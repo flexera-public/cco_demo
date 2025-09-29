@@ -22,31 +22,6 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  update_demo_data:
-    name: "Update Demo Data"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Speed up checkout by not fetching history
-
-      # .github/workflows/rebuild-demo-data.yml
-name: Rebuild demo_data from default branch
-
-on:
-  workflow_dispatch: {}
-  schedule:
-    - cron: "20 7 * * *"   # optional
-
-permissions:
-  contents: write
-
-concurrency:
-  group: rebuild-demo-data
-  cancel-in-progress: false
-
-jobs:
   rebuild:
     runs-on: ubuntu-latest
 
