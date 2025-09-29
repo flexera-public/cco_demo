@@ -24,7 +24,7 @@ datasource "ds_aws_rightsize_ebs_volumes_1" do
   request do
     verb "GET"
     host "raw.githubusercontent.com"
-    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_rightsize_ebs_volumes_1.json"
+    path "/flexera-public/cco_demo/refs/heads/demo_data/generated_data/fake_incident_tables/aws_rightsize_ebs_volumes_1.json"
   end
 end
 
@@ -32,7 +32,7 @@ datasource "ds_aws_rightsize_ebs_volumes_2" do
   request do
     verb "GET"
     host "raw.githubusercontent.com"
-    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_rightsize_ebs_volumes_2.json"
+    path "/flexera-public/cco_demo/refs/heads/demo_data/generated_data/fake_incident_tables/aws_rightsize_ebs_volumes_2.json"
   end
 end
 
