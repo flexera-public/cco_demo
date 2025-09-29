@@ -1,0 +1,105 @@
+{
+  "name": "AWS Old Snapshots",
+  "version": "8.4.9",
+  "cloud": "AWS",
+  "service": "Storage",
+  "policy_set": "Old Snapshots",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks for snapshots older than a specified number of days and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/old_snapshots) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/aws/old_snapshots/aws_delete_old_snapshots.pt",
+  "filename": "aws_delete_old_snapshots",
+  "incident": [
+    {
+      "summary_template": "AWS Old Snapshots: {{ len data }} AWS Old Snapshots Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "age",
+          "label": "Age (Days)"
+        },
+        {
+          "name": "size",
+          "label": "Size (GB)"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "parentType",
+          "label": "Parent Resource Type"
+        },
+        {
+          "name": "parentId",
+          "label": "Parent Resource ID"
+        },
+        {
+          "name": "snapshotType",
+          "label": "Snapshot Type"
+        },
+        {
+          "name": "description",
+          "label": "Description"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "imageId",
+          "label": "AMI"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Snapshot Age Threshold (Days)"
+        },
+        {
+          "name": "resourceARN",
+          "label": "Resource ARN"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_delete_old_snapshots_1.json"
+    }
+  ]
+}

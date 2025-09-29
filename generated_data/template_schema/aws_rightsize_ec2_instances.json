@@ -1,0 +1,325 @@
+{
+  "name": "AWS Rightsize EC2 Instances",
+  "version": "5.4.5",
+  "cloud": "AWS",
+  "service": "Compute",
+  "policy_set": "Rightsize Compute Instances",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Check for EC2 instances that have inefficient utilization for a specified number of days and downsizes or terminates them after approval. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/rightsize_ec2_instances/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/aws/rightsize_ec2_instances/aws_rightsize_ec2_instances.pt",
+  "filename": "aws_rightsize_ec2_instances",
+  "incident": [
+    {
+      "summary_template": "AWS Rightsize EC2 Instances: {{ len data }} AWS Underutilized EC2 Instances Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .underutil_total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .underutil_message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Instance Size"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Instance Size"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "hostname",
+          "label": "Hostname"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "launchTime",
+          "label": "Launch Time"
+        },
+        {
+          "name": "cpuMaximum",
+          "label": "CPU Maximum %",
+          "path": "cpu_maximum"
+        },
+        {
+          "name": "cpuMinimum",
+          "label": "CPU Minimum %",
+          "path": "cpu_minimum"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average %",
+          "path": "cpu_average"
+        },
+        {
+          "name": "cpuP99",
+          "label": "CPU p99",
+          "path": "cpu_p99"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95",
+          "path": "cpu_p95"
+        },
+        {
+          "name": "cpuP90",
+          "label": "CPU p90",
+          "path": "cpu_p90"
+        },
+        {
+          "name": "memMaximum",
+          "label": "Memory Maximum %",
+          "path": "mem_maximum"
+        },
+        {
+          "name": "memMinimum",
+          "label": "Memory Minimum %",
+          "path": "mem_minimum"
+        },
+        {
+          "name": "memAverage",
+          "label": "Memory Average %",
+          "path": "mem_average"
+        },
+        {
+          "name": "memP99",
+          "label": "Memory p99",
+          "path": "mem_p99"
+        },
+        {
+          "name": "memP95",
+          "label": "Memory p95",
+          "path": "mem_p95"
+        },
+        {
+          "name": "memP90",
+          "label": "Memory p90",
+          "path": "mem_p90"
+        },
+        {
+          "name": "thresholdType",
+          "label": "Threshold Statistic"
+        },
+        {
+          "name": "threshold",
+          "label": "CPU Threshold"
+        },
+        {
+          "name": "memoryThreshold",
+          "label": "Memory Threshold"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "resourceARN",
+          "label": "Resource ARN"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        },
+        {
+          "name": "chartUrlField",
+          "label": "Utilization Chart External Link"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_rightsize_ec2_instances_1.json"
+    },
+    {
+      "summary_template": "AWS Rightsize EC2 Instances: {{ len data }} AWS Idle EC2 Instances Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .idle_total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .idle_message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Instance Size"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Instance Size"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "hostname",
+          "label": "Hostname"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "launchTime",
+          "label": "Launch Time"
+        },
+        {
+          "name": "cpuMaximum",
+          "label": "CPU Maximum %",
+          "path": "cpu_maximum"
+        },
+        {
+          "name": "cpuMinimum",
+          "label": "CPU Minimum %",
+          "path": "cpu_minimum"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average %",
+          "path": "cpu_average"
+        },
+        {
+          "name": "cpuP99",
+          "label": "CPU p99",
+          "path": "cpu_p99"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95",
+          "path": "cpu_p95"
+        },
+        {
+          "name": "cpuP90",
+          "label": "CPU p90",
+          "path": "cpu_p90"
+        },
+        {
+          "name": "memMaximum",
+          "label": "Memory Maximum %",
+          "path": "mem_maximum"
+        },
+        {
+          "name": "memMinimum",
+          "label": "Memory Minimum %",
+          "path": "mem_minimum"
+        },
+        {
+          "name": "memAverage",
+          "label": "Memory Average %",
+          "path": "mem_average"
+        },
+        {
+          "name": "memP99",
+          "label": "Memory p99",
+          "path": "mem_p99"
+        },
+        {
+          "name": "memP95",
+          "label": "Memory p95",
+          "path": "mem_p95"
+        },
+        {
+          "name": "memP90",
+          "label": "Memory p90",
+          "path": "mem_p90"
+        },
+        {
+          "name": "thresholdType",
+          "label": "Threshold Statistic"
+        },
+        {
+          "name": "threshold",
+          "label": "CPU Threshold"
+        },
+        {
+          "name": "memoryThreshold",
+          "label": "Memory Threshold"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "resourceARN",
+          "label": "Resource ARN"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        },
+        {
+          "name": "chartUrlField",
+          "label": "Utilization Chart External Link"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_rightsize_ec2_instances_2.json"
+    }
+  ]
+}
