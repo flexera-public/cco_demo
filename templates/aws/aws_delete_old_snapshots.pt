@@ -35,7 +35,7 @@ end
 policy "pol_incident" do
   validate_each $ds_aws_delete_old_snapshots_1 do
     summary_template "AWS Old Snapshots: {{ len data }} AWS Old Snapshots Found"
-    check eq(val(item, "resourceID"), "")
+    check eq(0, 1)
     export do
       resource_level true
       field "accountID" do

@@ -43,7 +43,7 @@ end
 policy "pol_incident" do
   validate_each $ds_aws_rightsize_ec2_instances_1 do
     summary_template "AWS Rightsize EC2 Instances: {{ len data }} AWS Underutilized EC2 Instances Found"
-    check eq(val(item, "resourceID"), "")
+    check eq(0, 1)
     export do
       resource_level true
       field "accountID" do
@@ -152,7 +152,7 @@ policy "pol_incident" do
   end
   validate_each $ds_aws_rightsize_ec2_instances_2 do
     summary_template "AWS Rightsize EC2 Instances: {{ len data }} AWS Idle EC2 Instances Found"
-    check eq(val(item, "resourceID"), "")
+    check eq(0, 1)
     export do
       resource_level true
       field "accountID" do

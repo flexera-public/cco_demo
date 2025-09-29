@@ -83,7 +83,7 @@ def gen_incidents(incidents):
 
       validate_block = f"""  validate_each ${ds_name} do
     summary_template "{summary_template}"
-    check eq(val(item, "resourceID"), "")
+    check eq(0, 1)
     export do
       resource_level true
 """
