@@ -51,7 +51,7 @@ def gen_datasources(incidents):
   request do
     verb "GET"
     host "raw.githubusercontent.com"
-    path "/flexera-public/cco_demo/refs/heads/main/{incident_path}"
+    path "/flexera-public/cco_demo/refs/heads/demo_data/{incident_path}"
   end
 end
 
