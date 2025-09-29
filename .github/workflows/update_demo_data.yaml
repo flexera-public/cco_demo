@@ -1,0 +1,115 @@
+name: Update Demo Data in demo_data Branch
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  schedule:
+    #        ┌───────────── minute (0 - 59)
+    #        │  ┌───────────── hour (0 - 23)
+    #        │  │ ┌───────────── day of the month (1 - 31)
+    #        │  │ │ ┌───────────── month (1 - 12 or JAN-DEC)
+    #        │  │ │ │ ┌───────────── day of the week (0 - 6 or SUN-SAT)
+    #        │  │ │ │ │
+    #        │  │ │ │ │
+    #        │  │ │ │ │
+    #        *  * * * *
+    # At 03:00 UTC on Sundays
+    - cron: "0 3 * * 0"
+
+  # Workflow dispatch trigger allows manually running workflow
+  workflow_dispatch: {}
+
+jobs:
+  update_demo_data:
+    name: "Update Demo Data"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Speed up checkout by not fetching history
+
+      # .github/workflows/rebuild-demo-data.yml
+name: Rebuild demo_data from default branch
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "20 7 * * *"   # optional
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rebuild-demo-data
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo (no auto-branch)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reset Local State
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Figure out the default branch on origin (e.g., main or master)
+          DEFAULT_BRANCH="$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')"
+
+          # Ensure we have up-to-date refs
+          git fetch origin +refs/heads/*:refs/remotes/origin/*
+
+          # Reset the working tree to the latest default branch content
+          git checkout -B "${DEFAULT_BRANCH}" "origin/${DEFAULT_BRANCH}"
+          git reset --hard "origin/${DEFAULT_BRANCH}"
+          git clean -fdx  # optional: wipe untracked files (useful if your scripts leave artifacts)
+
+      - name: Create Fresh demo_data Branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEFAULT_BRANCH="$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')"
+          # -B: create or reset local demo_data to current commit
+          git checkout -B demo_data "origin/${DEFAULT_BRANCH}"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.13.2
+          cache: 'pip' # caching pip dependencies
+
+      - name: Install Python libraries
+        run: pip install -r requirements.txt
+
+      - name: Generate Assets
+        run: |
+          python3 scripts/generate_template_schema.py
+          python3 scripts/generate_incident_tables.py
+          python3 scripts/generate_fake_templates.py
+
+      - name: Configure Commit Author
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit Changes to demo_data
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "chore(demo_data): rebuild from default branch and regenerate"
+          else
+            echo "No changes to commit."
+          fi
+
+      - name: Force-update demo_data
+        # Force-with-lease avoids clobbering concurrent legitimate updates
+        run: git push --force-with-lease origin demo_data:demo_data
