@@ -1,0 +1,33 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for old AWS EC2 and RDS snapshots to delete.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "138186646095",
+    "accountName": "shinyquail",
+    "resourceID": "rectangularzebra",
+    "resourceName": "roundbanana",
+    "tags": "environment=staging, app=crmModule",
+    "age": 60,
+    "size": 487,
+    "service": "EC2",
+    "recommendationDetails": "Delete EC2 snapshot rectangularzebra in AWS Account shinyquail (138186646095)",
+    "parentType": "EBS Volume",
+    "parentId": "vol-17c4d2461e56cf409",
+    "snapshotType": "manual",
+    "description": "",
+    "type": "Storage Snapshot",
+    "imageId": "",
+    "region": "eu-west-1",
+    "savings": 872.94,
+    "savingsCurrency": "US$",
+    "lookbackPeriod": 30,
+    "resourceARN": "arn:aws:ec2:eu-west-1:138186646095:snapshot/snap-0123456789abcdef0",
+    "id": "rectangularzebra"
+  }
+]

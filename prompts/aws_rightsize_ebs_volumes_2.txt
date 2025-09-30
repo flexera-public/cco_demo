@@ -1,0 +1,37 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized AWS EBS volumes to downsize.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "138186646095",
+    "accountName": "shinyquail",
+    "resourceID": "vol-07bc08ccc876c4d41",
+    "resourceName": "logstorage",
+    "tags": "name=logstorage, env=prod, app=webapp",
+    "age": "25.35",
+    "recommendationDetails": "Modify volume vol-07bc08ccc876c4d41 in AWS Account shinyquail (138186646095). 0% utilization of read/write operations detected during lookback period which is below the threshold of 40%. Recommended IOPS: 3000 (-50% change).",
+    "resourceType": "gp3",
+    "newResourceType": "type=gp3,iops=3000",
+    "region": "us-east-2",
+    "size": "1536",
+    "iops": "6000",
+    "readOps": "0",
+    "writeOps": "0",
+    "utilizedOps": "0",
+    "utilizedOpsPercent": "0",
+    "newIops": "3000",
+    "newIopsPercentChange": "-50",
+    "state": "in-use",
+    "savings": "7.364",
+    "savingsCurrency": "US$",
+    "lookbackPeriod": "30",
+    "service": "EBS",
+    "resourceARN": "arn:aws:ec2:us-east-2:559676671713:volume/vol-07bc08ccc876c4d41",
+    "id": "vol-07bc08ccc876c4d41"
+  }
+]

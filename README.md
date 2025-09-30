@@ -33,4 +33,14 @@ Example:
   - There should be one file in "generated_data/fake_incident_tables" for this demo policy template:
     - aws_delete_old_snapshots_1.json for the first and only incident.
 
-Generating the demo data itself is up to you. The goal should be to make the demo data fake (it should not reference real infrastructure) but believable, and to have enough entries to look like a plausible result when using the real policy template. Tools such as LLMs may be useful in generating realistic enough data, provided they are prompted well and given good starting data to build from.
+Generating the demo data itself is up to you. The goal should be to make the demo data fake (it should not reference real infrastructure) but believable, and to have enough entries to look like a plausible result when using the real policy template.
+
+### LLMs
+
+Tools such as LLMs may be useful in generating realistic enough data, provided they are prompted well and given good starting data to build from. Example prompts you might use with such tools are available in the "prompts" directory. Demo data does not require a particularly high-powered LLM; a locally run tool like [ollama](https://ollama.com/) may be sufficient.
+
+Using ollama, you could generate fresh demo data for the AWS Old Snapshots policy template with the following command:
+
+```bash
+cat prompts/aws_delete_old_snapshots_1.txt | ollama run llama3 > generated_data/fake_incident_tables/aws_delete_old_snapshots_1.json
+```

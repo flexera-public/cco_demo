@@ -1,0 +1,34 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for idle AWS EBS volumes to delete.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "138186646095",
+    "accountName": "shinyquail",
+    "resourceID": "vol-cc6c4d41c8707bc08",
+    "resourceName": "logstorage",
+    "tags": "name=logstorage, env=prod, app=webapp",
+    "age": "25.35",
+    "recommendationDetails": "Delete volume vol-cc6c4d41c8707bc08 in AWS Account shinyquail (138186646095). Zero read/write operations detected during lookback period.",
+    "resourceType": "gp2",
+    "region": "us-east-2",
+    "size": "100",
+    "iops": "300",
+    "readOps": "0",
+    "writeOps": "0",
+    "utilizedOps": "0",
+    "utilizedOpsPercent": "0",
+    "state": "in-use",
+    "savings": "8.646",
+    "savingsCurrency": "US$",
+    "lookbackPeriod": "30",
+    "service": "EBS",
+    "resourceARN": "arn:aws:ec2:us-east-2:559676671713:volume/vol-cc6c4d41c8707bc08",
+    "id": "vol-cc6c4d41c8707bc08"
+  }
+]

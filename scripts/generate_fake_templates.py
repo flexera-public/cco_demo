@@ -15,11 +15,14 @@ OUT_DIR = Path("templates")
 
 def gen_header(name, version, cloud, service, policy_set, recommendation_type):
     result = f"""# DEMO POLICY TEMPLATE. DOES NOT PRODUCE REAL RESULTS.
+# More info available here: https://github.com/flexera-public/cco_demo
 name "{name}"
 rs_pt_ver 20180301
 type "policy"
 short_description "Checks for snapshots older than a specified number of days and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/old_snapshots) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more."
 long_description ""
+# This is to make it easy to identify this template as a demo template via API
+doc_link "https://github.com/flexera-public/cco_demo"
 category "Cost"
 severity "low"
 default_frequency "weekly"
@@ -29,8 +32,24 @@ info(
   service: "{service}",
   policy_set: "{policy_set}",
   recommendation_type: "{recommendation_type}",
-  hide_skip_approvals: "true"
+  hide_skip_approvals: "true",
+  demo: "true"
 )
+
+###############################################################################
+# Parameters
+###############################################################################
+
+# This is to make it easy for automation to determine if an applied policy is
+# a demo policy or not.
+parameter "param_demo" do
+  type "string"
+  category "Policy Settings"
+  label "Demo Policy"
+  description "Indicates that this is a demo policy. Should generally be left at its default value."
+  allowed_values "True", "False"
+  default "True"
+end
 
 ###############################################################################
 # Datasources & Scripts
@@ -51,7 +70,7 @@ def gen_datasources(incidents):
   request do
     verb "GET"
     host "raw.githubusercontent.com"
-    path "/flexera-public/cco_demo/refs/heads/demo_data/{incident_path}"
+    path "/flexera-public/cco_demo/refs/heads/main/{incident_path}"
   end
 end
 

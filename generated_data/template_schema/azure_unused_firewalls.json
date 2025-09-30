@@ -1,0 +1,77 @@
+{
+  "name": "Azure Unused Firewalls",
+  "version": "0.2.7",
+  "cloud": "Azure",
+  "service": "Network",
+  "policy_set": "Unused Firewalls",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks for Azure Firewalls that have received no traffic for a user-specified number of days and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/azure/unused_firewalls/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/azure/unused_firewalls/azure_unused_firewalls.pt",
+  "filename": "azure_unused_firewalls",
+  "incident": [
+    {
+      "summary_template": "Azure Unused Firewalls: {{ len data }} Azure Unused Firewalls Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Subscription ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Subscription Name"
+        },
+        {
+          "name": "resourceGroup",
+          "label": "Resource Group"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_unused_firewalls_1.json"
+    }
+  ]
+}

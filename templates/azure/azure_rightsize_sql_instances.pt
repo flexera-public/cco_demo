@@ -1,0 +1,245 @@
+# DEMO POLICY TEMPLATE. DOES NOT PRODUCE REAL RESULTS.
+name "Azure Rightsize SQL Databases"
+rs_pt_ver 20180301
+type "policy"
+short_description "Checks for snapshots older than a specified number of days and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/old_snapshots) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more."
+long_description ""
+category "Cost"
+severity "low"
+default_frequency "weekly"
+info(
+  version: "6.0.5",
+  provider: "Azure",
+  service: "SQL",
+  policy_set: "Rightsize Database Instances",
+  recommendation_type: "Usage Reduction",
+  hide_skip_approvals: "true",
+  demo: "true"
+)
+
+###############################################################################
+# Datasources & Scripts
+###############################################################################
+
+datasource "ds_azure_rightsize_sql_instances_1" do
+  request do
+    verb "GET"
+    host "raw.githubusercontent.com"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/azure_rightsize_sql_instances_1.json"
+  end
+end
+
+datasource "ds_azure_rightsize_sql_instances_2" do
+  request do
+    verb "GET"
+    host "raw.githubusercontent.com"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/azure_rightsize_sql_instances_2.json"
+  end
+end
+
+###############################################################################
+# Policy
+###############################################################################
+
+policy "pol_incident" do
+  validate_each $ds_azure_rightsize_sql_instances_1 do
+    summary_template "Azure Rightsize SQL Databases: {{ len data }} Azure Underutilized SQL Databases Found"
+    check eq(0, 1)
+    export do
+      resource_level true
+      field "accountID" do
+        label "Subscription ID"
+      end
+      field "accountName" do
+        label "Subscription Name"
+      end
+      field "resourceGroup" do
+        label "Resource Group"
+      end
+      field "resourceName" do
+        label "Resource Name"
+      end
+      field "resourceID" do
+        label "Resource ID"
+      end
+      field "tags" do
+        label "Resource Tags"
+      end
+      field "createdTime" do
+        label "Created At"
+      end
+      field "lastAccessed" do
+        label "Last Accessed"
+      end
+      field "recommendationDetails" do
+        label "Recommendation"
+      end
+      field "resourceType" do
+        label "Current Capacity"
+      end
+      field "newResourceType" do
+        label "Recommended Capacity"
+      end
+      field "skuName" do
+        label "SKU - Name"
+      end
+      field "skuTier" do
+        label "SKU - Tier"
+      end
+      field "purchase_model" do
+        label "Purchase Model"
+      end
+      field "type" do
+        label "Type"
+      end
+      field "resourceKind" do
+        label "Kind"
+      end
+      field "region" do
+        label "Region"
+      end
+      field "status" do
+        label "Status"
+      end
+      field "savings" do
+        label "Estimated Monthly Savings"
+      end
+      field "savingsCurrency" do
+        label "Savings Currency"
+      end
+      field "cpuMaximum" do
+        label "CPU Maximum %"
+      end
+      field "cpuMinimum" do
+        label "CPU Minimum %"
+      end
+      field "cpuAverage" do
+        label "CPU Average %"
+      end
+      field "cpuP90" do
+        label "CPU p90"
+      end
+      field "cpuP95" do
+        label "CPU p95"
+      end
+      field "cpuP99" do
+        label "CPU p99"
+      end
+      field "dtuMaximum" do
+        label "DTU Maximum %"
+      end
+      field "dtuMinimum" do
+        label "DTU Minimum %"
+      end
+      field "dtuAverage" do
+        label "DTU Average %"
+      end
+      field "dtuP90" do
+        label "DTU p90"
+      end
+      field "dtuP95" do
+        label "DTU p95"
+      end
+      field "dtuP99" do
+        label "DTU p99"
+      end
+      field "service" do
+        label "Service"
+      end
+      field "platform" do
+        label "Platform"
+      end
+      field "id" do
+        label "Resource ID"
+      end
+      field "thresholdType" do
+        label "Threshold Statistic"
+      end
+      field "threshold" do
+        label "CPU Threshold"
+      end
+      field "lookbackPeriod" do
+        label "Lookback Period"
+      end
+    end
+  end
+  validate_each $ds_azure_rightsize_sql_instances_2 do
+    summary_template "Azure Rightsize SQL Databases: {{ len data }} Azure Unused SQL Databases Found"
+    check eq(0, 1)
+    export do
+      resource_level true
+      field "accountID" do
+        label "Subscription ID"
+      end
+      field "accountName" do
+        label "Subscription Name"
+      end
+      field "resourceGroup" do
+        label "Resource Group"
+      end
+      field "resourceName" do
+        label "Resource Name"
+      end
+      field "resourceID" do
+        label "Resource ID"
+      end
+      field "tags" do
+        label "Resource Tags"
+      end
+      field "createdTime" do
+        label "Created At"
+      end
+      field "lastAccessed" do
+        label "Last Accessed"
+      end
+      field "recommendationDetails" do
+        label "Recommendation"
+      end
+      field "type" do
+        label "Type"
+      end
+      field "resourceKind" do
+        label "Kind"
+      end
+      field "region" do
+        label "Region"
+      end
+      field "status" do
+        label "Status"
+      end
+      field "resourceType" do
+        label "Current Capacity"
+      end
+      field "newResourceType" do
+        label "Recommended Capacity"
+      end
+      field "skuName" do
+        label "SKU - Name"
+      end
+      field "skuTier" do
+        label "SKU - Tier"
+      end
+      field "purchase_model" do
+        label "Purchase Model"
+      end
+      field "savings" do
+        label "Estimated Monthly Savings"
+      end
+      field "savingsCurrency" do
+        label "Savings Currency"
+      end
+      field "service" do
+        label "Service"
+      end
+      field "platform" do
+        label "Platform"
+      end
+      field "id" do
+        label "Resource ID"
+      end
+      field "lookbackPeriod" do
+        label "Lookback Period"
+      end
+    end
+  end
+end

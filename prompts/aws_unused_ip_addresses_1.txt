@@ -1,0 +1,30 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for unused AWS IP addresses to delete.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "452761456197",
+    "accountName": "Nebraska",
+    "age": "",
+    "allocationID": "eipalloc-0f0ea063ddcdd1f48",
+    "domain": "vpc",
+    "id": "3.121.132.48",
+    "ipAddress": "",
+    "lookbackPeriod": 30,
+    "recommendationDetails": "Release IP address 3.121.132.48 in AWS Account Nebraska (452761456197)",
+    "region": "ap-northeast-1",
+    "resourceARN": "arn:aws:ec2:ap-northeast-1:452761456197:elastic-ip/eipalloc-0f0ea063ddcdd1f48",
+    "resourceID": "3.121.132.48",
+    "resourceName": "",
+    "savings": 3.652,
+    "savingsCurrency": "US$",
+    "service": "EC2",
+    "tags": "",
+    "type": "IP Address"
+  }
+]

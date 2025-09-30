@@ -1,0 +1,36 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for idle AWS RDS instances to terminate. An instance is idle if it has 0 connections.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "371303629025",
+    "accountName": "Alabama",
+    "availabilityZone": "us-west-1b",
+    "connectionsAverage": 0,
+    "databaseEngine": "postgres",
+    "engineVersion": "13.20",
+    "id": "db-ASHF7INBIWYTZKDRZ2ZRPKOZNY",
+    "licenseModel": "postgresql-license",
+    "lookbackPeriod": 30,
+    "newResourceType": "Terminate RDS Instance",
+    "platform": "postgres",
+    "privateDnsName": "postgres.staging.us-west-1.rds.amazonaws.com",
+    "recommendationDetails": "Terminate RDS instance uat-postgres in AWS Account Alabama (371303629025)",
+    "region": "us-west-1",
+    "resourceARN": "arn:aws:rds:us-west-1:371303629025:db:uat-postgres",
+    "resourceID": "db-ASHF7INBIWYTZKDRZ2ZRPKOZNY",
+    "resourceName": "uat-postgres",
+    "resourceType": "db.t3.medium",
+    "savings": 152.345,
+    "savingsCurrency": "US$",
+    "service": "AmazonRDS",
+    "state": "available",
+    "tags": "Name=uat-postgres, Environment=production, application=alabama",
+    "vcpus": "2"
+  }
+]

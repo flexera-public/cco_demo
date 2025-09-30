@@ -1,0 +1,89 @@
+{
+  "name": "Azure Unused IP Addresses",
+  "version": "7.3.6",
+  "cloud": "Azure",
+  "service": "Compute",
+  "policy_set": "Unused IP Addresses",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks for unused IP addresses in the given account and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/azure/unused_ip_addresses) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/azure/unused_ip_addresses/azure_unused_ip_addresses.pt",
+  "filename": "azure_unused_ip_addresses",
+  "incident": [
+    {
+      "summary_template": "Azure Unused IP Addresses: {{ len data }} Azure Unused IP Addresses Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Subscription ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Subscription Name"
+        },
+        {
+          "name": "resourceGroup",
+          "label": "Resource Group"
+        },
+        {
+          "name": "ipAddress",
+          "label": "IP Address"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "age",
+          "label": "Days Unattached"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "allocation",
+          "label": "Allocation"
+        },
+        {
+          "name": "tags",
+          "label": "Tags"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_unused_ip_addresses_1.json"
+    }
+  ]
+}

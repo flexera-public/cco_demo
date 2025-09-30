@@ -1,0 +1,52 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized AWS RDS instances to downsize.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "371303629025",
+    "accountName": "Alabama",
+    "availabilityZone": "us-east-1b",
+    "connectionsAverage": 18.466666666666665,
+    "cpuAverage": 3.48,
+    "cpuMaximum": 57.74,
+    "cpuMinimum": 1.2,
+    "cpuP90": 3.98,
+    "cpuP95": 4.29,
+    "cpuP99": 5.98,
+    "databaseEngine": "mysql",
+    "engineVersion": "8.0.40",
+    "id": "db-HGHLEJPYEITFZJL447FYGYDWZM",
+    "incident_id": "67e311459c4f42d94e4a6adc",
+    "licenseModel": "general-public-license",
+    "lookbackPeriod": 30,
+    "memAverage": 131.33,
+    "memMaximum": 268.41,
+    "memMinimum": 35.25,
+    "netinAverage": 2473.07,
+    "netinMaximum": 8251366.73,
+    "netinMinimum": 854.08,
+    "netoutAverage": 35725.33,
+    "netoutMaximum": 8667832.1,
+    "netoutMinimum": 5173.69,
+    "newResourceType": "db.t3.micro",
+    "platform": "mysql",
+    "privateDnsName": "staging.alabama.us-east-1.rds.amazonaws.com",
+    "recommendationDetails": "Downsize AWS RDS instance chicken-farm in AWS Account Alabama (371303629025) from db.t3.small to db.t3.micro",
+    "region": "us-east-1",
+    "resourceARN": "arn:aws:rds:us-east-1:371303629025:db:chicken-farm",
+    "resourceID": "db-HGHLEJPYEITFZJL447FYGYDWZM",
+    "resourceName": "chicken-farm",
+    "resourceType": "db.t3.small",
+    "savings": 18.614,
+    "savingsCurrency": "US$",
+    "service": "AmazonRDS",
+    "state": "available",
+    "tags": "Name=chicken-farm, Environment=production, application=alabama",
+    "vcpus": "2"
+  }
+]

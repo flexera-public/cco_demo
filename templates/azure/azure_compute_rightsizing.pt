@@ -1,5 +1,5 @@
 # DEMO POLICY TEMPLATE. DOES NOT PRODUCE REAL RESULTS.
-name "AWS Rightsize EC2 Instances"
+name "Azure Rightsize Compute Instances"
 rs_pt_ver 20180301
 type "policy"
 short_description "Checks for snapshots older than a specified number of days and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/old_snapshots) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more."
@@ -8,8 +8,8 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "5.4.5",
-  provider: "AWS",
+  version: "6.2.4",
+  provider: "Azure",
   service: "Compute",
   policy_set: "Rightsize Compute Instances",
   recommendation_type: "Usage Reduction",
@@ -21,19 +21,19 @@ info(
 # Datasources & Scripts
 ###############################################################################
 
-datasource "ds_aws_rightsize_ec2_instances_1" do
+datasource "ds_azure_compute_rightsizing_1" do
   request do
     verb "GET"
     host "raw.githubusercontent.com"
-    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_rightsize_ec2_instances_1.json"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/azure_compute_rightsizing_1.json"
   end
 end
 
-datasource "ds_aws_rightsize_ec2_instances_2" do
+datasource "ds_azure_compute_rightsizing_2" do
   request do
     verb "GET"
     host "raw.githubusercontent.com"
-    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_rightsize_ec2_instances_2.json"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/azure_compute_rightsizing_2.json"
   end
 end
 
@@ -42,22 +42,25 @@ end
 ###############################################################################
 
 policy "pol_incident" do
-  validate_each $ds_aws_rightsize_ec2_instances_1 do
-    summary_template "AWS Rightsize EC2 Instances: {{ len data }} AWS Underutilized EC2 Instances Found"
+  validate_each $ds_azure_compute_rightsizing_1 do
+    summary_template "Azure Rightsize Compute Instances: {{ len data }} Azure Underutilized Virtual Machines Found"
     check eq(0, 1)
     export do
       resource_level true
       field "accountID" do
-        label "Account ID"
+        label "Subscription ID"
       end
       field "accountName" do
-        label "Account Name"
+        label "Subscription Name"
       end
-      field "resourceID" do
-        label "Resource ID"
+      field "resourceGroup" do
+        label "Resource Group"
       end
       field "resourceName" do
         label "Resource Name"
+      end
+      field "resourceID" do
+        label "Resource ID"
       end
       field "tags" do
         label "Resource Tags"
@@ -71,23 +74,35 @@ policy "pol_incident" do
       field "newResourceType" do
         label "Recommended Instance Size"
       end
+      field "resourceKind" do
+        label "Resource Kind"
+      end
       field "region" do
         label "Region"
       end
-      field "platform" do
-        label "Platform"
+      field "osType" do
+        label "Operating System"
       end
-      field "hostname" do
-        label "Hostname"
+      field "dataDiskCount" do
+        label "Attached Disks (#)"
+      end
+      field "imagePublisher" do
+        label "Image Publisher"
+      end
+      field "imageOffer" do
+        label "Image Offer"
+      end
+      field "imageSKU" do
+        label "Image SKU"
+      end
+      field "state" do
+        label "Power State"
       end
       field "savings" do
         label "Estimated Monthly Savings"
       end
       field "savingsCurrency" do
         label "Savings Currency"
-      end
-      field "launchTime" do
-        label "Launch Time"
       end
       field "cpuMaximum" do
         label "CPU Maximum %"
@@ -98,14 +113,14 @@ policy "pol_incident" do
       field "cpuAverage" do
         label "CPU Average %"
       end
-      field "cpuP99" do
-        label "CPU p99"
+      field "cpuP90" do
+        label "CPU p90"
       end
       field "cpuP95" do
         label "CPU p95"
       end
-      field "cpuP90" do
-        label "CPU p90"
+      field "cpuP99" do
+        label "CPU p99"
       end
       field "memMaximum" do
         label "Memory Maximum %"
@@ -116,14 +131,14 @@ policy "pol_incident" do
       field "memAverage" do
         label "Memory Average %"
       end
-      field "memP99" do
-        label "Memory p99"
+      field "memP90" do
+        label "Memory p90"
       end
       field "memP95" do
         label "Memory p95"
       end
-      field "memP90" do
-        label "Memory p90"
+      field "memP99" do
+        label "Memory p99"
       end
       field "thresholdType" do
         label "Threshold Statistic"
@@ -139,9 +154,6 @@ policy "pol_incident" do
       end
       field "service" do
         label "Service"
-      end
-      field "resourceARN" do
-        label "Resource ARN"
       end
       field "id" do
         label "ID"
@@ -151,22 +163,25 @@ policy "pol_incident" do
       end
     end
   end
-  validate_each $ds_aws_rightsize_ec2_instances_2 do
-    summary_template "AWS Rightsize EC2 Instances: {{ len data }} AWS Idle EC2 Instances Found"
+  validate_each $ds_azure_compute_rightsizing_2 do
+    summary_template "Azure Rightsize Compute Instances: {{ len data }} Azure Idle Virtual Machines Found"
     check eq(0, 1)
     export do
       resource_level true
       field "accountID" do
-        label "Account ID"
+        label "Subscription ID"
       end
       field "accountName" do
-        label "Account Name"
+        label "Subscription Name"
       end
-      field "resourceID" do
-        label "Resource ID"
+      field "resourceGroup" do
+        label "Resource Group"
       end
       field "resourceName" do
         label "Resource Name"
+      end
+      field "resourceID" do
+        label "Resource ID"
       end
       field "tags" do
         label "Resource Tags"
@@ -180,23 +195,35 @@ policy "pol_incident" do
       field "newResourceType" do
         label "Recommended Instance Size"
       end
+      field "resourceKind" do
+        label "Resource Kind"
+      end
       field "region" do
         label "Region"
       end
-      field "platform" do
-        label "Platform"
+      field "osType" do
+        label "Operating System"
       end
-      field "hostname" do
-        label "Hostname"
+      field "dataDiskCount" do
+        label "Attached Disks (#)"
+      end
+      field "imagePublisher" do
+        label "Image Publisher"
+      end
+      field "imageOffer" do
+        label "Image Offer"
+      end
+      field "imageSKU" do
+        label "Image SKU"
+      end
+      field "state" do
+        label "Power State"
       end
       field "savings" do
         label "Estimated Monthly Savings"
       end
       field "savingsCurrency" do
         label "Savings Currency"
-      end
-      field "launchTime" do
-        label "Launch Time"
       end
       field "cpuMaximum" do
         label "CPU Maximum %"
@@ -207,14 +234,14 @@ policy "pol_incident" do
       field "cpuAverage" do
         label "CPU Average %"
       end
-      field "cpuP99" do
-        label "CPU p99"
+      field "cpuP90" do
+        label "CPU p90"
       end
       field "cpuP95" do
         label "CPU p95"
       end
-      field "cpuP90" do
-        label "CPU p90"
+      field "cpuP99" do
+        label "CPU p99"
       end
       field "memMaximum" do
         label "Memory Maximum %"
@@ -225,14 +252,14 @@ policy "pol_incident" do
       field "memAverage" do
         label "Memory Average %"
       end
-      field "memP99" do
-        label "Memory p99"
+      field "memP90" do
+        label "Memory p90"
       end
       field "memP95" do
         label "Memory p95"
       end
-      field "memP90" do
-        label "Memory p90"
+      field "memP99" do
+        label "Memory p99"
       end
       field "thresholdType" do
         label "Threshold Statistic"
@@ -248,9 +275,6 @@ policy "pol_incident" do
       end
       field "service" do
         label "Service"
-      end
-      field "resourceARN" do
-        label "Resource ARN"
       end
       field "id" do
         label "ID"

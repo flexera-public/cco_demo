@@ -1,0 +1,357 @@
+{
+  "name": "Azure Rightsize Compute Instances",
+  "version": "6.2.4",
+  "cloud": "Azure",
+  "service": "Compute",
+  "policy_set": "Rightsize Compute Instances",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks for instances that have inefficient utilization for the last 30 days and downsizes or deletes them after approval. \\n See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/azure/rightsize_compute_instances/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/azure/rightsize_compute_instances/azure_compute_rightsizing.pt",
+  "filename": "azure_compute_rightsizing",
+  "incident": [
+    {
+      "summary_template": "Azure Rightsize Compute Instances: {{ len data }} Azure Underutilized Virtual Machines Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .underutil_total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .underutil_message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Subscription ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Subscription Name"
+        },
+        {
+          "name": "resourceGroup",
+          "label": "Resource Group"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Instance Size"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Instance Size"
+        },
+        {
+          "name": "resourceKind",
+          "label": "Resource Kind"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "osType",
+          "label": "Operating System"
+        },
+        {
+          "name": "dataDiskCount",
+          "label": "Attached Disks (#)"
+        },
+        {
+          "name": "imagePublisher",
+          "label": "Image Publisher"
+        },
+        {
+          "name": "imageOffer",
+          "label": "Image Offer"
+        },
+        {
+          "name": "imageSKU",
+          "label": "Image SKU"
+        },
+        {
+          "name": "state",
+          "label": "Power State"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "cpuMaximum",
+          "label": "CPU Maximum %",
+          "path": "cpu_maximum"
+        },
+        {
+          "name": "cpuMinimum",
+          "label": "CPU Minimum %",
+          "path": "cpu_minimum"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average %",
+          "path": "cpu_average"
+        },
+        {
+          "name": "cpuP90",
+          "label": "CPU p90",
+          "path": "cpu_p90"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95",
+          "path": "cpu_p95"
+        },
+        {
+          "name": "cpuP99",
+          "label": "CPU p99",
+          "path": "cpu_p99"
+        },
+        {
+          "name": "memMaximum",
+          "label": "Memory Maximum %",
+          "path": "mem_maximum"
+        },
+        {
+          "name": "memMinimum",
+          "label": "Memory Minimum %",
+          "path": "mem_minimum"
+        },
+        {
+          "name": "memAverage",
+          "label": "Memory Average %",
+          "path": "mem_average"
+        },
+        {
+          "name": "memP90",
+          "label": "Memory p90",
+          "path": "mem_p90"
+        },
+        {
+          "name": "memP95",
+          "label": "Memory p95",
+          "path": "mem_p95"
+        },
+        {
+          "name": "memP99",
+          "label": "Memory p99",
+          "path": "mem_p99"
+        },
+        {
+          "name": "thresholdType",
+          "label": "Threshold Statistic"
+        },
+        {
+          "name": "threshold",
+          "label": "CPU Threshold"
+        },
+        {
+          "name": "memoryThreshold",
+          "label": "Memory Threshold"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        },
+        {
+          "name": "chartUrlField",
+          "label": "Utilization Chart External Link"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_compute_rightsizing_1.json"
+    },
+    {
+      "summary_template": "Azure Rightsize Compute Instances: {{ len data }} Azure Idle Virtual Machines Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .idle_total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .idle_message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Subscription ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Subscription Name"
+        },
+        {
+          "name": "resourceGroup",
+          "label": "Resource Group"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Instance Size"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Instance Size"
+        },
+        {
+          "name": "resourceKind",
+          "label": "Resource Kind"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "osType",
+          "label": "Operating System"
+        },
+        {
+          "name": "dataDiskCount",
+          "label": "Attached Disks (#)"
+        },
+        {
+          "name": "imagePublisher",
+          "label": "Image Publisher"
+        },
+        {
+          "name": "imageOffer",
+          "label": "Image Offer"
+        },
+        {
+          "name": "imageSKU",
+          "label": "Image SKU"
+        },
+        {
+          "name": "state",
+          "label": "Power State"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "cpuMaximum",
+          "label": "CPU Maximum %",
+          "path": "cpu_maximum"
+        },
+        {
+          "name": "cpuMinimum",
+          "label": "CPU Minimum %",
+          "path": "cpu_minimum"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average %",
+          "path": "cpu_average"
+        },
+        {
+          "name": "cpuP90",
+          "label": "CPU p90",
+          "path": "cpu_p90"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95",
+          "path": "cpu_p95"
+        },
+        {
+          "name": "cpuP99",
+          "label": "CPU p99",
+          "path": "cpu_p99"
+        },
+        {
+          "name": "memMaximum",
+          "label": "Memory Maximum %",
+          "path": "mem_maximum"
+        },
+        {
+          "name": "memMinimum",
+          "label": "Memory Minimum %",
+          "path": "mem_minimum"
+        },
+        {
+          "name": "memAverage",
+          "label": "Memory Average %",
+          "path": "mem_average"
+        },
+        {
+          "name": "memP90",
+          "label": "Memory p90",
+          "path": "mem_p90"
+        },
+        {
+          "name": "memP95",
+          "label": "Memory p95",
+          "path": "mem_p95"
+        },
+        {
+          "name": "memP99",
+          "label": "Memory p99",
+          "path": "mem_p99"
+        },
+        {
+          "name": "thresholdType",
+          "label": "Threshold Statistic"
+        },
+        {
+          "name": "threshold",
+          "label": "CPU Threshold"
+        },
+        {
+          "name": "memoryThreshold",
+          "label": "Memory Threshold"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        },
+        {
+          "name": "chartUrlField",
+          "label": "Utilization Chart External Link"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_compute_rightsizing_2.json"
+    }
+  ]
+}

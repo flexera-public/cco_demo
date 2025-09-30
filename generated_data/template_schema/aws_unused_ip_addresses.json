@@ -1,0 +1,93 @@
+{
+  "name": "AWS Unused IP Addresses",
+  "version": "9.2.8",
+  "cloud": "AWS",
+  "service": "Compute",
+  "policy_set": "Unused IP Addresses",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks AWS for unused IP Addresses and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/unused_ip_addresses/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/aws/unused_ip_addresses/aws_unused_ip_addresses.pt",
+  "filename": "aws_unused_ip_addresses",
+  "incident": [
+    {
+      "summary_template": "AWS Unused IP Addresses: {{ len data }} AWS Unused IP Addresses Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "IP Address"
+        },
+        {
+          "name": "ipAddress",
+          "label": "Private Address"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "age",
+          "label": "Days Unattached"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "allocationID",
+          "label": "Allocation ID"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "domain",
+          "label": "Domain"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "resourceARN",
+          "label": "Resource ARN"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_unused_ip_addresses_1.json"
+    }
+  ]
+}

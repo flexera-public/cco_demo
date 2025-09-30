@@ -1,0 +1,285 @@
+{
+  "name": "AWS Rightsize RDS Instances",
+  "version": "5.8.6",
+  "cloud": "AWS",
+  "service": "RDS",
+  "policy_set": "Rightsize Database Instances",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks for RDS instances that have inefficient utilization for a user-specified number of days and downsizes or deletes them after approval. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/rightsize_rds_instances) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/aws/rightsize_rds_instances/aws_rightsize_rds_instances.pt",
+  "filename": "aws_rightsize_rds_instances",
+  "incident": [
+    {
+      "summary_template": "AWS Rightsize RDS Instances: {{ len data }} AWS Underutilized RDS Instances Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "availabilityZone",
+          "label": "Availability Zone"
+        },
+        {
+          "name": "state",
+          "label": "State"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "privateDnsName",
+          "label": "Private DNS Name"
+        },
+        {
+          "name": "resourceType",
+          "label": "Resource Type"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Resource Type"
+        },
+        {
+          "name": "connectionsAverage",
+          "label": "Connections (Daily)"
+        },
+        {
+          "name": "cpuMaximum",
+          "label": "CPU Maximum %"
+        },
+        {
+          "name": "cpuMinimum",
+          "label": "CPU Minimum %"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average %"
+        },
+        {
+          "name": "cpuP99",
+          "label": "CPU p99"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95"
+        },
+        {
+          "name": "cpuP90",
+          "label": "CPU p90"
+        },
+        {
+          "name": "memMaximum",
+          "label": "Available Memory Maximum (GiB)"
+        },
+        {
+          "name": "memMinimum",
+          "label": "Available Memory Minimum (GiB)"
+        },
+        {
+          "name": "memAverage",
+          "label": "Available Memory Average (GiB)"
+        },
+        {
+          "name": "netinMaximum",
+          "label": "Network Inbound Throughput Maximum (Bytes/second)"
+        },
+        {
+          "name": "netinMinimum",
+          "label": "Network Inbound Throughput Minimum (Bytes/second)"
+        },
+        {
+          "name": "netinAverage",
+          "label": "Network Inbound Throughput Average (Bytes/second)"
+        },
+        {
+          "name": "netoutMaximum",
+          "label": "Network Outbound Throughput Maximum (Bytes/second)"
+        },
+        {
+          "name": "netoutMinimum",
+          "label": "Network Outbound Throughput Minimum (Bytes/second)"
+        },
+        {
+          "name": "netoutAverage",
+          "label": "Network Outbound Throughput Average (Bytes/second)"
+        },
+        {
+          "name": "databaseEngine",
+          "label": "Database Engine"
+        },
+        {
+          "name": "engineVersion",
+          "label": "Engine Version"
+        },
+        {
+          "name": "multiAZ",
+          "label": "Multi-AZ"
+        },
+        {
+          "name": "vcpus",
+          "label": "vCPUs"
+        },
+        {
+          "name": "licenseModel",
+          "label": "License Model"
+        },
+        {
+          "name": "resourceARN",
+          "label": "ARN"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "id",
+          "label": "id",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_rightsize_rds_instances_1.json"
+    },
+    {
+      "summary_template": "AWS Rightsize RDS Instances: {{ len data }} AWS Unused RDS Instances Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "availabilityZone",
+          "label": "Availability Zone"
+        },
+        {
+          "name": "state",
+          "label": "State"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "privateDnsName",
+          "label": "Private DNS Name"
+        },
+        {
+          "name": "resourceType",
+          "label": "Resource Type"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Resource Type"
+        },
+        {
+          "name": "connectionsAverage",
+          "label": "Connections (Daily)"
+        },
+        {
+          "name": "databaseEngine",
+          "label": "Database Engine"
+        },
+        {
+          "name": "engineVersion",
+          "label": "Engine Version"
+        },
+        {
+          "name": "vcpus",
+          "label": "vCPUs"
+        },
+        {
+          "name": "licenseModel",
+          "label": "License Model"
+        },
+        {
+          "name": "resourceARN",
+          "label": "ARN"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "id",
+          "label": "id",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_rightsize_rds_instances_2.json"
+    }
+  ]
+}

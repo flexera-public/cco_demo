@@ -1,0 +1,235 @@
+name "Update CCO Demo Applied Policies"
+rs_pt_ver 20180301
+type "policy"
+short_description "Terminates and reapplies demo applied policies to produce fresh incidents."
+long_description ""
+doc_link "https://github.com/flexera-public/cco_demo"
+severity "low"
+category "Operational"
+default_frequency "weekly"
+info(
+  version: "0.1.0",
+  provider: "Flexera",
+  service: "Automation",
+  policy_set: "Automation",
+  hide_skip_approvals: "true"
+)
+
+###############################################################################
+# Parameters
+###############################################################################
+
+###############################################################################
+# Authentication
+###############################################################################
+
+credentials "auth_flexera" do
+  schemes "oauth2"
+  label "Flexera"
+  description "Select Flexera One OAuth2 credentials"
+  tags "provider=flexera"
+end
+
+###############################################################################
+# Datasources & Scripts
+###############################################################################
+
+# Get region-specific Flexera API endpoints
+datasource "ds_flexera_api_hosts" do
+  run_script $js_flexera_api_hosts, rs_optima_host
+end
+
+script "js_flexera_api_hosts", type: "javascript" do
+  parameters "rs_optima_host"
+  result "result"
+  code <<-EOS
+  host_table = {
+    "api.optima.flexeraeng.com": {
+	    api: "api.flexera.com",
+      flexera: "api.flexera.com",
+      fsm: "api.fsm.flexeraeng.com",
+      grs: "grs-front.iam-us-east-1.flexeraeng.com",
+      ui: "app.flexera.com",
+      tld: "flexera.com"
+    },
+    "api.optima-eu.flexeraeng.com": {
+	    api: "api.flexera.eu",
+      flexera: "api.flexera.eu",
+      fsm: "api.fsm-eu.flexeraeng.com",
+      grs: "grs-front.eu-central-1.iam-eu.flexeraeng.com",
+      ui: "app.flexera.eu",
+      tld: "flexera.eu"
+    },
+    "api.optima-apac.flexeraeng.com": {
+	    api: "api.flexera.au",
+      flexera: "api.flexera.au",
+      fsm: "api.fsm-apac.flexeraeng.com",
+      grs: "grs-front.ap-southeast-2.iam-apac.flexeraeng.com",
+      ui: "app.flexera.au",
+      tld: "flexera.au"
+    }
+  }
+
+  result = host_table[rs_optima_host]
+EOS
+end
+
+# Get applied policy metadata for use later
+datasource "ds_self_policy" do
+  request do
+    auth $auth_flexera
+    host val($ds_flexera_api_hosts, "flexera")
+    path join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/applied-policies", switch(policy_id, join(["/", policy_id]), "")])
+  end
+end
+
+datasource "ds_applied_policies" do
+  request do
+    auth $auth_flexera
+    host val($ds_flexera_api_hosts, "flexera")
+    path join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/applied-policies"])
+    query "filter", 'metaParentPolicyId eq "null"'
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "values[*]") do
+      field "category", jmes_path(col_item, "category")
+      field "created_at", jmes_path(col_item, "createdAt")
+      field "created_by", jmes_path(col_item, "createdBy.email")
+      field "credentials", jmes_path(col_item, "credentials")
+      field "description", jmes_path(col_item, "description")
+      field "doc_link", jmes_path(col_item, "docLink")
+      field "dry_run", jmes_path(col_item, "dryRun")
+      field "error", jmes_path(col_item, "error")
+      field "errored_at", jmes_path(col_item, "erroredAt")
+      field "frequency", get(1, split(jmes_path(col_item, "schedule.rrule"), '='))
+      field "id", jmes_path(col_item, "id")
+      field "incident_aggregate_id", jmes_path(col_item, "incidentAggregateId")
+      field "info", jmes_path(col_item, "info")
+      field "kind", jmes_path(col_item, "kind")
+      field "log_level", jmes_path(col_item, "logLevel")
+      field "version", jmes_path(col_item, "info.version")
+      field "parent", jmes_path(col_item, "parent.ref")
+      field "name", jmes_path(col_item, "name")
+      field "options", jmes_path(col_item, "options")
+      field "policy_aggregate_id", jmes_path(col_item, "policyAggregateId")
+      field "policy_template", jmes_path(col_item, "policyTemplate")
+      field "published_template", jmes_path(col_item, "publishedTemplate")
+      field "scope", jmes_path(col_item, "scope")
+      field "severity", jmes_path(col_item, "severity")
+      field "skip_approvals", jmes_path(col_item, "skipApprovals")
+      field "status", jmes_path(col_item, "status")
+      field "updated_at", jmes_path(col_item, "updatedAt")
+      field "href", join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/applied-policies/", jmes_path(col_item, "id")])
+    end
+  end
+end
+
+datasource "ds_applied_demo_policies" do
+  run_script $js_applied_demo_policies, $ds_applied_policies
+end
+
+script "js_applied_demo_policies", type: "javascript" do
+  parameters "ds_applied_policies"
+  result "result"
+  code <<-'EOS'
+  result = _.filter(ds_applied_policies, function(policy) {
+    param_labels = policy["options"] ? _.pluck(policy["options"], "label") : []
+    return _.contains(param_labels, "Demo Policy") && policy["name"] != "Update CCO Demo Applied Policies"
+  })
+EOS
+end
+
+datasource "ds_delete_applied_demo_policies" do
+  iterate $ds_applied_demo_policies
+  request do
+    auth $auth_flexera
+    verb "DELETE"
+    host val($ds_flexera_api_hosts, "flexera")
+    path val(iter_item, "href")
+  end
+end
+
+datasource "ds_policy_templates" do
+  request do
+    auth $auth_flexera
+    host val($ds_flexera_api_hosts, "flexera")
+    path join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/policy-templates"])
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "values[*]") do
+      field "category", jmes_path(col_item, "category")
+      field "created_at", jmes_path(col_item, "createdAt")
+      field "created_by", jmes_path(col_item, "createdBy.email")
+      field "credentials", jmes_path(col_item, "credentials")
+      field "defaultFrequency", jmes_path(col_item, "defaultFrequency")
+      field "docLink", jmes_path(col_item, "docLink")
+      field "filename", jmes_path(col_item, "filename")
+      field "fingerprint", jmes_path(col_item, "fingerprint")
+      field "id", jmes_path(col_item, "id")
+      field "longDescription", jmes_path(col_item, "longDescription")
+      field "name", jmes_path(col_item, "name")
+      field "parameters", jmes_path(col_item, "parameters")
+      field "permissions", jmes_path(col_item, "permissions")
+      field "policyTemplateVersion", jmes_path(col_item, "policyTemplateVersion")
+      field "projectId", jmes_path(col_item, "projectId")
+      field "severity", jmes_path(col_item, "severity")
+      field "shortDescription", jmes_path(col_item, "shortDescription")
+      field "tenancy", jmes_path(col_item, "tenancy")
+      field "href", join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/policy-templates/", jmes_path(col_item, "id")])
+    end
+  end
+end
+
+datasource "ds_demo_policy_templates" do
+  run_script $js_demo_policy_templates, $ds_policy_templates, $ds_delete_applied_demo_policies
+end
+
+script "js_demo_policy_templates", type: "javascript" do
+  parameters "ds_demo_policy_templates", "ds_delete_applied_demo_policies"
+  result "result"
+  code <<-'EOS'
+  result = _.filter(ds_demo_policy_templates, function(template) {
+    return template["docLink"] == "https://github.com/flexera-public/cco_demo" && template["name"] != "Update CCO Demo Applied Policies"
+  })
+EOS
+end
+
+datasource "ds_apply_demo_policy_templates" do
+  iterate $ds_demo_policy_templates
+  request do
+    run_script $js_apply_demo_policy_templates, iter_item, $ds_flexera_api_hosts, rs_org_id, rs_project_id
+  end
+end
+
+script "js_apply_demo_policy_templates", type: "javascript" do
+  parameters "template", "ds_flexera_api_hosts", "rs_org_id", "rs_project_id"
+  result "request"
+  code <<-'EOS'
+  body = {
+    "credentials": {},
+    "templateRef": [ "ref:::project/", rs_project_id, ":policy:policy-template:", template["id"] ].join('')
+  }
+
+  var request = {
+    auth: "auth_flexera",
+    verb: "POST",
+    host: ds_flexera_api_hosts["flexera"],
+    path: [ "/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/applied-policies" ].join(''),
+    body: body
+  }
+EOS
+end
+
+###############################################################################
+# Policy
+###############################################################################
+
+policy "pol_demo" do
+  validate_each $ds_apply_demo_policy_templates do
+    summary_template "Demo Policy Templates Applied"
+    detail_template "Demo Policy Templates Applied"
+    check eq(0, 0)
+  end
+end

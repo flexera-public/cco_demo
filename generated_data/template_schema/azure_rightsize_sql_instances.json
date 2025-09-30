@@ -1,0 +1,281 @@
+{
+  "name": "Azure Rightsize SQL Databases",
+  "version": "6.0.5",
+  "cloud": "Azure",
+  "service": "SQL",
+  "policy_set": "Rightsize Database Instances",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks for SQL database instances that have inefficient utilization for the last 30 days and downsizes or deletes them after approval. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/azure/rightsize_sql_instances/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/azure/rightsize_sql_instances/azure_rightsize_sql_instances.pt",
+  "filename": "azure_rightsize_sql_instances",
+  "incident": [
+    {
+      "summary_template": "Azure Rightsize SQL Databases: {{ len data }} Azure Underutilized SQL Databases Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Subscription ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Subscription Name"
+        },
+        {
+          "name": "resourceGroup",
+          "label": "Resource Group"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID",
+          "path": "id"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "createdTime",
+          "label": "Created At"
+        },
+        {
+          "name": "lastAccessed",
+          "label": "Last Accessed"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Current Capacity"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Capacity"
+        },
+        {
+          "name": "skuName",
+          "label": "SKU - Name",
+          "path": "sku.name"
+        },
+        {
+          "name": "skuTier",
+          "label": "SKU - Tier",
+          "path": "sku.tier"
+        },
+        {
+          "name": "purchase_model",
+          "label": "Purchase Model"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "resourceKind",
+          "label": "Kind"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "status",
+          "label": "Status"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "cpuMaximum",
+          "label": "CPU Maximum %"
+        },
+        {
+          "name": "cpuMinimum",
+          "label": "CPU Minimum %"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average %"
+        },
+        {
+          "name": "cpuP90",
+          "label": "CPU p90"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95"
+        },
+        {
+          "name": "cpuP99",
+          "label": "CPU p99"
+        },
+        {
+          "name": "dtuMaximum",
+          "label": "DTU Maximum %"
+        },
+        {
+          "name": "dtuMinimum",
+          "label": "DTU Minimum %"
+        },
+        {
+          "name": "dtuAverage",
+          "label": "DTU Average %"
+        },
+        {
+          "name": "dtuP90",
+          "label": "DTU p90"
+        },
+        {
+          "name": "dtuP95",
+          "label": "DTU p95"
+        },
+        {
+          "name": "dtuP99",
+          "label": "DTU p99"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "id",
+          "label": "Resource ID"
+        },
+        {
+          "name": "thresholdType",
+          "label": "Threshold Statistic"
+        },
+        {
+          "name": "threshold",
+          "label": "CPU Threshold"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Lookback Period"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_rightsize_sql_instances_1.json"
+    },
+    {
+      "summary_template": "Azure Rightsize SQL Databases: {{ len data }} Azure Unused SQL Databases Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Subscription ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Subscription Name"
+        },
+        {
+          "name": "resourceGroup",
+          "label": "Resource Group"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID",
+          "path": "id"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "createdTime",
+          "label": "Created At"
+        },
+        {
+          "name": "lastAccessed",
+          "label": "Last Accessed"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "resourceKind",
+          "label": "Kind"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "status",
+          "label": "Status"
+        },
+        {
+          "name": "resourceType",
+          "label": "Current Capacity"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Capacity"
+        },
+        {
+          "name": "skuName",
+          "label": "SKU - Name",
+          "path": "sku.name"
+        },
+        {
+          "name": "skuTier",
+          "label": "SKU - Tier",
+          "path": "sku.tier"
+        },
+        {
+          "name": "purchase_model",
+          "label": "Purchase Model"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "id",
+          "label": "Resource ID"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Lookback Period"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_rightsize_sql_instances_2.json"
+    }
+  ]
+}
