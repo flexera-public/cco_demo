@@ -2,6 +2,8 @@ I am creating demo data for a cloud cost optimization tool that provides recomme
 
 Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
 
+Note: The "chartUrlField" is a URL that uses the image-charts.com tool through a proxy. Do your best to generate URLs that are likely to produce sensible looking charts. Match the format of the demo data exactly but change the numbers around a bit.
+
 Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
 
 Do not stop until the JSON list contains exactly 20 items. Do not end early.
@@ -40,6 +42,7 @@ Do not stop until the JSON list contains exactly 20 items. Do not end early.
     "service": "EC2",
     "tags": "Name=test-node, Environment=production, application=accounting",
     "threshold": 40,
-    "thresholdType": "p95"
+    "thresholdType": "p95",
+    "chartUrlField": "i-35819afebd05f70c0 Utilization Chart||https://api.image-charts-auth.flexeraeng.com/ic-function?rs_org_id=39953&rs_project_id=141987&cht=lc&chs=900x450&chco=206BB6,CF8F36&chxt=x,y&chxs=0,000000,12,-1,lt,000000,s,min90&chdl=CPU%20Usage%2525%2520%2520%2520%2520%2520%2520%2520%2520%2520%2520%7CMemory%20Usage%2525&chdlp=b&chtt=Average%2BResource%2BUtilization%7Cawsplsplunk199%2520(i-0d9d00b8700564af9)&chma=10,10,10,10&chxr=1,0,100&chls=4%7C4&chf=bg,s,FFFFFF00&chg=20%2C50%2C5%2C5%2CCECECE&chxl=0%3A%7C2025-08-25%257C2025-08-26%257C2025-08-27%257C2025-08-28%257C2025-08-29%257C2025-08-30%257C2025-08-31%257C2025-09-01%257C2025-09-02%257C2025-09-03%257C2025-09-04%257C2025-09-05%257C2025-09-06%257C2025-09-07%257C2025-09-08%257C2025-09-09%257C2025-09-10%257C2025-09-11%257C2025-09-12%257C2025-09-13%257C2025-09-14%257C2025-09-15%257C2025-09-16%257C2025-09-17%257C2025-09-18%257C2025-09-19%257C2025-09-20%257C2025-09-21%257C2025-09-22%257C2025-09-23&chd=t%3A4.6%2C4.6%2C4.5%2C4.6%2C4.6%2C4.6%2C4.3%2C4.4%2C4.6%2C4.6%2C4.6%2C4.6%2C4.6%2C4.5%2C4.6%2C4.6%2C4.7%2C4.7%2C4.7%2C4.7%2C4.4%2C4.6%2C4.6%2C4.6%2C4.7%2C4.7%2C4.6%2C4.4%2C4.6%2C4.6%7C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_%2C_"
   }
 ]
