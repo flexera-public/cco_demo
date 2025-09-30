@@ -74,15 +74,6 @@ script "js_flexera_api_hosts", type: "javascript" do
 EOS
 end
 
-# Get applied policy metadata for use later
-datasource "ds_self_policy" do
-  request do
-    auth $auth_flexera
-    host val($ds_flexera_api_hosts, "flexera")
-    path join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/applied-policies", switch(policy_id, join(["/", policy_id]), "")])
-  end
-end
-
 datasource "ds_applied_policies" do
   request do
     auth $auth_flexera
@@ -93,34 +84,9 @@ datasource "ds_applied_policies" do
   result do
     encoding "json"
     collect jmes_path(response, "values[*]") do
-      field "category", jmes_path(col_item, "category")
-      field "created_at", jmes_path(col_item, "createdAt")
-      field "created_by", jmes_path(col_item, "createdBy.email")
-      field "credentials", jmes_path(col_item, "credentials")
-      field "description", jmes_path(col_item, "description")
-      field "doc_link", jmes_path(col_item, "docLink")
-      field "dry_run", jmes_path(col_item, "dryRun")
-      field "error", jmes_path(col_item, "error")
-      field "errored_at", jmes_path(col_item, "erroredAt")
-      field "frequency", get(1, split(jmes_path(col_item, "schedule.rrule"), '='))
       field "id", jmes_path(col_item, "id")
-      field "incident_aggregate_id", jmes_path(col_item, "incidentAggregateId")
-      field "info", jmes_path(col_item, "info")
-      field "kind", jmes_path(col_item, "kind")
-      field "log_level", jmes_path(col_item, "logLevel")
-      field "version", jmes_path(col_item, "info.version")
-      field "parent", jmes_path(col_item, "parent.ref")
       field "name", jmes_path(col_item, "name")
       field "options", jmes_path(col_item, "options")
-      field "policy_aggregate_id", jmes_path(col_item, "policyAggregateId")
-      field "policy_template", jmes_path(col_item, "policyTemplate")
-      field "published_template", jmes_path(col_item, "publishedTemplate")
-      field "scope", jmes_path(col_item, "scope")
-      field "severity", jmes_path(col_item, "severity")
-      field "skip_approvals", jmes_path(col_item, "skipApprovals")
-      field "status", jmes_path(col_item, "status")
-      field "updated_at", jmes_path(col_item, "updatedAt")
-      field "href", join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/applied-policies/", jmes_path(col_item, "id")])
     end
   end
 end
@@ -146,7 +112,7 @@ datasource "ds_delete_applied_demo_policies" do
     auth $auth_flexera
     verb "DELETE"
     host val($ds_flexera_api_hosts, "flexera")
-    path val(iter_item, "href")
+    path join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/applied-policies/", val(iter_item, "id")])
   end
 end
 
@@ -159,25 +125,9 @@ datasource "ds_policy_templates" do
   result do
     encoding "json"
     collect jmes_path(response, "values[*]") do
-      field "category", jmes_path(col_item, "category")
-      field "created_at", jmes_path(col_item, "createdAt")
-      field "created_by", jmes_path(col_item, "createdBy.email")
-      field "credentials", jmes_path(col_item, "credentials")
-      field "defaultFrequency", jmes_path(col_item, "defaultFrequency")
       field "docLink", jmes_path(col_item, "docLink")
-      field "filename", jmes_path(col_item, "filename")
-      field "fingerprint", jmes_path(col_item, "fingerprint")
       field "id", jmes_path(col_item, "id")
-      field "longDescription", jmes_path(col_item, "longDescription")
       field "name", jmes_path(col_item, "name")
-      field "parameters", jmes_path(col_item, "parameters")
-      field "permissions", jmes_path(col_item, "permissions")
-      field "policyTemplateVersion", jmes_path(col_item, "policyTemplateVersion")
-      field "projectId", jmes_path(col_item, "projectId")
-      field "severity", jmes_path(col_item, "severity")
-      field "shortDescription", jmes_path(col_item, "shortDescription")
-      field "tenancy", jmes_path(col_item, "tenancy")
-      field "href", join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/policy-templates/", jmes_path(col_item, "id")])
     end
   end
 end
