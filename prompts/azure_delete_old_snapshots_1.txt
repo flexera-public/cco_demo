@@ -1,0 +1,28 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for old Azure VM snapshots to delete.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "458d48fd-541b-4da2-e5ab-65b981c52a61",
+    "accountName": "Minnesota",
+    "age": 59,
+    "id": "/subscriptions/458d48fd-541b-4da2-e5ab-65b981c52a61/resourceGroups/dev-environment-387/providers/Microsoft.Compute/snapshots/OS_UPGRADE_56445",
+    "lookbackPeriod": 35,
+    "recommendationDetails": "Delete Azure snapshot CHG0728129_OS_UPGRADE_pgv0135e6 in Azure Subscription Minnesota (458d48fd-541b-4da2-e5ab-65b981c52a61)",
+    "region": "westus",
+    "resourceGroup": "dev-environment-387",
+    "resourceID": "/subscriptions/458d48fd-541b-4da2-e5ab-65b981c52a61/resourceGroups/dev-environment-387/providers/Microsoft.Compute/snapshots/OS_UPGRADE_56445",
+    "resourceName": "OS_UPGRADE_56445",
+    "savings": 1.431,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.Compute",
+    "size": 50,
+    "tags": "app=llm, environment=staging",
+    "type": "Microsoft.Compute/snapshots"
+  }
+]

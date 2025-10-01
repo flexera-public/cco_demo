@@ -1,0 +1,29 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for unused Azure IP addresses to delete.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "944cfd94-ed42-495a-809d-856ee8a0b5e1",
+    "accountName": "Alaska",
+    "age": null,
+    "allocation": "Static",
+    "id": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/alaska-nonprod/providers/Microsoft.Network/publicIPAddresses/alaska-eth02",
+    "ipAddress": "20.227.113.49",
+    "lookbackPeriod": 65,
+    "recommendationDetails": "Delete IP address alaska-eth02 (20.227.113.49) in Azure Subscription Alaska (944cfd94-ed42-495a-809d-856ee8a0b5e1)",
+    "region": "westus",
+    "resourceGroup": "alaska-nonprod",
+    "resourceID": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/alaska-nonprod/providers/Microsoft.Network/publicIPAddresses/alaska-eth02",
+    "resourceName": "alaska-eth02",
+    "savings": 2.447,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.Network",
+    "tags": "appcode=alnp, environment=test",
+    "type": "Microsoft.Network/publicIPAddresses"
+  }
+]

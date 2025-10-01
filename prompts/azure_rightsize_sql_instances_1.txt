@@ -1,0 +1,50 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized Azure SQL databases to downsize.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "944cfd94-ed42-495a-809d-856ee8a0b5e1",
+    "accountName": "Alaska",
+    "cpuAverage": 0.04,
+    "cpuMaximum": 34,
+    "cpuMinimum": "",
+    "cpuP90": 1,
+    "cpuP95": 1,
+    "cpuP99": 2,
+    "createdTime": "2024-05-23T00:29:17.593Z",
+    "dtuAverage": "",
+    "dtuMaximum": "",
+    "dtuMinimum": "",
+    "dtuP90": "",
+    "dtuP95": "",
+    "dtuP99": "",
+    "id": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/Alaska-prod/providers/Microsoft.Sql/servers/app-prod-westus-sqlsrv-01/databases/app-prod",
+    "lastAccessed": "2025-09-30",
+    "lookbackPeriod": 65,
+    "newResourceType": "24",
+    "platform": "Azure SQL Database",
+    "purchase_model": "vCore",
+    "recommendationDetails": "Downsize Azure SQL database app-prod in Azure Subscription Alaska (944cfd94-ed42-495a-809d-856ee8a0b5e1) from 32 capacity to 24 capacity",
+    "region": "westus",
+    "resourceGroup": "Alaska-prod",
+    "resourceID": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/Alaska-prod/providers/Microsoft.Sql/servers/app-prod-westus-sqlsrv-01/databases/app-prod",
+    "resourceKind": "v12.0,user,vcore",
+    "resourceName": "app-prod",
+    "resourceType": 32,
+    "savings": 903.054,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.Sql",
+    "skuName": "BC_Gen5",
+    "skuTier": "BusinessCritical",
+    "status": "Online",
+    "tags": "appcode=alnp, environment=prod",
+    "threshold": 60,
+    "thresholdType": "Maximum",
+    "type": "Microsoft.Sql/servers/databases"
+  }
+]

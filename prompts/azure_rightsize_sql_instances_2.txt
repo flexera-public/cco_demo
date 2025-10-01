@@ -1,0 +1,36 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for idle Azure SQL databases to delete.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "944cfd94-ed42-495a-809d-856ee8a0b5e1",
+    "accountName": "Alaska",
+    "createdTime": "2021-02-21T16:51:12.277Z",
+    "id": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/alaska-test-env/providers/Microsoft.Sql/servers/test-cluster-server/databases/test-sql",
+    "lastAccessed": "\u003e 65 Days Ago",
+    "lookbackPeriod": 65,
+    "newResourceType": "Delete Instance",
+    "platform": "Azure SQL Database",
+    "purchase_model": "vCore",
+    "recommendationDetails": "Delete Azure SQL database test-sql in Azure Subscription Alaska (944cfd94-ed42-495a-809d-856ee8a0b5e1)",
+    "region": "westus",
+    "resourceGroup": "alaska-test-env",
+    "resourceID": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/alaska-test-env/providers/Microsoft.Sql/servers/test-cluster-server/databases/test-sql",
+    "resourceKind": "v12.0,user,vcore,serverless",
+    "resourceName": "test-sql",
+    "resourceType": 2,
+    "savings": 156.623,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.Sql",
+    "skuName": "GP_S_Gen5",
+    "skuTier": "GeneralPurpose",
+    "status": "Online",
+    "tags": "appcode=alnp, environment=test",
+    "type": "Microsoft.Sql/servers/databases"
+  }
+]

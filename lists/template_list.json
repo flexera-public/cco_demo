@@ -9,6 +9,5 @@
   "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/rightsize_managed_sql/azure_rightsize_managed_sql.pt",
   "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/rightsize_sql_instances/azure_rightsize_sql_instances.pt",
   "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/unused_ip_addresses/azure_unused_ip_addresses.pt",
-  "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/unused_volumes/azure_unused_volumes.pt",
-  "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/unused_firewalls/azure_unused_firewalls.pt"
+  "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/unused_volumes/azure_unused_volumes.pt"
 ]

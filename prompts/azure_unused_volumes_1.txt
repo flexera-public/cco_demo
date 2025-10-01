@@ -1,0 +1,31 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for unused Azure volumes to delete.
+
+Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "944cfd94-ed42-495a-809d-856ee8a0b5e1",
+    "accountName": "Alaska",
+    "age": 83,
+    "attached_vm": null,
+    "id": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/alaska-nonprod/providers/Microsoft.Compute/disks/pvc-944cfd94",
+    "lookbackPeriod": 65,
+    "recommendationDetails": "Delete unused volume pvc-944cfd94 in Azure Subscription Alaska (944cfd94-ed42-495a-809d-856ee8a0b5e1)",
+    "region": "westus",
+    "resourceGroup": "alaska-nonprod",
+    "resourceID": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/alaska-nonprod/providers/Microsoft.Compute/disks/pvc-944cfd94",
+    "resourceName": "pvc-944cfd94",
+    "savings": 0.205,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.Compute",
+    "size": 1,
+    "state": "Unattached",
+    "tags": "appcode=alnp, environment=test",
+    "timeCreated": "2025-07-10T00:00:01.231Z",
+    "type": "Microsoft.Compute/disks"
+  }
+]
