@@ -1,0 +1,36 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for AWS EC2 instances with superseded instance types.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+NOTE: AWS account numbers should always be 12 digits.
+
+[
+  {
+    "accountID": "165211183188",
+    "accountName": "Arizona",
+    "cost": 7.67,
+    "hostname": "ip-10-147-102-94",
+    "id": "i-fe316fdaa4c0792b3",
+    "instance_type_price": 16.802,
+    "launchTime": "2025-02-28T06:47:44.000Z",
+    "newResourceType": "t3.small",
+    "osType": "Linux",
+    "platform": "Linux/UNIX",
+    "recommendationDetails": "Change instance type of EC2 instance i-fe316fdaa4c0792b3 in AWS Account Arizona (165211183188) from t2.small to t3.small",
+    "recommendationType": "Regular",
+    "region": "us-east-1",
+    "resourceARN": "arn:aws:ec2:us-east-1:165211183188:instance/i-fe316fdaa4c0792b3",
+    "resourceID": "i-fe316fdaa4c0792b3",
+    "resourceName": "dev-instance-78",
+    "resourceType": "t2.small",
+    "savings": 0.731,
+    "savingsCurrency": "US$",
+    "service": "AmazonEC2",
+    "superseded_type_price": 16.071,
+    "tags": "env=test, team=devops"
+  }
+]

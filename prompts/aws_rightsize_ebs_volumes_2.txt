@@ -1,10 +1,12 @@
 I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized AWS EBS volumes to downsize.
 
-Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
 
 Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
 
 Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+NOTE: AWS account numbers should always be 12 digits.
 
 [
   {

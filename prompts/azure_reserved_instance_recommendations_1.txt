@@ -1,0 +1,33 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for purchasing Azure reserved instances/reservations.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "14f6f910-338f-6481-b778-b5414b68f781",
+    "accountName": "AppServices Devtest",
+    "costWithNoRI": 936.6,
+    "firstUsageDate": "2025-08-31T00:00:00Z",
+    "id": "5b9be032-758b-bb05-9781-af154dad0fae",
+    "instanceFlexibilityGroup": "Easv5 Series",
+    "instanceFlexibilityRatio": 2,
+    "lookbackPeriod": "Last 30 Days",
+    "normalizedSize": "Standard_E2as_v5",
+    "recommendedQuantity": 6,
+    "recommendedQuantityNormalized": 12,
+    "region": "uksouth",
+    "resourceGroup": null,
+    "resourceID": "5b9be032-758b-bb05-9781-af154dad0fae",
+    "resourceType": "Standard_E4as_v5",
+    "savings": 270.76,
+    "savingsCurrency": "US$",
+    "scope": "Single",
+    "service": "VirtualMachines",
+    "term": "1 Year",
+    "totalCostWithRI": 665.84
+  }
+]

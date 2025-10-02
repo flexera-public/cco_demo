@@ -1,10 +1,4 @@
-I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized Azure VM instances to downsize.
-
-Using the below sample data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
-
-Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
-
-Do not stop until the JSON list contains exactly 20 items. Do not end early.
+Please generate a JSON list of 20 objects of fake demo data based on the below JSON sample. Use all of the same keys but provide randomly generated but realisticed looking values. The data is for underutilized Azure VM instances that are being recommended for downsizing
 
 [
   {

@@ -1,0 +1,101 @@
+{
+  "name": "AWS Unused Network Load Balancers",
+  "version": "0.2.8",
+  "cloud": "AWS",
+  "service": "Network",
+  "policy_set": "Unused Load Balancers",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks AWS for unused Network Load Balancers and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/unused_nlbs) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/aws/unused_nlbs/aws_unused_nlbs.pt",
+  "filename": "aws_unused_nlbs",
+  "incident": [
+    {
+      "summary_template": "AWS Unused Network Load Balancers: {{ len data }} AWS Unused Network Load Balancers Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ARN"
+        },
+        {
+          "name": "dns",
+          "label": "DNS Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "totalListeners",
+          "label": "Listeners (#)"
+        },
+        {
+          "name": "totalGroups",
+          "label": "Target Groups (#)"
+        },
+        {
+          "name": "totalHealthyGroups",
+          "label": "Healthy Target Groups (#)"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "zones",
+          "label": "Availability Zones"
+        },
+        {
+          "name": "vpc",
+          "label": "VPC"
+        },
+        {
+          "name": "created",
+          "label": "Creation Date"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "resourceARN",
+          "label": "Resource ARN"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_unused_nlbs_1.json"
+    }
+  ]
+}

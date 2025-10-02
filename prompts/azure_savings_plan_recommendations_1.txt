@@ -1,0 +1,34 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for purchasing Azure savings plans.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "14f6f910-338f-6481-b778-b5414b68f781",
+    "accountName": "AppServices Production",
+    "benefitCost": 13304.01,
+    "commitmentGranularity": "Hourly",
+    "costWithoutBenefit": 16048.83,
+    "coveragePercentage": 91.898,
+    "id": "/subscriptions/14f6f910-338f-6481-b778-b5414b68f781/providers/Microsoft.CostManagement/benefitRecommendations/32101d457d8f76d499cf731da88069cc021cb792a9781d7a87cb1b39176ed34f",
+    "lookbackPeriod": "Last 30 Days",
+    "name": "32101d457d8f76d499cf731da88069cc021cb792a9781d7a87cb1b39176ed34f",
+    "overageCost": 1755.18,
+    "recommendedQuantity": 18.607,
+    "resourceGroup": null,
+    "resourceType": "Compute Savings Plan",
+    "savings": 4893.09,
+    "savingsCurrency": "US$",
+    "savingsPercentage": 30.489,
+    "scope": "Subscription",
+    "service": "Microsoft.Compute",
+    "term": "3 Year",
+    "totalCost": 11155.74,
+    "totalHours": 715,
+    "wastageCost": 27.85
+  }
+]

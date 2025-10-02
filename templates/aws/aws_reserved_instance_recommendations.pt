@@ -1,0 +1,179 @@
+# DEMO POLICY TEMPLATE. DOES NOT PRODUCE REAL RESULTS.
+# More info available here: https://github.com/flexera-public/cco_demo
+name "AWS Reserved Instances Recommendations"
+rs_pt_ver 20180301
+type "policy"
+short_description "Checks for snapshots older than a specified number of days and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/old_snapshots) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more."
+long_description ""
+# This is to make it easy to identify this template as a demo template via API
+doc_link "https://github.com/flexera-public/cco_demo"
+category "Cost"
+severity "low"
+default_frequency "weekly"
+info(
+  version: "3.6.6",
+  provider: "AWS",
+  service: "Compute",
+  policy_set: "Reserved Instances",
+  recommendation_type: "Rate Reduction",
+  hide_skip_approvals: "true",
+  demo: "true"
+)
+
+###############################################################################
+# Parameters
+###############################################################################
+
+# This is to make it easy for automation to determine if an applied policy is
+# a demo policy or not.
+parameter "param_demo" do
+  type "string"
+  category "Policy Settings"
+  label "Demo Policy"
+  description "Indicates that this is a demo policy. Should generally be left at its default value."
+  allowed_values "True", "False"
+  default "True"
+end
+
+###############################################################################
+# Datasources & Scripts
+###############################################################################
+
+datasource "ds_aws_reserved_instance_recommendations_1" do
+  request do
+    verb "GET"
+    host "raw.githubusercontent.com"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_reserved_instance_recommendations_1.json"
+  end
+end
+
+###############################################################################
+# Policy
+###############################################################################
+
+policy "pol_incident" do
+  validate_each $ds_aws_reserved_instance_recommendations_1 do
+    summary_template "AWS Reserved Instances Recommendations: {{ len data }} AWS Reserved Instances Purchase Recommendations"
+    check eq(0, 1)
+    export do
+      resource_level true
+      field "accountID" do
+        label "Account ID"
+      end
+      field "accountName" do
+        label "Account Name"
+      end
+      field "region" do
+        label "Region"
+      end
+      field "service" do
+        label "Service"
+      end
+      field "savingsCurrency" do
+        label "Currency"
+      end
+      field "savings" do
+        label "Estimated Monthly Savings Amount"
+      end
+      field "scope" do
+        label "Account Scope"
+      end
+      field "averageNormalizedUnitsUsedPerHour" do
+        label "Average Normalized Units Used Per Hour"
+      end
+      field "averageNumberOfInstancesUsedPerHour" do
+        label "Average Number Of Instances Used Per Hour"
+      end
+      field "averageUtilization" do
+        label "Average Utilization"
+      end
+      field "databaseEdition" do
+        label "Database Edition"
+      end
+      field "databaseEngine" do
+        label "Database Engine"
+      end
+      field "deploymentOption" do
+        label "Deployment Option"
+      end
+      field "estimatedBreakEvenInMonths" do
+        label "Estimated Break Even In Months"
+      end
+      field "estimatedMonthlyOnDemandCost" do
+        label "Estimated Monthly On Demand Cost"
+      end
+      field "estimatedMonthlySavingsPercentage" do
+        label "Estimated Monthly Savings Percentage"
+      end
+      field "estimatedReservationCostForLookbackPeriod" do
+        label "Estimated Reservation Cost For Lookback Period"
+      end
+      field "family" do
+        label "Family"
+      end
+      field "instanceClass" do
+        label "Instance Class"
+      end
+      field "instanceSize" do
+        label "Instance Size"
+      end
+      field "instanceType" do
+        label "Instance Type"
+      end
+      field "licenseModel" do
+        label "License Model"
+      end
+      field "lookbackPeriod" do
+        label "Look Back Period (Days)"
+      end
+      field "maximumNormalizedUnitsUsedPerHour" do
+        label "Maximum Normalized Units Used Per Hour"
+      end
+      field "maximumNumberOfInstancesUsedPerHour" do
+        label "Maximum Number Of Instances Used Per Hour"
+      end
+      field "minimumNormalizedUnitsUsedPerHour" do
+        label "Minimum Normalized Units Used Per Hour"
+      end
+      field "minimumNumberOfInstancesUsedPerHour" do
+        label "Minimum Number Of Instances Used Per Hour"
+      end
+      field "nodeType" do
+        label "Node Type"
+      end
+      field "paymentOption" do
+        label "Payment Option"
+      end
+      field "platform" do
+        label "Platform"
+      end
+      field "productDescription" do
+        label "Product Description"
+      end
+      field "recommendedNormalizedUnitsToPurchase" do
+        label "Recommended Normalized Units To Purchase"
+      end
+      field "recommendedQuantity" do
+        label "Recommended Number Of Instances To Purchase"
+      end
+      field "recurringStandardMonthlyCost" do
+        label "Recurring Standard Monthly Cost"
+      end
+      field "sizeFlexEligible" do
+        label "Flex Eligible"
+      end
+      field "tenancy" do
+        label "Tenancy"
+      end
+      field "upfrontCost" do
+        label "Upfront Cost"
+      end
+      field "resourceType" do
+        label "Resource Type"
+      end
+      field "term" do
+        label "Term"
+      end
+    end
+  end
+end

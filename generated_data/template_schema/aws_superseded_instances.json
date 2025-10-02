@@ -1,0 +1,109 @@
+{
+  "name": "AWS Superseded EC2 Instances",
+  "version": "3.0.1",
+  "cloud": "AWS",
+  "service": "Compute",
+  "policy_set": "Superseded Compute Instances",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks for AWS EC2 instance types that have been superseded and, optionally, updates the instance type. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/superseded_instances) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/aws/superseded_instances/aws_superseded_instances.pt",
+  "filename": "aws_superseded_instances",
+  "incident": [
+    {
+      "summary_template": "AWS Superseded EC2 Instances: {{ len data }} AWS Potentially Superseded EC2 Instances Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Instance Size"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Instance Size"
+        },
+        {
+          "name": "recommendationType",
+          "label": "Recommendation Type"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "osType",
+          "label": "Operating System"
+        },
+        {
+          "name": "hostname",
+          "label": "Hostname"
+        },
+        {
+          "name": "cost",
+          "label": "Estimated Monthly Cost"
+        },
+        {
+          "name": "instance_type_price",
+          "label": "Current Monthly List Price"
+        },
+        {
+          "name": "superseded_type_price",
+          "label": "New Monthly List Price"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "launchTime",
+          "label": "Launch Time"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "resourceARN",
+          "label": "Resource ARN"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_superseded_instances_1.json"
+    }
+  ]
+}

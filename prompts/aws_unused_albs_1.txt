@@ -1,0 +1,34 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for unused AWS application load balancers to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+NOTE: AWS account numbers should always be 12 digits.
+
+[
+  {
+    "accountID": "170322705405",
+    "accountName": "SouthDakota",
+    "created": "2025-03-06T00:14:15.503Z",
+    "dns": "internal-App7LoadBalancer-874731586.us-east-1.elb.amazonaws.com",
+    "id": "arn:aws:elasticloadbalancing:us-east-1:170322705405:loadbalancer/app/App7LoadBalancer/c2621932462bcbaf",
+    "recommendationDetails": "Delete AWS Application Load Balancer App7LoadBalancer in AWS Account SouthDakota (170322705405)",
+    "region": "us-east-1",
+    "resourceARN": "arn:aws:elasticloadbalancing:us-east-1:170322705405:loadbalancer/app/App7LoadBalancer/c2621932462bcbaf",
+    "resourceID": "arn:aws:elasticloadbalancing:us-east-1:170322705405:loadbalancer/app/App7LoadBalancer/c2621932462bcbaf",
+    "resourceName": "App7LoadBalancer",
+    "savings": 0,
+    "savingsCurrency": "US$",
+    "service": "ELB",
+    "tags": "env=dev, team=devops",
+    "totalGroups": 1,
+    "totalHealthyGroups": 0,
+    "totalListeners": 1,
+    "type": "Application Load Balancer",
+    "vpc": "vpc-0ebffb1c0fc1e75da",
+    "zones": "subnet:subnet-167a2db7870a8a1a1 zone:us-east-1a, subnet:subnet-04a44c83c554f0128 zone:us-east-1c, subnet:subnet-0b7228075259ec4a3 zone:us-east-1b"
+  }
+]

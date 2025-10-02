@@ -1,0 +1,52 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for AWS Reservation/reserved instance purchases.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+NOTE: AWS account numbers should always be 12 digits.
+
+[
+  {
+    "accountID": "854730780832",
+    "accountName": "app-backup-all-01",
+    "averageNormalizedUnitsUsedPerHour": 63.82,
+    "averageUtilization": 99.72,
+    "databaseEdition": "",
+    "databaseEngine": "",
+    "deploymentOption": "",
+    "estimatedBreakEvenInMonths": 0,
+    "estimatedMonthlyOnDemandCost": 15145.11,
+    "estimatedMonthlySavingsPercentage": 30,
+    "estimatedReservationCostForLookbackPeriod": 104.79,
+    "family": "m7i",
+    "instanceClass": "",
+    "instanceSize": "",
+    "instanceType": "m7i.8xlarge",
+    "licenseModel": "",
+    "lookbackPeriod": "30",
+    "maximumNormalizedUnitsUsedPerHour": 64,
+    "maximumNumberOfInstancesUsedPerHour": 1,
+    "minimumNormalizedUnitsUsedPerHour": 0,
+    "minimumNumberOfInstancesUsedPerHour": 0,
+    "nodeType": "",
+    "paymentOption": "No Upfront",
+    "platform": "Windows (Amazon VPC)",
+    "productDescription": "",
+    "recommendedNormalizedUnitsToPurchase": 64,
+    "recommendedQuantity": 1,
+    "recurringStandardMonthlyCost": 10624.93,
+    "region": "EU (Ireland)",
+    "resourceType": "m7i.8xlarge",
+    "savings": 4520.18,
+    "savingsCurrency": "Dkr",
+    "scope": "Linked",
+    "service": "Elastic Compute Cloud (EC2)",
+    "sizeFlexEligible": "false",
+    "tenancy": "Shared",
+    "term": "3 years",
+    "upfrontCost": 0
+  }
+]

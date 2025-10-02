@@ -1,0 +1,119 @@
+# DEMO POLICY TEMPLATE. DOES NOT PRODUCE REAL RESULTS.
+# More info available here: https://github.com/flexera-public/cco_demo
+name "AWS Savings Plan Recommendations"
+rs_pt_ver 20180301
+type "policy"
+short_description "Checks for snapshots older than a specified number of days and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/old_snapshots) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more."
+long_description ""
+# This is to make it easy to identify this template as a demo template via API
+doc_link "https://github.com/flexera-public/cco_demo"
+category "Cost"
+severity "low"
+default_frequency "weekly"
+info(
+  version: "3.3.7",
+  provider: "AWS",
+  service: "Compute",
+  policy_set: "Savings Plans",
+  recommendation_type: "Rate Reduction",
+  hide_skip_approvals: "true",
+  demo: "true"
+)
+
+###############################################################################
+# Parameters
+###############################################################################
+
+# This is to make it easy for automation to determine if an applied policy is
+# a demo policy or not.
+parameter "param_demo" do
+  type "string"
+  category "Policy Settings"
+  label "Demo Policy"
+  description "Indicates that this is a demo policy. Should generally be left at its default value."
+  allowed_values "True", "False"
+  default "True"
+end
+
+###############################################################################
+# Datasources & Scripts
+###############################################################################
+
+datasource "ds_aws_savings_plan_recommendations_1" do
+  request do
+    verb "GET"
+    host "raw.githubusercontent.com"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_savings_plan_recommendations_1.json"
+  end
+end
+
+###############################################################################
+# Policy
+###############################################################################
+
+policy "pol_incident" do
+  validate_each $ds_aws_savings_plan_recommendations_1 do
+    summary_template "AWS Savings Plan Recommendations: {{ len data }} AWS Savings Plan Purchase Recommendations"
+    check eq(0, 1)
+    export do
+      resource_level true
+      field "accountID" do
+        label "Account ID"
+      end
+      field "accountName" do
+        label "Account Name"
+      end
+      field "region" do
+        label "Region"
+      end
+      field "service" do
+        label "Service"
+      end
+      field "savingsCurrency" do
+        label "Currency"
+      end
+      field "savings" do
+        label "Estimated Monthly Savings"
+      end
+      field "estimatedSavingsPercentage" do
+        label "Estimated Savings Percentage"
+      end
+      field "estimatedSavingsPlanCost" do
+        label "Estimated Savings Plan Cost"
+      end
+      field "lookbackPeriod" do
+        label "Look Back Period (Days)"
+      end
+      field "paymentOption" do
+        label "Payment Option"
+      end
+      field "recommendedQuantity" do
+        label "Recommended Hourly Commitment"
+      end
+      field "upfrontCost" do
+        label "Upfront Cost"
+      end
+      field "currentAverageHourlyOnDemandSpend" do
+        label "Current Average Hourly On-Demand Spend"
+      end
+      field "currentMaximumHourlyOnDemandSpend" do
+        label "Current Maximum Hourly On-Demand Spend"
+      end
+      field "currentMinimumHourlyOnDemandSpend" do
+        label "Current Minimum Hourly On-Demand Spend"
+      end
+      field "offeringId" do
+        label "Offering Id"
+      end
+      field "instanceFamily" do
+        label "Instance Family"
+      end
+      field "resourceType" do
+        label "Resource Type"
+      end
+      field "term" do
+        label "Term"
+      end
+    end
+  end
+end
