@@ -40,7 +40,7 @@
     "imageId": "",
     "region": "eu-central-1",
     "savings": 21.49,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 90,
     "resourceARN": "arn:aws:ec2:eu-central-1:928734012394:snapshot/snap-fedcba09876543210",
     "id": "whisperingcloud"
@@ -109,7 +109,7 @@
     "imageId": "",
     "region": "eu-central-1",
     "savings": 79.99,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 90,
     "resourceARN": "arn:aws:rds:eu-central-1:812734012394:snapshot/rds-snap-fedcba9876543210fedc0",
     "id": "whisperingcloud"
@@ -178,7 +178,7 @@
     "imageId": "",
     "region": "eu-central-1",
     "savings": 79.99,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 90,
     "resourceARN": "arn:aws:ec2:eu-central-1:812734012394:snapshot/snap-fedcba9876543210fedc0",
     "id": "whisperingcloud"
@@ -224,7 +224,7 @@
     "imageId": "",
     "region": "eu-central-1",
     "savings": 21.49,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 90,
     "resourceARN": "arn:aws:ec2:eu-central-1:928734012394:snapshot/snap-fedcba9876543210fedc0",
     "id": "whisperingcloud"
@@ -293,7 +293,7 @@
     "imageId": "",
     "region": "eu-central-1",
     "savings": 79.99,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 90,
     "resourceARN": "arn:aws:rds:eu-central-1:812734012394:snapshot/rds-snap-fedcba9876543210fedc0",
     "id": "whisperingcloud"
@@ -339,7 +339,7 @@
     "imageId": "",
     "region": "eu-central-1",
     "savings": 21.49,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 90,
     "resourceARN": "arn:aws:rds:eu-central-1:928734012394:snapshot/rds-snap-fedcba9876543210fedc0",
     "id": "whisperingcloud"
@@ -408,7 +408,7 @@
     "imageId": "",
     "region": "eu-central-1",
     "savings": 79.99,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 90,
     "resourceARN": "arn:aws:ec2:eu-central-1:812734012394:snapshot/snap-fedcba9876543210fedc0",
     "id": "whisperingcloud"
@@ -454,7 +454,7 @@
     "imageId": "",
     "region": "eu-central-1",
     "savings": 21.49,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 90,
     "resourceARN": "arn:aws:ec2:eu-central-1:928734012394:snapshot/snap-fedcba9876543210fedc0",
     "id": "whisperingcloud"

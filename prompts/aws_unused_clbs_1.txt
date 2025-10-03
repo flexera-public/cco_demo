@@ -21,7 +21,7 @@ NOTE: AWS account numbers should always be 12 digits.
     "resourceARN": "arn:aws:elasticloadbalancing:ap-south-1:170322705405:loadbalancer/classic/aac6f2407ceabb41e61108a0fee90a6b",
     "resourceID": "aac6f2407ceabb41e61108a0fee90a6b",
     "resourceName": "aac6f2407ceabb41e61108a0fee90a6b",
-    "savings": 0,
+    "savings": 37.25,
     "savingsCurrency": "US$",
     "service": "ELB",
     "tags": "env=dev, team=devops",

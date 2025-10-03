@@ -13,7 +13,7 @@
     "service": "Cloud SQL",
     "pricingPlan": "PACKAGE",
     "savings": 9.23,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "priority": "P5",
     "recommendationDetails": "Save cost by stopping Idle Cloud SQL 'heavywater'.",
     "recommenderSubtype": "DELETE_RESOURCE",

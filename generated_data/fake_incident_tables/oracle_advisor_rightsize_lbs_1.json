@@ -17,7 +17,7 @@
       "resourceName": "prod-lb-9",
       "resourceType": "flexible",
       "savings": 35.78,
-      "savingsCurrency": "GBP£",
+      "savingsCurrency": "US$",
       "service": "ORALB"
   },
   {
@@ -38,7 +38,7 @@
       "resourceName": "dev-lb-8",
       "resourceType": "flexible",
       "savings": 29.91,
-      "savingsCurrency": "EUR€",
+      "savingsCurrency": "EURUS$",
       "service": "ORALB"
   },
   {
@@ -59,7 +59,7 @@
       "resourceName": "qa-lb-1",
       "resourceType": "flexible",
       "savings": 41.19,
-      "savingsCurrency": "GBP£",
+      "savingsCurrency": "US$",
       "service": "ORALB"
   },
   {
@@ -80,7 +80,7 @@
       "resourceName": "prod-lb-5",
       "resourceType": "flexible",
       "savings": 31.49,
-      "savingsCurrency": "EUR€",
+      "savingsCurrency": "EURUS$",
       "service": "ORALB"
   },
   {
@@ -101,7 +101,7 @@
       "resourceName": "qa-lb-6",
       "resourceType": "flexible",
       "savings": 23.91,
-      "savingsCurrency": "GBP£",
+      "savingsCurrency": "US$",
       "service": "ORALB"
   },
   {
@@ -122,7 +122,7 @@
       "resourceName": "dev-lb-2",
       "resourceType": "flexible",
       "savings": 33.21,
-      "savingsCurrency": "EUR€",
+      "savingsCurrency": "EURUS$",
       "service": "ORALB"
   },
   {
@@ -143,7 +143,7 @@
       "resourceName": "qa-lb-7",
       "resourceType": "flexible",
       "savings": 21.91,
-      "savingsCurrency": "GBP£",
+      "savingsCurrency": "US$",
       "service": "ORALB"
   },
   {
@@ -164,7 +164,7 @@
       "resourceName": "prod-lb-3",
       "resourceType": "flexible",
       "savings": 29.91,
-      "savingsCurrency": "EUR€",
+      "savingsCurrency": "EURUS$",
       "service": "ORALB"
   },
   {
@@ -185,7 +185,7 @@
       "resourceName": "dev-lb-8",
       "resourceType": "flexible",
       "savings": 35.19,
-      "savingsCurrency": "GBP£",
+      "savingsCurrency": "US$",
       "service": "ORALB"
   },
   {
@@ -206,7 +206,7 @@
       "resourceName": "qa-lb-4",
       "resourceType": "flexible",
       "savings": 25.19,
-      "savingsCurrency": "EUR€",
+      "savingsCurrency": "EURUS$",
       "service": "ORALB"
   },
   {
@@ -227,7 +227,7 @@
       "resourceName": "prod-lb-9",
       "resourceType": "flexible",
       "savings": 19.91,
-      "savingsCurrency": "GBP£",
+      "savingsCurrency": "US$",
       "service": "ORALB"
   },
   {
@@ -248,7 +248,7 @@
     "resourceName": "external-lb-8",
     "resourceType": "flexible",
     "savings": 21.25,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "service": "ORALB"
   },
   {

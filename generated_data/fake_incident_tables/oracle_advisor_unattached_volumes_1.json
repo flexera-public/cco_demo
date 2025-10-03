@@ -70,7 +70,7 @@
     "resourceName": "prod02_volume",
     "resourceType": "Block",
     "savings": 12.15,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "service": "BLOCK_STORAGE",
     "size": "200"
   },
@@ -85,7 +85,7 @@
     "resourceName": "dev03_volume",
     "resourceType": "Block",
     "savings": 8.25,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "service": "BLOCK_STORAGE",
     "size": "100"
   },
@@ -100,7 +100,7 @@
     "resourceName": "test01_volume",
     "resourceType": "Block",
     "savings": 9.00,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "service": "BLOCK_STORAGE",
     "size": "300"
   },
@@ -115,7 +115,7 @@
     "resourceName": "dev04_volume",
     "resourceType": "Block",
     "savings": 15.60,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "service": "BLOCK_STORAGE",
     "size": "600"
   },
@@ -145,7 +145,7 @@
     "resourceName": "prod02_volume",
     "resourceType": "Block",
     "savings": 20.50,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "service": "BLOCK_STORAGE",
     "size": "800"
   },
@@ -160,7 +160,7 @@
     "resourceName": "dev03_volume",
     "resourceType": "Block",
     "savings": 18.00,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "service": "BLOCK_STORAGE",
     "size": "500"
   },
@@ -175,7 +175,7 @@
     "resourceName": "dev04_volume",
     "resourceType": "Block",
     "savings": 21.00,
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "service": "BLOCK_STORAGE",
     "size": "600"
   }

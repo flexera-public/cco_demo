@@ -38,7 +38,7 @@
     "resourceID": "e3d9f4ed-bc6c-f8a1-bcda-a2b0eb7cafc6",
     "resourceType": "Standard_DS4v2",
     "savings": 270.76,
-    "savingsCurrency": "£",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -104,7 +104,7 @@
     "resourceID": "b2c4a1f3-d0e8-f3d7-b9ac-aec7aebabfc6",
     "resourceType": "Standard_DS4v3",
     "savings": 99.19,
-    "savingsCurrency": "£",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -170,7 +170,7 @@
     "resourceID": "a7b4e1c3-df0b-bd19-fc6b-a8b3a2cd37ab",
     "resourceType": "Standard_DS4v2",
     "savings": 299.58,
-    "savingsCurrency": "£",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -236,7 +236,7 @@
     "resourceID": "b2c4a1f3-d0e9-f3d7-b9ac-aec7aebabfc7",
     "resourceType": "Standard_DS4v3",
     "savings": 1499.95,
-    "savingsCurrency": "£",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -302,7 +302,7 @@
     "resourceID": "e3d9f4ed-bc6d-f8a1-bcda-a2b0eb7cafc8",
     "resourceType": "Standard_DS4v2",
     "savings": 4499.88,
-    "savingsCurrency": "£",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"

@@ -15,7 +15,7 @@
     "resourceName": "stg-landing-wls-3",
     "resourceType": "VM.Standard.E2.1.Flex",
     "savings": "31",
-    "savingsCurrency": "€",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -53,7 +53,7 @@
     "resourceName": "dev-wls-10",
     "resourceType": "VM.Standard.E2.1.Flex",
     "savings": "39",
-    "savingsCurrency": "£",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -91,7 +91,7 @@
     "resourceName": "stg-landing-wls-5",
     "resourceType": "VM.Standard.E2.1.Flex",
     "savings": "42",
-    "savingsCurrency": "£",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
