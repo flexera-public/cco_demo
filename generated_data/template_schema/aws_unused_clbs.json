@@ -1,0 +1,94 @@
+{
+  "name": "AWS Unused Classic Load Balancers",
+  "version": "6.4.8",
+  "cloud": "AWS",
+  "service": "Network",
+  "policy_set": "Unused Load Balancers",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks AWS for unused Classic Load Balancers and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/unused_clbs) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/aws/unused_clbs/aws_unused_clbs.pt",
+  "filename": "aws_unused_clbs",
+  "incident": [
+    {
+      "summary_template": "AWS Unused Classic Load Balancers: {{ len data }} AWS Unused Classic Load Balancers Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "dns",
+          "label": "DNS Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "zones",
+          "label": "Availability Zones"
+        },
+        {
+          "name": "instances",
+          "label": "Attached Instances"
+        },
+        {
+          "name": "vpc",
+          "label": "VPC"
+        },
+        {
+          "name": "created",
+          "label": "Creation Date"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "resourceARN",
+          "label": "Resource ARN"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name",
+          "path": "resourceID"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_unused_clbs_1.json"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for unused AWS classic load balancers to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+NOTE: AWS account numbers should always be 12 digits.
+
+[
+  {
+    "accountID": "170322705405",
+    "accountName": "SouthDakota",
+    "created": "2020-04-29T11:47:03.240Z",
+    "dns": "aac6f2407ceabb41e61108a0fee90a6b-359659079.ap-south-1.elb.amazonaws.com",
+    "id": "aac6f2407ceabb41e61108a0fee90a6b",
+    "instances": "",
+    "recommendationDetails": "Delete AWS Classic Load Balancer aac6f2407ceabb41e61108a0fee90a6b in AWS Account SouthDakota (170322705405)",
+    "region": "ap-south-1",
+    "resourceARN": "arn:aws:elasticloadbalancing:ap-south-1:170322705405:loadbalancer/classic/aac6f2407ceabb41e61108a0fee90a6b",
+    "resourceID": "aac6f2407ceabb41e61108a0fee90a6b",
+    "resourceName": "aac6f2407ceabb41e61108a0fee90a6b",
+    "savings": 0,
+    "savingsCurrency": "US$",
+    "service": "ELB",
+    "tags": "env=dev, team=devops",
+    "type": "Classic Load Balancer",
+    "vpc": "vpc-0b6128ac72a901c56",
+    "zones": "ap-south-1c, ap-south-1b, ap-south-1a"
+  }
+]

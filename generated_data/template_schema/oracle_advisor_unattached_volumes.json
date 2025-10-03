@@ -1,0 +1,73 @@
+{
+  "name": "Oracle Cloud Advisor: Unattached Volumes",
+  "version": "0.1.1",
+  "cloud": "Oracle",
+  "service": "Storage",
+  "policy_set": "Unused Volumes",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Reports Oracle Cloud Advisor recommendations for unattached volumes. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/oracle/advisor_unattached_volumes/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/oracle/advisor_unattached_volumes/oracle_advisor_unattached_volumes.pt",
+  "filename": "oracle_advisor_unattached_volumes",
+  "incident": [
+    {
+      "summary_template": "Oracle Cloud Advisor: Unattached Volumes: {{ len data }} Oracle Unattached Volume Recommendations Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Compartment ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Compartment Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Type"
+        },
+        {
+          "name": "size",
+          "label": "Size (GB)"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        },
+        {
+          "name": "actionId",
+          "label": "Action ID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/oracle_advisor_unattached_volumes_1.json"
+    }
+  ]
+}

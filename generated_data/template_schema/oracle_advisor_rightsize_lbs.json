@@ -1,0 +1,97 @@
+{
+  "name": "Oracle Cloud Advisor: Rightsize Load Balancers",
+  "version": "0.1.0",
+  "cloud": "Oracle",
+  "service": "Network",
+  "policy_set": "Unused Load Balancers",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Reports Oracle Cloud Advisor recommendations for underutilized load balancers. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/oracle/advisor_rightsize_lbs/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/oracle/advisor_rightsize_lbs/oracle_advisor_rightsize_lbs.pt",
+  "filename": "oracle_advisor_rightsize_lbs",
+  "incident": [
+    {
+      "summary_template": "Oracle Cloud Advisor: Rightsize Load Balancers: {{ len data }} Oracle Underutilized Load Balancer Recommendations Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Compartment ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Compartment Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Current Instance Size"
+        },
+        {
+          "name": "minBandwidth",
+          "label": "Current Minimum Bandwidth (Mbps)"
+        },
+        {
+          "name": "maxBandwidth",
+          "label": "Current Maximum Bandwidth (Mbps)"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Instance Size"
+        },
+        {
+          "name": "newMinBandwidth",
+          "label": "Recommended Minimum Bandwidth (Mbps)"
+        },
+        {
+          "name": "newMaxBandwidth",
+          "label": "Recommended Maximum Bandwidth (Mbps)"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "netMinimum",
+          "label": "Minimum Peak Bandwidth Usage (Mbps)"
+        },
+        {
+          "name": "netMaximum",
+          "label": "Maximum Peak Bandwidth Usage (Mbps)"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        },
+        {
+          "name": "actionId",
+          "label": "Action ID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/oracle_advisor_rightsize_lbs_1.json"
+    }
+  ]
+}

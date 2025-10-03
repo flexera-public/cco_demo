@@ -1,0 +1,38 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for idle Google Virtual Machines to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Google infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "application-manager",
+    "accountName": "application-manager",
+    "cpuAverage": 0.45,
+    "cpuMaximum": 0.78,
+    "cpuMinimum": 0.39,
+    "hostname": null,
+    "id": "7557678506839219449",
+    "newResourceType": "Stop VM Instance",
+    "platform": "Intel Broadwell",
+    "primaryImpactCategory": "COST",
+    "priority": "P4",
+    "projectNumber": "429374770904",
+    "recommendationDetails": "Save cost by stopping Idle VM 'image-generator-03'.",
+    "recommenderSubtype": "STOP_VM",
+    "region": "us-east4",
+    "resourceID": "7557678506839219449",
+    "resourceName": "image-generator-03",
+    "resourceType": "n1-standard-4",
+    "savings": 109.16,
+    "savingsCurrency": "US$",
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/application-manager/zones/us-east4-a/instances/image-generator-03",
+    "service": "Compute Engine",
+    "state": "ACTIVE",
+    "status": "RUNNING",
+    "tags": "project=app-project-058, env=dev",
+    "zone": "us-east4-a"
+  }
+]

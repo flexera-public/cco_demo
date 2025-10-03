@@ -1,0 +1,34 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized Oracle virtual machines to downsize.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real OCI infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+      "accountID": "ocid1.tenancy.oc1..aaaaaaaalv3mp3rrxrhnmhnbtna7y6moq5dserqrf3w2bdacj27fq",
+      "accountName": "eng_nonprd",
+      "actionId": "ocid1.optimizerresourceaction.oc1..aaaaaaaarb75fuu7fkjhqkoznjhzdlpgmxf7xw4mupwp2eikxu2qranpu46s",
+      "cpuAverage": 0.78,
+      "cpuMaximum": 24.35,
+      "cpuP95": 3.1,
+      "currentCPU": 4,
+      "currentMemory": 60,
+      "id": "ocid1.instance.oc1.uk-london-1.eyhzgrezbqrna53q4wyddet6mmhcrt2nv2anwgiljrmhyaecrd6dtphztsbq",
+      "memMaximum": 7.64,
+      "newCPU": 2,
+      "newMemory": 32,
+      "newResourceType": "VM.Standard.E3.Flex",
+      "osType": "Oracle Linux",
+      "recommendationDetails": "Resize Oracle Virtual Machine ocid1.instance.oc1.uk-london-1.eyhzgrezbqrna53q4wyddet6mmhcrt2nv2anwgiljrmhyaecrd6dtphztsbq in Oracle Compartment eng_nonprd (ocid1.tenancy.oc1..aaaaaaaalv3mp3rrxrhnmhnbtna7y6moq5dserqrf3w2bdacj27fq) from VM.Standard.E3.Flex (4 OCPUs, 60 GB Memory) to VM.Standard.E3.Flex (2 OCPUs, 32 GB Memory)",
+      "region": "uk-london-1",
+      "resourceID": "ocid1.instance.oc1.uk-london-1.eyhzgrezbqrna53q4wyddet6mmhcrt2nv2anwgiljrmhyaecrd6dtphztsbq",
+      "resourceName": "prodlanding-wls-1",
+      "resourceType": "VM.Standard.E3.Flex",
+      "savings": "46",
+      "savingsCurrency": "US$",
+      "service": "COMPUTE"
+  }
+]

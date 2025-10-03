@@ -1,0 +1,36 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for idle Google persistent disks to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Google infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "image-thumbnail-tools",
+    "accountName": "image-thumbnail-tools",
+    "age": 334,
+    "creationTime": "2024-11-01T08:27:09.696Z",
+    "days_unattached": null,
+    "id": "2251670122189134141",
+    "primaryImpactCategory": "COST",
+    "priority": "P4",
+    "projectNumber": "278365672080",
+    "recommendationDetails": "Save cost by deleting idle persistent disk 'thumbnail-transfer-agent-33'.",
+    "recommenderSubtype": "DELETE_DISK",
+    "region": "us-west2",
+    "resourceID": "2251670122189134141",
+    "resourceName": "thumbnail-transfer-agent-33",
+    "savings": 4.71,
+    "savingsCurrency": "US$",
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/image-thumbnail-tools/zones/us-west2-a/disks/thumbnail-transfer-agent-33",
+    "service": "Compute Engine",
+    "size": "100",
+    "state": "ACTIVE",
+    "status": "READY",
+    "tags": "project=app-project-058, env=dev",
+    "type": "pd-standard",
+    "zone": "us-west2-a"
+  }
+]

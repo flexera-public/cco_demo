@@ -1,0 +1,93 @@
+{
+  "name": "Google Committed Use Discount Recommender",
+  "version": "4.3.4",
+  "cloud": "Google",
+  "service": "Compute",
+  "policy_set": "Reserved Instances",
+  "recommendation_type": "Rate Reduction",
+  "short_description": "This Policy finds Google Committed Use Discount Recommendations and reports when it finds them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/google/cud_recommendations) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/google/cud_recommendations/google_committed_use_discount_recommendations.pt",
+  "filename": "google_committed_use_discount_recommendations",
+  "incident": [
+    {
+      "summary_template": "Google Committed Use Discount Recommender: {{ len data }} Google Committed Use Discount Recommendations",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Project ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Project Name"
+        },
+        {
+          "name": "projectNumber",
+          "label": "Project Number"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "resourceType",
+          "label": "Resource Type"
+        },
+        {
+          "name": "resourcesToPurchase",
+          "label": "Resources To Purchase"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "term",
+          "label": "Term"
+        },
+        {
+          "name": "algorithm",
+          "label": "Algorithm"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Currency"
+        },
+        {
+          "name": "priority",
+          "label": "Priority"
+        },
+        {
+          "name": "scope",
+          "label": "Scope"
+        },
+        {
+          "name": "state",
+          "label": "State"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/google_committed_use_discount_recommendations_1.json"
+    }
+  ]
+}

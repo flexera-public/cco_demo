@@ -1,0 +1,185 @@
+{
+  "name": "Oracle Cloud Advisor: Rightsize Virtual Machines",
+  "version": "0.2.2",
+  "cloud": "Oracle",
+  "service": "Compute",
+  "policy_set": "Rightsize Compute Instances",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Reports Oracle Cloud Advisor recommendations for idle and underutilized virtual machines. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/oracle/advisor_rightsize_vms/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/oracle/advisor_rightsize_vms/oracle_advisor_rightsize_vms.pt",
+  "filename": "oracle_advisor_rightsize_vms",
+  "incident": [
+    {
+      "summary_template": "Oracle Cloud Advisor: Rightsize Virtual Machines: {{ len data }} Oracle Underutilized Virtual Machine Recommendations Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Compartment ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Compartment Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "osType",
+          "label": "Operating System"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Current Instance Size"
+        },
+        {
+          "name": "currentCPU",
+          "label": "Current CPU (#)"
+        },
+        {
+          "name": "currentMemory",
+          "label": "Current Memory (GB)"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Instance Size"
+        },
+        {
+          "name": "newCPU",
+          "label": "Recommended CPU (#)"
+        },
+        {
+          "name": "newMemory",
+          "label": "Recommended Memory (GB)"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "cpuMaximum",
+          "label": "CPU Maximum (%)"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average (%)"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95"
+        },
+        {
+          "name": "memMaximum",
+          "label": "Memory Maximum (%)"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        },
+        {
+          "name": "actionId",
+          "label": "Action ID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/oracle_advisor_rightsize_vms_1.json"
+    },
+    {
+      "summary_template": "Oracle Cloud Advisor: Rightsize Virtual Machines: {{ len data }} Oracle Idle Virtual Machine Recommendations Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Compartment ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Compartment Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "osType",
+          "label": "Operating System"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Instance Size"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "cpuMaximum",
+          "label": "CPU Maximum (%)"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average (%)"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95"
+        },
+        {
+          "name": "memMaximum",
+          "label": "Memory Maximum (%)"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        },
+        {
+          "name": "actionId",
+          "label": "Action ID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/oracle_advisor_rightsize_vms_2.json"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized Oracle Load Balancers to downsize.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real OCI infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+      "accountID": "ocid1.tenancy.oc1..aaaaaaaa5dserqrf327mbtnajq6cmn2b7ydap3orhnmhrrwk2wlv3mxrsnfq",
+      "accountName": "internal_networks",
+      "actionId": "ocid1.optimizerresourceaction.oc1..aaaaaaaau3piufrk235dg4rs27cxiwvnehbusvnnz5z2yzlhcysbl3ehzyna",
+      "id": "ocid1.loadbalancer.oc1.uk-london-1.aaaaaaaapczmevef5q237okmuucd7yfr4gqplzmdp6zyq3xd6ysya6wtn7fa",
+      "maxBandwidth": 100,
+      "minBandwidth": 100,
+      "netMaximum": 0.03,
+      "netMinimum": 0.03,
+      "newMaxBandwidth": 100,
+      "newMinBandwidth": 10,
+      "newResourceType": "flexible",
+      "recommendationDetails": "Resize Oracle Load Balancer ocid1.loadbalancer.oc1.uk-london-1.aaaaaaaapczmevef5q237okmuucd7yfr4gqplzmdp6zyq3xd6ysya6wtn7fa in Oracle Compartment internal_networks (ocid1.tenancy.oc1..aaaaaaaa5dserqrf327mbtnajq6cmn2b7ydap3orhnmhrrwk2wlv3mxrsnfq) from flexible (100 Min. Mbps, 100 Max. Mbps) to flexible (10 Min. Mbps, 100 Max. Mbps)",
+      "region": "uk-london-1",
+      "resourceID": "ocid1.loadbalancer.oc1.uk-london-1.aaaaaaaapczmevef5q237okmuucd7yfr4gqplzmdp6zyq3xd6ysya6wtn7fa",
+      "resourceName": "internal-lb-7",
+      "resourceType": "flexible",
+      "savings": 45.05,
+      "savingsCurrency": "US$",
+      "service": "ORALB"
+  }
+]

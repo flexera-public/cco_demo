@@ -1,0 +1,245 @@
+{
+  "name": "Google Rightsize Cloud SQL Recommender",
+  "version": "0.2.4",
+  "cloud": "Google",
+  "service": "Compute",
+  "policy_set": "Rightsize Database Instances",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "This Policy finds underutilized and idle Google Cloud SQL instances and downsizes, stops, or deletes them after approval. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/google/rightsize_cloudsql_recommendations) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/google/rightsize_cloudsql_recommendations/google_rightsize_cloudsql_recommendations.pt",
+  "filename": "google_rightsize_cloudsql_recommendations",
+  "incident": [
+    {
+      "summary_template": "Google Rightsize Cloud SQL Recommender: {{ len data }} Google Underutilized Cloud SQL Instances Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Project ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Project Name"
+        },
+        {
+          "name": "projectNumber",
+          "label": "Project Number"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceType",
+          "label": "Resource Tier"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Resource Tier"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "timeCreated",
+          "label": "Created At"
+        },
+        {
+          "name": "primaryImpactCategory",
+          "label": "Primary Impact Category"
+        },
+        {
+          "name": "tags",
+          "label": "Labels"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "pricingPlan",
+          "label": "Pricing Plan"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Currency"
+        },
+        {
+          "name": "priority",
+          "label": "Priority"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "recommenderSubtype",
+          "label": "Recommendation Sub Type"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "diskType",
+          "label": "Disk Type"
+        },
+        {
+          "name": "size",
+          "label": "Disk Size (GB)"
+        },
+        {
+          "name": "availabilityType",
+          "label": "Availability"
+        },
+        {
+          "name": "replicationType",
+          "label": "Replication"
+        },
+        {
+          "name": "state",
+          "label": "State"
+        },
+        {
+          "name": "status",
+          "label": "Status"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "selfLink",
+          "label": "Resource Link"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/google_rightsize_cloudsql_recommendations_1.json"
+    },
+    {
+      "summary_template": "Google Rightsize Cloud SQL Recommender: {{ len data }} Google Idle Cloud SQL Instances Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Project ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Project Name"
+        },
+        {
+          "name": "projectNumber",
+          "label": "Project Number"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceType",
+          "label": "Resource Tier"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Resource Tier"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "timeCreated",
+          "label": "Created At"
+        },
+        {
+          "name": "primaryImpactCategory",
+          "label": "Primary Impact Category"
+        },
+        {
+          "name": "tags",
+          "label": "Labels"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "pricingPlan",
+          "label": "Pricing Plan"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Currency"
+        },
+        {
+          "name": "priority",
+          "label": "Priority"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "recommenderSubtype",
+          "label": "Recommendation Sub Type"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "diskType",
+          "label": "Disk Type"
+        },
+        {
+          "name": "size",
+          "label": "Disk Size (GB)"
+        },
+        {
+          "name": "availabilityType",
+          "label": "Availability"
+        },
+        {
+          "name": "replicationType",
+          "label": "Replication"
+        },
+        {
+          "name": "state",
+          "label": "State"
+        },
+        {
+          "name": "status",
+          "label": "Status"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "selfLink",
+          "label": "Resource Link"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/google_rightsize_cloudsql_recommendations_2.json"
+    }
+  ]
+}

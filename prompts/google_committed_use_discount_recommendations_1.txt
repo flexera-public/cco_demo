@@ -1,0 +1,30 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for Google Committed Use Discount purchases.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Google infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "rightscale.com:resat-prem",
+    "accountName": "RightScale-Resat-Premium",
+    "projectNumber": "1748073717434",
+    "resourceID": "projects/1748073717434/locations/europe-west1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 1 year new standard CUD for N2DCore CPU",
+    "resourceName": "cud-recommendation-6218771408",
+    "resourceType": "GENERAL_PURPOSE",
+    "resourcesToPurchase": 5,
+    "region": "europe-west1",
+    "term": "1 Year",
+    "algorithm": "Optimal (Break-Even Point)",
+    "recommendationDetails": "Purchase a 1 year new standard CUD for N2DCore CPU",
+    "savings": 610.1,
+    "savingsCurrency": "US$",
+    "priority": "P4",
+    "scope": "PROJECT_SCOPED_COMMITMENTS",
+    "state": "ACTIVE",
+    "service": "Compute Engine",
+    "id": "projects/1748073717434/locations/europe-west1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 1 year new standard CUD for N2DCore CPU"
+  }
+]

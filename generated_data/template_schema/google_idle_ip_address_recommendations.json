@@ -1,0 +1,101 @@
+{
+  "name": "Google Idle IP Address Recommender",
+  "version": "4.3.4",
+  "cloud": "Google",
+  "service": "Compute",
+  "policy_set": "Unused IP Addresses",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "This Policy finds Google Idle IP Address Recommendations and reports when it finds them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/google/idle_ip_address_recommendations) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/google/idle_ip_address_recommendations/google_idle_ip_address_recommendations.pt",
+  "filename": "google_idle_ip_address_recommendations",
+  "incident": [
+    {
+      "summary_template": "Google Idle IP Address Recommender: {{ len data }} Google Idle IP Addresses Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Project ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Project Name"
+        },
+        {
+          "name": "projectNumber",
+          "label": "Project Number"
+        },
+        {
+          "name": "ipAddress",
+          "label": "IP Address"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "primaryImpactCategory",
+          "label": "Primary Impact Category"
+        },
+        {
+          "name": "tags",
+          "label": "Labels"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Currency"
+        },
+        {
+          "name": "priority",
+          "label": "Priority"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "recommenderSubtype",
+          "label": "Recommendation Sub Type"
+        },
+        {
+          "name": "state",
+          "label": "State"
+        },
+        {
+          "name": "status",
+          "label": "Status"
+        },
+        {
+          "name": "selfLink",
+          "label": "Resource Link"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/google_idle_ip_address_recommendations_1.json"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for unused Azure app service plans to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+Keep the "savingsCurrency" field set to "US$" for all items.
+
+[
+  {
+    "accountID": "77918beb-9302-4ae4-97b4-afda482adc59",
+    "accountName": "Flexera Services",
+    "id": "/subscriptions/77918beb-9302-4ae4-97b4-afda482adc59/resourceGroups/SPOM/providers/Microsoft.Web/serverfarms/ASP-SPOM-8df8",
+    "recommendationDetails": "Delete Azure App Service Plan ASP-SPOM-8df8 in Azure Subscription Flexera Services ()",
+    "region": "Central US",
+    "resourceGroup": "SPOM",
+    "resourceID": "/subscriptions/77918beb-9302-4ae4-97b4-afda482adc59/resourceGroups/SPOM/providers/Microsoft.Web/serverfarms/ASP-SPOM-8df8",
+    "resourceName": "ASP-SPOM-8df8",
+    "savings": 35.23,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.Network",
+    "state": "Ready",
+    "tags": "appcode=alnp, environment=test",
+    "type": "Microsoft.Web/serverfarms",
+    "web_apps": 0
+  }
+]

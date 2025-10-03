@@ -1,0 +1,38 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized Google Virtual Machines to downsize.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Google infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "app-project-058",
+    "accountName": "app-project-058",
+    "cpuAverage": 7.17,
+    "cpuMaximum": 31.14,
+    "cpuMinimum": 5.63,
+    "hostname": "app.gcp.example.com",
+    "id": "6119298436247290743",
+    "newResourceType": "e2-highmem-4",
+    "platform": "AMD Rome",
+    "primaryImpactCategory": "COST",
+    "priority": "P4",
+    "projectNumber": "612114399774",
+    "recommendationDetails": "Save cost by changing machine type from e2-standard-8 to e2-highmem-4.",
+    "recommenderSubtype": "CHANGE_MACHINE_TYPE",
+    "region": "us-west2",
+    "resourceID": "6119298436247290743",
+    "resourceName": "messenger-app",
+    "resourceType": "e2-standard-8",
+    "savings": 75.861,
+    "savingsCurrency": "US$",
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/app-project-058/zones/us-west2-a/instances/messenger-app",
+    "service": "Compute Engine",
+    "state": "ACTIVE",
+    "status": "RUNNING",
+    "tags": "project=app-project-058, env=dev",
+    "zone": "us-west2-a"
+  }
+]

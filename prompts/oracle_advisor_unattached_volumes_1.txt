@@ -1,0 +1,25 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for unattached Oracle volumes to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real OCI infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+      "accountID": "ocid1.tenancy.oc1..aaaaaaaa5dserqrf327mbtnajq6cmn2b7ydap3orhnmhrrwk2wlv3mxrsnfq",
+      "accountName": "shared_management",
+      "actionId": "ocid1.optimizerresourceaction.oc1..aaaaaaaaczn2sn2z6yd43z6nuaplwedc24kbrlsyaqhjgoli22t6ssodtvha",
+      "id": "ocid1.volume.oc1.uk-london-1.b4mrs2rns6plsgiljrhsmqd7aiool4rht3sc3iosabwkc545i22beymjd3qq",
+      "recommendationDetails": "Delete Oracle Block Volume ocid1.volume.oc1.uk-london-1.b4mrs2rns6plsgiljrhsmqd7aiool4rht3sc3iosabwkc545i22beymjd3qq in Oracle Compartment shared_management (ocid1.tenancy.oc1..aaaaaaaa5dserqrf327mbtnajq6cmn2b7ydap3orhnmhrrwk2wlv3mxrsnfq)",
+      "region": "uk-london-1",
+      "resourceID": "ocid1.volume.oc1.uk-london-1.b4mrs2rns6plsgiljrhsmqd7aiool4rht3sc3iosabwkc545i22beymjd3qq",
+      "resourceName": "prod01_volume",
+      "resourceType": "Block",
+      "savings": 11.01,
+      "savingsCurrency": "US$",
+      "service": "BLOCK_STORAGE",
+      "size": "400"
+  }
+]

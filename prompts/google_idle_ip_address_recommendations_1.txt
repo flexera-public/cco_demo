@@ -1,0 +1,32 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for idle Google IP addresses to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Google infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "rightscale.com:resat-prem",
+    "accountName": "RightScale-Resat-Premium",
+    "projectNumber": "1947992300131",
+    "ipAddress": "98.18.166.141",
+    "resourceID": "52528547762772275399",
+    "resourceName": "shinysnake-public-ip",
+    "type": "compute#address",
+    "region": "northamerica-northeast1",
+    "primaryImpactCategory": "COST",
+    "tags": "environment=staging, app=crmModule",
+    "service": "Compute Engine",
+    "savings": 247.85,
+    "savingsCurrency": "US$",
+    "priority": "P4",
+    "recommendationDetails": "Save cost by deleting idle IP address 'shinysnake-public-ip'.",
+    "recommenderSubtype": "DELETE_ADDRESS",
+    "state": "ACTIVE",
+    "status": "RESERVED",
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/rightscale.com:resat-prem/regions/northamerica-northeast1/addresses/shinysnake-public-ip",
+    "id": "52528547762772275399"
+  }
+]

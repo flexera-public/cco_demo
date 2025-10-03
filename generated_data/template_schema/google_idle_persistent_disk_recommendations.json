@@ -1,0 +1,117 @@
+{
+  "name": "Google Idle Persistent Disk Recommender",
+  "version": "4.3.4",
+  "cloud": "Google",
+  "service": "Storage",
+  "policy_set": "Unused Volumes",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "This Policy finds Google Idle Persistent Disk Recommendations and deletes them after approval. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/google/idle_persistent_disk_recommendations) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/google/idle_persistent_disk_recommendations/google_idle_persistent_disk_recommendations.pt",
+  "filename": "google_idle_persistent_disk_recommendations",
+  "incident": [
+    {
+      "summary_template": "Google Idle Persistent Disk Recommender: {{ len data }} Google Idle Persistent Disks Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Project ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Project Name"
+        },
+        {
+          "name": "projectNumber",
+          "label": "Project Number"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "zone",
+          "label": "Zone"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "primaryImpactCategory",
+          "label": "Primary Impact Category"
+        },
+        {
+          "name": "tags",
+          "label": "Labels"
+        },
+        {
+          "name": "creationTime",
+          "label": "Created At"
+        },
+        {
+          "name": "days_unattached",
+          "label": "Days Unattached"
+        },
+        {
+          "name": "age",
+          "label": "Age (Days)"
+        },
+        {
+          "name": "size",
+          "label": "Disk Size (GB)"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Currency"
+        },
+        {
+          "name": "priority",
+          "label": "Priority"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "recommenderSubtype",
+          "label": "Recommendation Sub Type"
+        },
+        {
+          "name": "state",
+          "label": "State"
+        },
+        {
+          "name": "status",
+          "label": "Status"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "selfLink",
+          "label": "Resource Link"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/google_idle_persistent_disk_recommendations_1.json"
+    }
+  ]
+}

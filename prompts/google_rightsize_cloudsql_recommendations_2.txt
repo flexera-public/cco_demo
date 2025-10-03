@@ -1,0 +1,39 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for idle Google CloudSQL instances to stop.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Google infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "rightscale.com:resat-prem",
+    "accountName": "RightScale-Resat-Premium",
+    "projectNumber": "3608958404348",
+    "resourceID": "narrowneptune",
+    "resourceType": "db-n1-standard-2",
+    "newResourceType": "Stop Cloud SQL Instance",
+    "region": "southamerica-east1",
+    "timeCreated": "2020-12-07T20:48:06-06:00",
+    "primaryImpactCategory": "COST",
+    "tags": "environment=prod, app=paymentGateway",
+    "service": "Cloud SQL",
+    "pricingPlan": "PACKAGE",
+    "savings": 11.61,
+    "savingsCurrency": "US$",
+    "priority": "P4",
+    "recommendationDetails": "Save cost by stopping Idle Cloud SQL 'narrowneptune'.",
+    "recommenderSubtype": "DELETE_RESOURCE",
+    "platform": "MYSQL_8_0_36",
+    "diskType": "PD_SSD",
+    "size": 487,
+    "availabilityType": "ZONAL",
+    "replicationType": "SYNCHRONOUS",
+    "state": "ACTIVE",
+    "status": "READY",
+    "resourceName": "narrowneptune",
+    "selfLink": "https://www.googleapis.com/sql/v1beta4/projects/rightscale.com:resat-prem/instances/narrowneptune",
+    "id": "narrowneptune"
+  }
+]

@@ -1,0 +1,29 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized Oracle Base Database Service instances to downsize.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real OCI infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "ocid1.tenancy.oc1..aaaaaaaah27mm65dserqrf3wlvmmo3btna7yn23rhnbdaprrxcjqwk2rsnfq",
+    "accountName": "prod-eng-02",
+    "actionId": "ocid1.optimizerresourceaction.oc1..aaaaaaaadaom4qa3rkyqsghnsyj3ktwc23yux6heifopupdytlinfdhwwxzq",
+    "cpuAverage": 8.73,
+    "currentCPU": 16,
+    "dbType": "vmdb-system",
+    "id": "ocid1.dbsystem.oc1.uk-london-1.ailqkbaxzqgtbgi44zqxanwgiljsmhya4wyyx6rge5cmdrlmetc5z26utkrq",
+    "newCPU": 8,
+    "newResourceType": "VM.Standard2.4",
+    "recommendationDetails": "Resize Oracle Base Database Service ocid1.dbsystem.oc1.uk-london-1.ailqkbaxzqgtbgi44zqxanwgiljsmhya4wyyx6rge5cmdrlmetc5z26utkrq in Oracle Compartment prod-eng-02 (ocid1.tenancy.oc1..aaaaaaaah27mm65dserqrf3wlvmmo3btna7yn23rhnbdaprrxcjqwk2rsnfq) from VM.Standard2.8 to VM.Standard2.4",
+    "region": "uk-london-1",
+    "resourceID": "ocid1.dbsystem.oc1.uk-london-1.ailqkbaxzqgtbgi44zqxanwgiljsmhya4wyyx6rge5cmdrlmetc5z26utkrq",
+    "resourceName": "db-prod-01",
+    "resourceType": "VM.Standard2.8",
+    "savings": "746.87",
+    "savingsCurrency": "US$",
+    "service": "DATABASE"
+  }
+]
