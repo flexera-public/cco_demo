@@ -56,7 +56,7 @@ policy "pol_incident" do
     summary_template "AWS Reserved Instances Recommendations: {{ len data }} AWS Reserved Instances Purchase Recommendations"
     check eq(0, 1)
     export do
-      resource_level true
+      resource_level false
       field "accountID" do
         label "Account ID"
       end

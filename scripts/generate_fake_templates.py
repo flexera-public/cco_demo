@@ -94,17 +94,25 @@ def gen_incidents(incidents):
     result = ""
 
     for incident in incidents:
+      resource_level = "false"
+
       incident_path = incident.get("path", "")
       summary_template = incident.get("summary_template", "")
       fields = incident.get("export", [])
 
       ds_name = "ds_" + Path(incident_path).stem
 
+      for field in fields:
+          field_name = field.get("name", "")
+
+          if field_name == "id":
+              resource_level = "true"
+
       validate_block = f"""  validate_each ${ds_name} do
     summary_template "{summary_template}"
     check eq(0, 1)
     export do
-      resource_level true
+      resource_level {resource_level}
 """
 
       for field in fields:
