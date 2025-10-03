@@ -169,7 +169,7 @@ script "js_apply_demo_policy_templates", type: "javascript" do
       "dryRun": false,
       "logLevel": "full",
       "name": template["name"].split("[Demo]")[0],
-      "schedule": { "rrule": "FREQ=WEEKLY" },
+      "schedule": { "rrule": "FREQ=MONTHLY" },
       "severity": "low",
       "skipApprovals": false,
       "templateRef": [ "ref:::project/", rs_project_id, ":policy:policy-template:", template["id"] ].join('')
