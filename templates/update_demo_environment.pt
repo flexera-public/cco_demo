@@ -128,6 +128,7 @@ datasource "ds_policy_templates" do
       field "docLink", jmes_path(col_item, "docLink")
       field "id", jmes_path(col_item, "id")
       field "name", jmes_path(col_item, "name")
+      field "description", jmes_path(col_item, "description")
     end
   end
 end
@@ -157,17 +158,22 @@ script "js_apply_demo_policy_templates", type: "javascript" do
   parameters "template", "ds_flexera_api_hosts", "rs_org_id", "rs_project_id"
   result "request"
   code <<-'EOS'
-  body = {
-    "credentials": {},
-    "templateRef": [ "ref:::project/", rs_project_id, ":policy:policy-template:", template["id"] ].join('')
-  }
-
   var request = {
     auth: "auth_flexera",
     verb: "POST",
     host: ds_flexera_api_hosts["flexera"],
     path: [ "/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/applied-policies" ].join(''),
-    body: body
+    body_fields: {
+      "credentials": {},
+      "description": template["description"],
+      "dryRun": false,
+      "logLevel": "full",
+      "name": template["name"].split("[Demo]")[0],
+      "schedule": { "rrule": "FREQ=WEEKLY" },
+      "severity": "low",
+      "skipApprovals": false,
+      "templateRef": [ "ref:::project/", rs_project_id, ":policy:policy-template:", template["id"] ].join('')
+    }
   }
 EOS
 end
