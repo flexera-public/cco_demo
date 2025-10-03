@@ -6,6 +6,8 @@ Do not include any preambles or explanations of the data. Return only the JSON a
 
 Do not stop until the JSON list contains exactly 20 items. Do not end early.
 
+Keep the "savingsCurrency" field set to "US$" for all items.
+
 [
   {
     "accountID": "944cfd94-ed42-495a-809d-856ee8a0b5e1",
