@@ -20,7 +20,7 @@ NOTE: AWS account numbers should always be 12 digits.
     "resourceARN": "arn:aws:elasticloadbalancing:eu-west-1:311229977860:loadbalancer/net/rabbit-messenger/a1be2991eeabf62b",
     "resourceID": "arn:aws:elasticloadbalancing:eu-west-1:311229977860:loadbalancer/net/rabbit-messenger/a1be2991eeabf62b",
     "resourceName": "rabbit-messenger",
-    "savings": 0,
+    "savings": 38.52,
     "savingsCurrency": "US$",
     "service": "ELB",
     "tags": "env=test, team=devops",
