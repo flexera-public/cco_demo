@@ -1,0 +1,111 @@
+[
+  {
+    "cardinality": 5,
+    "key": "ProjectName",
+    "type": "Subscription",
+    "value_list": "Phoenix Rise, Project Nova, Atlas Initiative, Ares Deployment, Titan Taskforce"
+  },
+  {
+    "cardinality": 8,
+    "key": "location",
+    "type": "Resource Group",
+    "value_list": "NORTHAMERICA, EUROPEWEST, APAC, CENTRALUS, OCEANIA, TOKYO, KOREA, SOUTHINDIA"
+  },
+  {
+    "cardinality": 11,
+    "key": "Department",
+    "type": "Resource",
+    "value_list": "Finance and Accounting, IT Infrastructure, Security Operations, Marketing Team, Human Resources, Sales Support, Procurement Department, Development Team, Operations Team, Executive Management, Customer Support"
+  },
+  {
+    "cardinality": 7,
+    "key": "ServiceType",
+    "type": "Subscription",
+    "value_list": "Database, Storage, Compute, Network, Identity, Security, Analytics"
+  },
+  {
+    "cardinality": 9,
+    "key": "ApplicationName",
+    "type": "Resource Group",
+    "value_list": "Customer Portal, Employee Onboarding, Sales Dashboard, Marketing Automation, Invoicing System, Reporting Tool, Project Management, Help Desk Ticketing, Order Fulfillment"
+  },
+  {
+    "cardinality": 10,
+    "key": "RoleAssignment",
+    "type": "Resource",
+    "value_list": "Admin, Developer, Tester, QA Lead, DevOps Engineer, Release Manager, Security Officer, Compliance Officer, Business Analyst, Product Owner"
+  },
+  {
+    "cardinality": 6,
+    "key": "SolutionName",
+    "type": "Subscription",
+    "value_list": "Cloud Migration, Digital Transformation, IT Consolidation, Cybersecurity Framework, Data Analytics Platform, AI Powered Services"
+  },
+  {
+    "cardinality": 12,
+    "key": "ResourceCategory",
+    "type": "Resource Group",
+    "value_list": "Web Servers, Database Servers, Load Balancers, Firewalls, VPN Connections, Elastic IPs, Network Interfaces, Virtual Networks, Subnets, Security Groups, Route Tables"
+  },
+  {
+    "cardinality": 8,
+    "key": "CompanyBranch",
+    "type": "Resource",
+    "value_list": "Headquarters, New York Office, London Branch, Sydney Department, Paris Subsidiary, Berlin Regional Office, Singapore Operations, Dubai Representative Office"
+  },
+  {
+    "cardinality": 11,
+    "key": "ApplicationServer",
+    "type": "Subscription",
+    "value_list": "App Server 1, App Server 2, App Server 3, Web Server 1, Web Server 2, Database Server 1, Database Server 2, Load Balancer 1, Firewall 1, Security Group 1"
+  },
+  {
+    "cardinality": 10,
+    "key": "CloudProvider",
+    "type": "Resource Group",
+    "value_list": "AWS Cloud Services, Azure Cloud Platform, Google Cloud Services, IBM Cloud Offering, Alibaba Cloud Services, Oracle Cloud Infrastructure, Salesforce Cloud Services, SAP Cloud Platform"
+  },
+  {
+    "cardinality": 9,
+    "key": "DatabaseName",
+    "type": "Resource",
+    "value_list": "Customer Database, Employee Database, Sales Database, Marketing Database, Invoicing Database, Reporting Database, Project Management Database, Help Desk Ticketing Database, Order Fulfillment Database"
+  },
+  {
+    "cardinality": 12,
+    "key": "SecurityPolicy",
+    "type": "Subscription",
+    "value_list": "Compliance Framework, Data Loss Prevention, Access Control Policy, Identity and Access Management, Security Information and Event Management, Incident Response Plan, Disaster Recovery Procedure, Business Continuity Planning"
+  },
+  {
+    "cardinality": 11,
+    "key": "ResourcePool",
+    "type": "Resource Group",
+    "value_list": "Compute Pool, Storage Pool, Network Pool, Database Pool, Security Pool, Analytics Pool, AI Powered Services Pool, Cybersecurity Framework Pool, Digital Transformation Pool"
+  },
+  {
+    "cardinality": 8,
+    "key": "OperatingSystem",
+    "type": "Resource",
+    "value_list": "Windows Server 2019, Linux Ubuntu 20.04, Windows Server 2022, RHEL 8.4, CentOS 7.9, SLES 15 SP3, Oracle Linux 8.4"
+  },
+  {
+    "cardinality": 10,
+    "key": "NetworkDevice",
+    "type": "Subscription",
+    "value_list": "Router 1, Switch 1, Firewall 1, Load Balancer 1, VPN Connection 1, Virtual Network 1, Subnet 1, Security Group 1, Route Table 1"
+  },
+  {
+    "cardinality": 7,
+    "key": "DatabaseEngine",
+    "type": "Resource Group",
+    "value_list": "SQL Server, MySQL, PostgreSQL, Oracle Database, MongoDB, Cassandra, Redis"
+  },
+  {
+    "cardinality": 9,
+    "key": "CloudService",
+    "type": "Resource",
+    "value_list": "IaaS, PaaS, SaaS, Function as a Service, Event-Driven Architecture, Microservices Architecture, Containerization Platform"
+  }
+]
+

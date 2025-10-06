@@ -1,0 +1,34 @@
+{
+  "name": "Google Label Cardinality Report",
+  "version": "0.2.4",
+  "cloud": "Google",
+  "service": "Tags",
+  "policy_set": "Tag Cardinality",
+  "short_description": "Generates a label cardinality report for Google Projects and Resources. See the [README](https://github.com/flexera-public/policy_templates/tree/master/operational/google/label_cardinality) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/operational/google/label_cardinality/google_label_cardinality.pt",
+  "filename": "google_label_cardinality",
+  "incident": [
+    {
+      "summary_template": "Google Label Cardinality Report: {{ len data }} Google Label Keys Found",
+      "export": [
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "key",
+          "label": "Key"
+        },
+        {
+          "name": "cardinality",
+          "label": "Cardinality"
+        },
+        {
+          "name": "value_list",
+          "label": "Unique Values"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/google_label_cardinality_1.json"
+    }
+  ]
+}

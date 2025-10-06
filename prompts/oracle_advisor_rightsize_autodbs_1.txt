@@ -1,0 +1,31 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized Oracle Autonomous Database Service instances to downsize.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real OCI infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+Keep the "savingsCurrency" field set to "US$" for all items.
+
+{
+	"accountID": "ocid1.tenancy.oc1..aaaaaaaamk2rsnflv3mrhnmbdap3rrxcjqwqrf3w7h2q5dser6mobtna7yn2",
+	"accountName": "demo-infra-02",
+	"actionId": "ocid1.optimizerresourceaction.oc1..aaaaaaaayxavlzlp3pa2vhnmsvgz6mgkldhlltdmoxa5wl5qihw6zuje2cj7",
+	"computeModel": "ECPU",
+	"cpuAverage": 0.43,
+	"cpuP95": 0.86,
+	"currentCPU": 8,
+	"dbWorkload": "OLTP",
+	"id": "ocid1.autonomousdatabase.oc1.uk-london-1.rcj6cqanwgax25nufkhrybq6bzzldiljr753yhmhya4wa2dsftjkeusnj67m",
+	"newCPU": 4,
+	"newResourceType": "4 ECPU",
+	"recommendationDetails": "Resize Oracle Autonomous Database Service ocid1.autonomousdatabase.oc1.uk-london-1.rcj6cqanwgax25nufkhrybq6bzzldiljr753yhmhya4wa2dsftjkeusnj67m in Oracle Compartment ccb_nonprd (ocid1.tenancy.oc1..aaaaaaaamk2rsnflv3mrhnmbdap3rrxcjqwqrf3w7h2q5dser6mobtna7yn2) from 8 ECPU to 4 ECPU",
+	"region": "uk-london-1",
+	"resourceID": "ocid1.autonomousdatabase.oc1.uk-london-1.rcj6cqanwgax25nufkhrybq6bzzldiljr753yhmhya4wa2dsftjkeusnj67m",
+	"resourceName": "demo-compute-02",
+	"resourceType": "8 ECPU",
+	"savings": 155.59,
+	"savingsCurrency": "US$",
+	"service": "DATABASE"
+}

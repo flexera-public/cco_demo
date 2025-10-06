@@ -1,0 +1,34 @@
+{
+  "name": "Azure Tag Cardinality Report",
+  "version": "3.2.6",
+  "cloud": "Azure",
+  "service": "Tags",
+  "policy_set": "Tag Cardinality",
+  "short_description": "Generates a tag cardinality report for Azure Subscriptions, Resource Groups, and Resources. See the [README](https://github.com/flexera-public/policy_templates/tree/master/operational/azure/tag_cardinality) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/operational/azure/tag_cardinality/azure_tag_cardinality.pt",
+  "filename": "azure_tag_cardinality",
+  "incident": [
+    {
+      "summary_template": "Azure Tag Cardinality Report",
+      "export": [
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "key",
+          "label": "Key"
+        },
+        {
+          "name": "cardinality",
+          "label": "Cardinality"
+        },
+        {
+          "name": "value_list",
+          "label": "Unique Values"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_tag_cardinality_1.json"
+    }
+  ]
+}

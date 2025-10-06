@@ -1,0 +1,97 @@
+{
+  "name": "Oracle Cloud Advisor: Rightsize Autonomous Database Service",
+  "version": "0.1.0",
+  "cloud": "Oracle",
+  "service": "Database",
+  "policy_set": "Rightsize Database Instances",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Reports Oracle Cloud Advisor recommendations for underutilized autonomous database services. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/oracle/advisor_rightsize_autodbs/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/oracle/advisor_rightsize_autodbs/oracle_advisor_rightsize_autodbs.pt",
+  "filename": "oracle_advisor_rightsize_autodbs",
+  "incident": [
+    {
+      "summary_template": "Oracle Cloud Advisor: Rightsize Autonomous Database Service: {{ len data }} Oracle Underutilized Autonomous Database Service Recommendations Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Compartment ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Compartment Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "dbWorkload",
+          "label": "Database Workload"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "computeModel",
+          "label": "Compute Model"
+        },
+        {
+          "name": "currentCPU",
+          "label": "Current CPU (#)"
+        },
+        {
+          "name": "newCPU",
+          "label": "Recommended CPU (#)"
+        },
+        {
+          "name": "resourceType",
+          "label": "Current Instance Size"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended Instance Size"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average (%)"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95 (%)"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        },
+        {
+          "name": "actionId",
+          "label": "Action ID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/oracle_advisor_rightsize_autodbs_1.json"
+    }
+  ]
+}

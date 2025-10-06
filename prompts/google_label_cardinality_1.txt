@@ -1,0 +1,30 @@
+I am creating demo data for a cloud cost optimization tool that provides cardinality information for labels in a Google Cloud environment.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Google Cloud infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+Avoid using the same value for "key" more than once. Make sure that the value of "cardinality" matches the number of comma-separated values in "value_list". Avoid using keys with names like "instance_id" that are unlikely to be tags since they are already metadata in the cloud platform. Attempt to make both the keys and the value_list believable as real tags.
+
+[
+  {
+    "cardinality": 5,
+    "key": "Environment",
+    "type": "Project",
+    "value_list": "Production, Staging, Development, QA, Testing"
+  },
+  {
+    "cardinality": 8,
+    "key": "region",
+    "type": "Project",
+    "value_list": "NAM, EMEA, APAC, LATAM, OCE, JPN, KOR, IND"
+  },
+  {
+    "cardinality": 11,
+    "key": "team",
+    "type": "Resource",
+    "value_list": "Falcon, Armistice, Phoenix, Phoeix, Titan, Apollo, apoll, Orion, Zeus, Hermes, Athena"
+  }
+]

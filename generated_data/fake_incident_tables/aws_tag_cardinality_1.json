@@ -1,0 +1,81 @@
+[
+  {
+    "cardinality": 5,
+    "key": "Department",
+    "type": "Account",
+    "value_list": "IT, Finance, HR, Marketing, Operations"
+  },
+  {
+    "cardinality": 8,
+    "key": "location",
+    "type": "Account",
+    "value_list": "NYC, LON, TOK, SEO, BOM, MUM, CAI, HKG"
+  },
+  {
+    "cardinality": 12,
+    "key": "application",
+    "type": "Resource",
+    "value_list": "Payroll, Invoicing, CRM, ERP, HRM, Finance, Inventory, Orders, Reporting, Analytics, Dashboard, Workflow"
+  },
+  {
+    "cardinality": 4,
+    "key": "tier",
+    "type": "Resource",
+    "value_list": "High, Medium, Low, Critical"
+  },
+  {
+    "cardinality": 7,
+    "key": "role",
+    "type": "Account",
+    "value_list": "Admin, User, Viewer, Guest, Customer, Partner, Reseller"
+  },
+  {
+    "cardinality": 6,
+    "key": "version",
+    "type": "Account",
+    "value_list": "V1, V2, Alpha, Beta, RC1, GA"
+  },
+  {
+    "cardinality": 9,
+    "key": "database",
+    "type": "Resource",
+    "value_list": "MySQL, PostgreSQL, Oracle, MongoDB, Cassandra, Redis, SQLite, SQLServer, Sybase"
+  },
+  {
+    "cardinality": 3,
+    "key": "status",
+    "type": "Account",
+    "value_list": "Active, Inactive, Pending"
+  },
+  {
+    "cardinality": 5,
+    "key": "Environment",
+    "type": "Account",
+    "value_list": "Production, Staging, Development, QA, Testing"
+  },
+  {
+    "cardinality": 8,
+    "key": "region",
+    "type": "Account",
+    "value_list": "NAM, EMEA, APAC, LATAM, OCE, JPN, KOR, IND"
+  },
+  {
+    "cardinality": 11,
+    "key": "team",
+    "type": "Resource",
+    "value_list": "Falcon, Armistice, Phoenix, Phoeix, Titan, Apollo, apoll, Orion, Zeus, Hermes, Athena"
+  },
+  {
+    "cardinality": 5,
+    "key": "Database",
+    "type": "Account",
+    "value_list": "DB1, DB2, DB3, DB4, DB5"
+  },
+  {
+    "cardinality": 6,
+    "key": "feature",
+    "type": "Resource",
+    "value_list": "FeatureA, FeatureB, FeatureC, FeatureD, FeatureE, FeatureF"
+  }
+]
+
