@@ -1,0 +1,26 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for long stopped AWS EC2 instances to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "accountID": "403944802802",
+    "accountName": "AWS-DEV-HYBRIDS",
+    "hostname": "ip-10-94-51-52",
+    "id": "i-09afc7b63a6aab296",
+    "launchTime": "2025-02-25T07:03:30.000Z",
+    "lookbackPeriod": 7,
+    "platform": "Linux/UNIX",
+    "recommendationDetails": "Terminate EC2 instance i-09afc7b63a6aab296 in AWS Account AWS-DEV-HYBRIDS (403944802802)",
+    "region": "us-east-1",
+    "resourceID": "i-09afc7b63a6aab296",
+    "resourceName": "kafka-test",
+    "resourceType": "t3.xlarge",
+    "service": "EC2",
+    "tags": "Name=kafka-test, Owner=devops-team, Environment=development"
+  }
+]

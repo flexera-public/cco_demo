@@ -1,0 +1,76 @@
+{
+  "name": "AWS Long Stopped EC2 Instances",
+  "version": "6.0.7",
+  "cloud": "AWS",
+  "service": "Compute",
+  "policy_set": "Long Stopped Instances",
+  "short_description": "Check for EC2 instances that have been stopped for a long time with the option to terminate them after approval. See the [README](https://github.com/flexera-public/policy_templates/tree/master/compliance/aws/long_stopped_instances) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/compliance/aws/long_stopped_instances/aws_long_stopped_instances.pt",
+  "filename": "aws_long_stopped_instances",
+  "incident": [
+    {
+      "summary_template": "AWS Long Stopped EC2 Instances: {{ len data }} AWS Long Stopped EC2 Instances Found",
+      "detail_template": "{{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Account ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Account Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "resourceType",
+          "label": "Instance Size"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "hostname",
+          "label": "Hostname"
+        },
+        {
+          "name": "launchTime",
+          "label": "Launch Time"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/aws_long_stopped_instances_1.json"
+    }
+  ]
+}

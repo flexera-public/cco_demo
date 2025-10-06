@@ -1,0 +1,37 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for superseded AWS EBS volume types.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real AWS infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+Keep the "savingsCurrency" field set to "US$" for all items.
+
+NOTE: AWS account numbers should always be 12 digits.
+
+[
+  {
+    "accountID": "948445631818",
+    "accountName": "Prod-Legacy",
+    "age": 50.84,
+    "attachmentStatus": "i-3925ad61c0282cfab=attached",
+    "cost": 132.251,
+    "gp2_price": 165,
+    "gp3_price": 140.25,
+    "id": "vol-0131f76140d1201ae",
+    "iops": "4500",
+    "recommendationDetails": "Upgrade volume vol-0131f76140d1201ae in AWS Account Prod-Legacy (948445631818) from GP2 to GP3",
+    "region": "eu-west-1",
+    "resourceARN": "arn:aws:ec2:eu-west-1:948445631818:volume/vol-0131f76140d1201ae",
+    "resourceID": "vol-0131f76140d1201ae",
+    "resourceName": "",
+    "savings": 24.75,
+    "savingsCurrency": "US$",
+    "service": "AmazonEC2",
+    "size": "1500",
+    "state": "available",
+    "tags": "env=legacy, team=devops"
+    "type": "gp2"
+  }
+]

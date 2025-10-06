@@ -1,0 +1,35 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for long stopped Azure Virtual Machines to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure.  Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+Keep the "savingsCurrency" field set to "US$" for all items.
+
+[
+  {
+    "accountID": "830dc8c6-1691-44c2-9ed8-52fd2706d833",
+    "accountName": "Prod-Design",
+    "diskCost": 123.137,
+    "diskCount": 3,
+    "diskNames": "datastore01, datastore02, datastore03",
+    "id": "/subscriptions/830dc8c6-1691-44c2-9ed8-52fd2706d833/resourceGroups/Secondary-Platform/providers/Microsoft.Compute/virtualMachines/ASXPROD277",
+    "osType": "Windows",
+    "recommendationDetails": "Delete Azure virtual machine ASXPROD277 in Azure Subscription Prod-Design (830dc8c6-1691-44c2-9ed8-52fd2706d833)",
+    "region": "southeastasia",
+    "resourceGroup": "Secondary-Platform",
+    "resourceID": "/subscriptions/830dc8c6-1691-44c2-9ed8-52fd2706d833/resourceGroups/Secondary-Platform/providers/Microsoft.Compute/virtualMachines/ASXPROD277",
+    "resourceName": "ASXPROD277",
+    "resourceType": "Standard_B16as_v2",
+    "savings": 0,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.Compute",
+    "state": "deallocated",
+    "stopDays": "\u003e 90",
+    "stopTime": "\u003e 90 Days Ago",
+    "tags": "Environment=Production, Owner=cloudops-team, Department=Design",
+    "vmCost": 0
+  }
+]
