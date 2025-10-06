@@ -2,9 +2,15 @@
 
 This repository contains fictional demo data, and demo policy templates, to use in the Flexera One platform. The purpose is to enable the demonstration of the platform's functionality without the need to unnecessarily pay for a large number of cloud assets to produce *real* optimization recommendations.
 
-## Accessing Demo Policy Templates
+## Deploying Demo Policy Templates
 
-Switch to the `main` branch and navigate to the "templates" directory (or [click this link](https://github.com/flexera-public/cco_demo/tree/main/templates) as a shortcut). There you will find the current templates to use.
+The following steps should be followed to deploy the demo policy templates in a Flexera One demo organization:
+
+1) Switch to the `main` branch and navigate to the "templates" directory (or [click this link](https://github.com/flexera-public/cco_demo/tree/main/templates) as a shortcut). The demo templates will be sorted by cloud provider; download all of the templates you wish to use in the demo environment along with the [Update Demo Environment](https://github.com/flexera-public/cco_demo/blob/main/templates/update_demo_environment.pt) policy template.
+
+2) In Flexera One, switch to the organization that you will be using these in, and navigate to Automation -> Templates. Once there, upload the templates you downloaded.
+
+3) Apply the "Update Demo Environment" policy template. This template will automatically apply all of the demo policy templates and will, on a weekly basis, terminate and reapply them so that they produce fresh recommendations/incidents. It is recommended that you apply this policy template on a weekly schedule on a Saturday.
 
 ## Development Flow
 
@@ -14,10 +20,12 @@ The following flow should be followed to create/update demo policy templates and
 
 1. Create and switch to a development branch.
 2. Modify "lists/template_list.json" as needed to add any policy templates from the catalog that we want to demo (if needed).
-3. Run the "scripts/generate_template_schema.py" script from the root directory of the repository. This will scrape the policy templates listed in "lists/template_list.json" to create schema that we can generate demo policy templates from.
+3. If "lists/template_list.json" was modified or any existing policy templates need to beRun the "scripts/generate_template_schema.py" script from the root directory of the repository. This will scrape the policy templates listed in "lists/template_list.json" to create schema that we can generate demo policy templates from.
 4. Run the "scripts/generate_fake_templates.py" script from the root directory of the repository. This will use the schema created above to create and store updated demo policy templates in the "templates" directory.
 5. Create/update demo data in the "generated_data/fake_incident_tables" directory. More details on how to do this are below.
 6. Make a pull request to the `main` branch with your updates and merge it after review.
+
+Note: If you only need to make tweaks or updates to the demo data, you can skip steps 2-4.
 
 ## Creating Demo Data
 
@@ -44,3 +52,5 @@ Using ollama, you could generate fresh demo data for the AWS Old Snapshots polic
 ```bash
 cat prompts/aws_delete_old_snapshots_1.txt | ollama run llama3 > generated_data/fake_incident_tables/aws_delete_old_snapshots_1.json
 ```
+
+Note: LLMs are finicky and often inconsistent. Please verify the validity of their output. You may still need to adjust some results by hand.
