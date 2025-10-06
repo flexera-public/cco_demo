@@ -34,7 +34,7 @@
     "resourceName": "dev-wls-9",
     "resourceType": "VM.Standard.E2.2.Flex",
     "savings": "26",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -72,7 +72,7 @@
     "resourceName": "prodlanding-wls-1",
     "resourceType": "VM.Standard.E3.Flex",
     "savings": "21",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -110,7 +110,7 @@
     "resourceName": "dev-wls-8",
     "resourceType": "VM.Standard.E2.1.Flex",
     "savings": "26",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -129,7 +129,7 @@
     "resourceName": "dev-wls-9",
     "resourceType": "VM.Standard.E2.1.Flex",
     "savings": "21",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -148,7 +148,7 @@
     "resourceName": "prodlanding-wls-1",
     "resourceType": "VM.Standard.E3.Flex",
     "savings": "11",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -167,7 +167,7 @@
     "resourceName": "stg-landing-wls-5",
     "resourceType": "VM.Standard.E3.Flex",
     "savings": "31",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -186,7 +186,7 @@
     "resourceName": "dev-wls-8",
     "resourceType": "VM.Standard.E2.1.Flex",
     "savings": "16",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -205,7 +205,7 @@
     "resourceName": "dev-wls-9",
     "resourceType": "VM.Standard.E2.1.Flex",
     "savings": "21",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -224,7 +224,7 @@
     "resourceName": "prodlanding-wls-1",
     "resourceType": "VM.Standard.E3.Flex",
     "savings": "11",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   },
   {
@@ -243,7 +243,7 @@
     "resourceName": "stg-landing-wls-5",
     "resourceType": "VM.Standard.E3.Flex",
     "savings": "31",
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "COMPUTE"
   }
 ]

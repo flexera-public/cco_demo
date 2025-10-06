@@ -236,7 +236,7 @@
       "resourceName": "dev_sap_wrkshop_3",
       "resourceType": "VM.Standard.E3.Flex",
       "savings": "65",
-      "savingsCurrency": "$",
+      "savingsCurrency": "US$",
       "service": "COMPUTE"
   },
   {
@@ -260,7 +260,7 @@
       "resourceName": "eng_sap_wrkshop_1",
       "resourceType": "VM.Standard.E3.Flex",
       "savings": "38",
-      "savingsCurrency": "$",
+      "savingsCurrency": "US$",
       "service": "COMPUTE"
   },
   {
@@ -284,7 +284,7 @@
       "resourceName": "eng_sap_wrkshop_4",
       "resourceType": "VM.Standard.A1.Flex",
       "savings": "56",
-      "savingsCurrency": "$",
+      "savingsCurrency": "US$",
       "service": "COMPUTE"
   },
   {
@@ -308,7 +308,7 @@
       "resourceName": "eng_sap_wrkshop_1",
       "resourceType": "VM.Standard.E3.Flex",
       "savings": "43",
-      "savingsCurrency": "$",
+      "savingsCurrency": "US$",
       "service": "COMPUTE"
   },
   {
@@ -332,7 +332,7 @@
       "resourceName": "eng_sap_wrkshop_4",
       "resourceType": "VM.Standard.E3.Flex",
       "savings": "34",
-      "savingsCurrency": "$",
+      "savingsCurrency": "US$",
       "service": "COMPUTE"
   },
   {
@@ -356,7 +356,7 @@
       "resourceName": "eng_sap_wrkshop_1",
       "resourceType": "VM.Standard.E3.Flex",
       "savings": "50",
-      "savingsCurrency": "$",
+      "savingsCurrency": "US$",
       "service": "COMPUTE"
   },
   {
@@ -380,7 +380,7 @@
       "resourceName": "eng_sap_wrkshop_4",
       "resourceType": "VM.Standard.E3.Flex",
       "savings": "40",
-      "savingsCurrency": "$",
+      "savingsCurrency": "US$",
       "service": "COMPUTE"
   },
   {
@@ -404,7 +404,7 @@
       "resourceName": "eng_sap_wrkshop_1",
       "resourceType": "VM.Standard.E3.Flex",
       "savings": "30",
-      "savingsCurrency": "$",
+      "savingsCurrency": "US$",
       "service": "COMPUTE"
   }
 ]

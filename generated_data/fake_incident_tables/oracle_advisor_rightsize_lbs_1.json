@@ -269,7 +269,7 @@
     "resourceName": "internal-lb-0",
     "resourceType": "flexible",
     "savings": 18.75,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "service": "ORALB"
   },
   {

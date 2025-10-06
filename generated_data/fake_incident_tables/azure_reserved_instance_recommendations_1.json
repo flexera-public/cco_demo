@@ -16,7 +16,7 @@
     "resourceID": "6cd9e0bb-dc10-bb1a-8f3d-7da8dc0e4fb2",
     "resourceType": "Standard_E4as_v5",
     "savings": 54.73,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -60,7 +60,7 @@
     "resourceID": "a7b4e1c2-df0a-bd19-fc6b-a8b3a2cd37ab",
     "resourceType": "Standard_DS13_v2",
     "savings": 18.49,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -82,7 +82,7 @@
     "resourceID": "f6a3c0b4-cd1f-b9e8-f8b7-d4a2bcba8fb1",
     "resourceType": "Standard_DS13_v2",
     "savings": 49.59,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -126,7 +126,7 @@
     "resourceID": "a1b9c3f6-e3d4-bda2-f0e7-a8d7b6ba1fb2",
     "resourceType": "Standard_DS14_v2",
     "savings": 99.19,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -148,7 +148,7 @@
     "resourceID": "f6c4a0b9-cd1e-b9e8-f8b7-d4a2bcba8fb3",
     "resourceType": "Standard_DS13_v2",
     "savings": 199.39,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -192,7 +192,7 @@
     "resourceID": "e3d9f4ed-bc6c-f8a1-bcda-a2b0eb7cafc7",
     "resourceType": "Standard_DS14_v2",
     "savings": 599.17,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -214,7 +214,7 @@
     "resourceID": "f6a3c0b4-cd1e-b9e8-f8b7-d4a2bcba8fb4",
     "resourceType": "Standard_DS13_v2",
     "savings": 999.76,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -258,7 +258,7 @@
     "resourceID": "a1b9c3f6-e3d5-bda2-f0e7-a8d7b6ba1fb3",
     "resourceType": "Standard_DS14_v2",
     "savings": 2499.93,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -280,7 +280,7 @@
     "resourceID": "f6c4a0b9-cd1f-b9e8-f8b7-d4a2bcba8fb5",
     "resourceType": "Standard_DS13_v2",
     "savings": 3499.90,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
@@ -324,7 +324,7 @@
     "resourceID": "f6a3c0b4-cd1e-b9e8-f8b7-d4a2bcba8fb6",
     "resourceType": "Standard_DS14_v2",
     "savings": 5499.86,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"

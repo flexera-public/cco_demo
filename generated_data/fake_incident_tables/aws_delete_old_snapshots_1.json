@@ -17,7 +17,7 @@
     "imageId": "",
     "region": "ap-southeast-2",
     "savings": 134.99,
-    "savingsCurrency": "NZ$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 60,
     "resourceARN": "arn:aws:rds:ap-southeast-2:645234102791:snapshot/rds-snap-9876543210fedcba0",
     "id": "sphericalkite"
@@ -63,7 +63,7 @@
     "imageId": "",
     "region": "us-west-2",
     "savings": 49.99,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 30,
     "resourceARN": "arn:aws:rds:us-west-2:371826094235:snapshot/rds-snap-cba9876543210fedc0",
     "id": "blazingtorch"
@@ -86,7 +86,7 @@
     "imageId": "",
     "region": "ap-northeast-2",
     "savings": 179.99,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 60,
     "resourceARN": "arn:aws:ec2:ap-northeast-2:519824012391:snapshot/snap-fedcba9876543210fedc0",
     "id": "dazzlingkite"
@@ -132,7 +132,7 @@
     "imageId": "",
     "region": "ap-southeast-2",
     "savings": 134.99,
-    "savingsCurrency": "NZ$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 60,
     "resourceARN": "arn:aws:ec2:ap-southeast-2:645234102791:snapshot/snap-9876543210fedcba0",
     "id": "sphericalkite"
@@ -155,7 +155,7 @@
     "imageId": "",
     "region": "us-west-2",
     "savings": 49.99,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 30,
     "resourceARN": "arn:aws:rds:us-west-2:371826094235:snapshot/rds-snap-cba9876543210fedc0",
     "id": "blazingtorch"
@@ -201,7 +201,7 @@
     "imageId": "",
     "region": "ap-northeast-2",
     "savings": 179.99,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 60,
     "resourceARN": "arn:aws:rds:ap-northeast-2:519824012391:snapshot/rds-snap-fedcba9876543210fedc0",
     "id": "dazzlingkite"
@@ -247,7 +247,7 @@
     "imageId": "",
     "region": "ap-southeast-2",
     "savings": 134.99,
-    "savingsCurrency": "NZ$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 60,
     "resourceARN": "arn:aws:rds:ap-southeast-2:645234102791:snapshot/rds-snap-9876543210fedcba0",
     "id": "sphericalkite"
@@ -270,7 +270,7 @@
     "imageId": "",
     "region": "us-west-2",
     "savings": 49.99,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 30,
     "resourceARN": "arn:aws:ec2:us-west-2:371826094235:snapshot/snap-cba9876543210fedc0",
     "id": "blazingtorch"
@@ -316,7 +316,7 @@
     "imageId": "",
     "region": "ap-northeast-2",
     "savings": 179.99,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 60,
     "resourceARN": "arn:aws:ec2:ap-northeast-2:519824012391:snapshot/snap-fedcba9876543210fedc0",
     "id": "dazzlingkite"
@@ -362,7 +362,7 @@
     "imageId": "",
     "region": "ap-southeast-2",
     "savings": 134.99,
-    "savingsCurrency": "NZ$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 60,
     "resourceARN": "arn:aws:ec2:ap-southeast-2:645234102791:snapshot/snap-9876543210fedcba0",
     "id": "sphericalkite"
@@ -385,7 +385,7 @@
     "imageId": "",
     "region": "us-west-2",
     "savings": 49.99,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 30,
     "resourceARN": "arn:aws:rds:us-west-2:371826094235:snapshot/rds-snap-cba9876543210fedc0",
     "id": "blazingtorch"
@@ -431,7 +431,7 @@
     "imageId": "",
     "region": "ap-northeast-2",
     "savings": 179.99,
-    "savingsCurrency": "$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 60,
     "resourceARN": "arn:aws:rds:ap-northeast-2:519824012391:snapshot/rds-snap-fedcba9876543210fedc0",
     "id": "dazzlingkite"
@@ -477,7 +477,7 @@
     "imageId": "",
     "region": "ap-southeast-2",
     "savings": 134.99,
-    "savingsCurrency": "NZ$",
+    "savingsCurrency": "US$",
     "lookbackPeriod": 60,
     "resourceARN": "arn:aws:rds:ap-southeast-2:645234102791:snapshot/rds-snap-9876543210fedcba0",
     "id": "sphericalkite"

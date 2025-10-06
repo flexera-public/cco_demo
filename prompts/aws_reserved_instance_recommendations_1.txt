@@ -43,7 +43,7 @@ NOTE: AWS account numbers should always be 12 digits.
     "region": "EU (Ireland)",
     "resourceType": "m7i.8xlarge",
     "savings": 4520.18,
-    "savingsCurrency": "Dkr",
+    "savingsCurrency": "US$",
     "scope": "Linked",
     "service": "Elastic Compute Cloud (EC2)",
     "sizeFlexEligible": "false",
