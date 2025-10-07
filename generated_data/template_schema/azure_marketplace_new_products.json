@@ -1,0 +1,31 @@
+{
+  "name": "Azure New Marketplace Products",
+  "version": "0.5.3",
+  "cloud": "Azure",
+  "service": "Marketplace",
+  "policy_set": "New Marketplace Products",
+  "short_description": "Checks for newly purchased Azure Marketplace products and reports on them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/operational/azure/marketplace_new_products) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/operational/azure/marketplace_new_products/azure_marketplace_new_products.pt",
+  "filename": "azure_marketplace_new_products",
+  "incident": [
+    {
+      "summary_template": "Azure New Marketplace Products: {{ len data }} Azure New Marketplace Products Found",
+      "detail_template": "**Potential Monthly Cost:** {{ with index data 0 }}{{ .total_cost }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "product",
+          "label": "New Product"
+        },
+        {
+          "name": "cost",
+          "label": "Estimated Monthly Cost"
+        },
+        {
+          "name": "currency",
+          "label": "Currency"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_marketplace_new_products_1.json"
+    }
+  ]
+}

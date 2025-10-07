@@ -1,0 +1,179 @@
+{
+  "name": "Azure Rightsize Managed Disks",
+  "version": "2.6.4",
+  "cloud": "Azure",
+  "service": "Managed Disks",
+  "policy_set": "Rightsize Storage",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "This policy finds underutilized managed disks and recommends downgrading the managed disk tier if this results in savings and satisfies required usage levels. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/azure/rightsize_managed_disks/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/azure/rightsize_managed_disks/azure_rightsize_managed_disks.pt",
+  "filename": "azure_rightsize_managed_disks",
+  "incident": [
+    {
+      "summary_template": "{{ with index data 0 }}{{ .policyName }}{{ end }}: {{ len data }} Azure Oversized Managed Disks Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}${{ .totalSavings }} {{ .savingsCurrency }}\n\n {{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Subscription ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Subscription Name"
+        },
+        {
+          "name": "resourceGroup",
+          "label": "Resource Group"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "resourceType",
+          "label": "Disk Type"
+        },
+        {
+          "name": "resourceTypeRedundancy",
+          "label": "Disk Redundancy"
+        },
+        {
+          "name": "resourceTypeGiB",
+          "label": "Disk Capacity (GiB)"
+        },
+        {
+          "name": "resourceTypeIOPS",
+          "label": "Disk IOPS"
+        },
+        {
+          "name": "resourceTypeThroughput",
+          "label": "Disk Throughput (MB/s)"
+        },
+        {
+          "name": "resourceTypeMonthlyPrice",
+          "label": "Disk Monthly Price"
+        },
+        {
+          "name": "newResourceType",
+          "label": "New Disk Type"
+        },
+        {
+          "name": "newResourceTypeRedundancy",
+          "label": "New Disk Redundancy"
+        },
+        {
+          "name": "newResourceTypeGiB",
+          "label": "New Disk Capacity (GiB)"
+        },
+        {
+          "name": "newResourceTypeIOPS",
+          "label": "New Disk IOPS"
+        },
+        {
+          "name": "newResourceTypeThroughput",
+          "label": "New Disk Throughput (MB/s)"
+        },
+        {
+          "name": "newResourceTypeMonthlyPrice",
+          "label": "New Disk Monthly Price"
+        },
+        {
+          "name": "resourceTypePriceCurrency",
+          "label": "Disk Price Currency"
+        },
+        {
+          "name": "resourceKind",
+          "label": "Resource Kind"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings",
+          "path": "monthlySavings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "iopsPctMaximum",
+          "label": "IOPS Maximum %"
+        },
+        {
+          "name": "iopsAverage",
+          "label": "IOPS Average %",
+          "path": "iopsPctAverage"
+        },
+        {
+          "name": "iopsPctP90",
+          "label": "IOPS p90"
+        },
+        {
+          "name": "iopsPctP95",
+          "label": "IOPS p95"
+        },
+        {
+          "name": "iopsPctP99",
+          "label": "IOPS p99"
+        },
+        {
+          "name": "iopsThreshold",
+          "label": "IOPS Threshold %"
+        },
+        {
+          "name": "throughputPctMaximum",
+          "label": "Throughput Maximum %"
+        },
+        {
+          "name": "throughputPctAverage",
+          "label": "Throughput Average %"
+        },
+        {
+          "name": "throughputPctP90",
+          "label": "Throughput p90"
+        },
+        {
+          "name": "throughputPctP95",
+          "label": "Throughput p95"
+        },
+        {
+          "name": "throughputPctP99",
+          "label": "Throughput p99"
+        },
+        {
+          "name": "throughputThreshold",
+          "label": "Throughput Threshold %"
+        },
+        {
+          "name": "sizeGB",
+          "label": "Actual Disk Size (GiB)"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Look Back Period (Days)"
+        },
+        {
+          "name": "id",
+          "label": "ID",
+          "path": "resourceID"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_rightsize_managed_disks_1.json"
+    }
+  ]
+}

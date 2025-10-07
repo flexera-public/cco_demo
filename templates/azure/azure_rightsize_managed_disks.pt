@@ -1,0 +1,179 @@
+# DEMO POLICY TEMPLATE. DOES NOT PRODUCE REAL RESULTS.
+# More info available here: https://github.com/flexera-public/cco_demo
+name "Azure Rightsize Managed Disks [Demo]"
+rs_pt_ver 20180301
+type "policy"
+short_description "Checks for snapshots older than a specified number of days and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/old_snapshots) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more."
+long_description ""
+# This is to make it easy to identify this template as a demo template via API
+doc_link "https://github.com/flexera-public/cco_demo"
+category "Cost"
+severity "low"
+default_frequency "weekly"
+info(
+  version: "2.6.4",
+  provider: "Azure",
+  service: "Managed Disks",
+  policy_set: "Rightsize Storage",
+  recommendation_type: "Usage Reduction",
+  hide_skip_approvals: "true",
+  demo: "true"
+)
+
+###############################################################################
+# Parameters
+###############################################################################
+
+# This is to make it easy for automation to determine if an applied policy is
+# a demo policy or not.
+parameter "param_demo" do
+  type "string"
+  category "Policy Settings"
+  label "Demo Policy"
+  description "Indicates that this is a demo policy. Should generally be left at its default value."
+  allowed_values "True", "False"
+  default "True"
+end
+
+###############################################################################
+# Datasources & Scripts
+###############################################################################
+
+datasource "ds_azure_rightsize_managed_disks_1" do
+  request do
+    verb "GET"
+    host "raw.githubusercontent.com"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/azure_rightsize_managed_disks_1.json"
+  end
+end
+
+###############################################################################
+# Policy
+###############################################################################
+
+policy "pol_incident" do
+  validate_each $ds_azure_rightsize_managed_disks_1 do
+    summary_template "{{ with index data 0 }}{{ .policyName }}{{ end }}: {{ len data }} Azure Oversized Managed Disks Found"
+    check eq(0, 1)
+    export do
+      resource_level true
+      field "accountID" do
+        label "Subscription ID"
+      end
+      field "accountName" do
+        label "Subscription Name"
+      end
+      field "resourceGroup" do
+        label "Resource Group"
+      end
+      field "service" do
+        label "Service"
+      end
+      field "resourceName" do
+        label "Resource Name"
+      end
+      field "resourceID" do
+        label "Resource ID"
+      end
+      field "tags" do
+        label "Resource Tags"
+      end
+      field "resourceType" do
+        label "Disk Type"
+      end
+      field "resourceTypeRedundancy" do
+        label "Disk Redundancy"
+      end
+      field "resourceTypeGiB" do
+        label "Disk Capacity (GiB)"
+      end
+      field "resourceTypeIOPS" do
+        label "Disk IOPS"
+      end
+      field "resourceTypeThroughput" do
+        label "Disk Throughput (MB/s)"
+      end
+      field "resourceTypeMonthlyPrice" do
+        label "Disk Monthly Price"
+      end
+      field "newResourceType" do
+        label "New Disk Type"
+      end
+      field "newResourceTypeRedundancy" do
+        label "New Disk Redundancy"
+      end
+      field "newResourceTypeGiB" do
+        label "New Disk Capacity (GiB)"
+      end
+      field "newResourceTypeIOPS" do
+        label "New Disk IOPS"
+      end
+      field "newResourceTypeThroughput" do
+        label "New Disk Throughput (MB/s)"
+      end
+      field "newResourceTypeMonthlyPrice" do
+        label "New Disk Monthly Price"
+      end
+      field "resourceTypePriceCurrency" do
+        label "Disk Price Currency"
+      end
+      field "resourceKind" do
+        label "Resource Kind"
+      end
+      field "region" do
+        label "Region"
+      end
+      field "savings" do
+        label "Estimated Monthly Savings"
+      end
+      field "savingsCurrency" do
+        label "Savings Currency"
+      end
+      field "iopsPctMaximum" do
+        label "IOPS Maximum %"
+      end
+      field "iopsAverage" do
+        label "IOPS Average %"
+      end
+      field "iopsPctP90" do
+        label "IOPS p90"
+      end
+      field "iopsPctP95" do
+        label "IOPS p95"
+      end
+      field "iopsPctP99" do
+        label "IOPS p99"
+      end
+      field "iopsThreshold" do
+        label "IOPS Threshold %"
+      end
+      field "throughputPctMaximum" do
+        label "Throughput Maximum %"
+      end
+      field "throughputPctAverage" do
+        label "Throughput Average %"
+      end
+      field "throughputPctP90" do
+        label "Throughput p90"
+      end
+      field "throughputPctP95" do
+        label "Throughput p95"
+      end
+      field "throughputPctP99" do
+        label "Throughput p99"
+      end
+      field "throughputThreshold" do
+        label "Throughput Threshold %"
+      end
+      field "sizeGB" do
+        label "Actual Disk Size (GiB)"
+      end
+      field "lookbackPeriod" do
+        label "Look Back Period (Days)"
+      end
+      field "id" do
+        label "ID"
+      end
+    end
+  end
+end

@@ -1,0 +1,20 @@
+I am creating demo data for a cloud cost optimization tool that reports new Azure marketplace purchases.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+[
+  {
+    "cost": 6609.11,
+    "currency": "US$",
+    "product": "claude-sonnet-4-5-20250929"
+  },
+  {
+    "cost": 677.37,
+    "currency": "US$",
+    "product": "gpt-5-codex"
+  }
+]

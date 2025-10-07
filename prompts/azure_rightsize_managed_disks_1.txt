@@ -1,0 +1,58 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized Azure managed disks to rightsize.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+Keep the "savingsCurrency" field set to "US$" for all items.
+
+Note: Azure subscriptions ("accountID") are in hexadecimal format and should never vary in number of characters or use any letters or numbers not used in hexadecimal.
+
+[
+  {
+    "accountID": "3dfed94b-3730-bc4e-8afc-d65367086556",
+    "accountName": "Services",
+    "id": "/subscriptions/3dfed94b-3730-bc4e-8afc-d65367086556/resourceGroups/servicesprod/providers/Microsoft.Compute/disks/servicesprod-buildDisk",
+    "iopsAverage": 0,
+    "iopsPctMaximum": 0,
+    "iopsPctP90": 0,
+    "iopsPctP95": 0,
+    "iopsPctP99": 0,
+    "iopsThreshold": -1,
+    "lookbackPeriod": 30,
+    "newResourceType": "S10",
+    "newResourceTypeGiB": 128,
+    "newResourceTypeIOPS": 500,
+    "newResourceTypeMonthlyPrice": 5.781,
+    "newResourceTypeRedundancy": "LRS",
+    "newResourceTypeThroughput": 60,
+    "region": "eastus",
+    "resourceGroup": "servicesprod",
+    "resourceID": "/subscriptions/3dfed94b-3730-bc4e-8afc-d65367086556/resourceGroups/servicesprod/providers/Microsoft.Compute/disks/servicesprod-buildDisk",
+    "resourceKind": "Microsoft.Compute/disks",
+    "resourceName": "servicesprod-buildDisk",
+    "resourceType": "P10",
+    "resourceTypeGiB": 128,
+    "resourceTypeIOPS": 500,
+    "resourceTypeMonthlyPrice": 19.351,
+    "resourceTypePriceCurrency": "US$",
+    "resourceTypeRedundancy": "LRS",
+    "resourceTypeThroughput": 100,
+    "savings": 13.57,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.Compute",
+    "sizeGB": 70,
+    "tags": [
+        "env=prod",
+        "app=web"
+    ],
+    "throughputPctAverage": 0,
+    "throughputPctMaximum": 0,
+    "throughputPctP90": 0,
+    "throughputPctP95": 0,
+    "throughputPctP99": 0,
+    "throughputThreshold": -1
+  }
+]

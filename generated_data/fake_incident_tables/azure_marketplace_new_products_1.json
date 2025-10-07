@@ -1,0 +1,103 @@
+[
+  {
+    "cost": 12345.67,
+    "currency": "US$",
+    "product": "azure-ml-hydra-4gb"
+  },
+  {
+    "cost": 98.21,
+    "currency": "US$",
+    "product": "nvidia-t4-v100-sgx"
+  },
+  {
+    "cost": 4567.89,
+    "currency": "US$",
+    "product": "databricks-optimized-for-mlops"
+  },
+  {
+    "cost": 21.50,
+    "currency": "US$",
+    "product": "azure-cognitive-search-starter"
+  },
+  {
+    "cost": 9876.54,
+    "currency": "US$",
+    "product": "nvidia-v100-16gb-tensorflow-2-x"
+  },
+  {
+    "cost": 543.21,
+    "currency": "US$",
+    "product": "azure-databricks-standard-edition-1-workspace"
+  },
+  {
+    "cost": 1111.11,
+    "currency": "US$",
+    "product": "nvidia-a100-40gb-gaudi2-mx"
+  },
+  {
+    "cost": 76.54,
+    "currency": "US$",
+    "product": "azure-machine-learning-evaluator"
+  },
+  {
+    "cost": 3456.78,
+    "currency": "US$",
+    "product": "azure-data-factory-standard-1-edition"
+  },
+  {
+    "cost": 23.98,
+    "currency": "US$",
+    "product": "nvidia-t4-v100-sgx"
+  },
+  {
+    "cost": 6543.21,
+    "currency": "US$",
+    "product": "databricks-optimized-for-mlops"
+  },
+  {
+    "cost": 111.11,
+    "currency": "US$",
+    "product": "azure-cognitive-search-standard-1-sku"
+  },
+  {
+    "cost": 9876.54,
+    "currency": "US$",
+    "product": "nvidia-v100-16gb-tensorflow-2-x"
+  },
+  {
+    "cost": 5432.11,
+    "currency": "US$",
+    "product": "azure-databricks-standard-edition-1-workspace"
+  },
+  {
+    "cost": 76.54,
+    "currency": "US$",
+    "product": "nvidia-a100-40gb-gaudi2-mx"
+  },
+  {
+    "cost": 23.98,
+    "currency": "US$",
+    "product": "azure-machine-learning-evaluator"
+  },
+  {
+    "cost": 6543.21,
+    "currency": "US$",
+    "product": "azure-data-factory-standard-1-edition"
+  },
+  {
+    "cost": 111.11,
+    "currency": "US$",
+    "product": "nvidia-t4-v100-sgx"
+  },
+  {
+    "cost": 9876.54,
+    "currency": "US$",
+    "product": "databricks-optimized-for-mlops"
+  },
+  {
+    "cost": 5432.11,
+    "currency": "US$",
+    "product": "azure-cognitive-search-standard-1-sku"
+  }
+]
+
