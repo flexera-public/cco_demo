@@ -15,7 +15,7 @@
     "product": "databricks-optimized-for-mlops"
   },
   {
-    "cost": 21.50,
+    "cost": 21.5,
     "currency": "US$",
     "product": "azure-cognitive-search-starter"
   },
@@ -100,4 +100,3 @@
     "product": "azure-cognitive-search-standard-1-sku"
   }
 ]
-

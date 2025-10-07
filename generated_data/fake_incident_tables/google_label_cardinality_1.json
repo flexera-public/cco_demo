@@ -3,109 +3,126 @@
     "cardinality": 7,
     "key": "tier",
     "type": "Project",
-    "value_list": "Gold, Silver, Bronze, Copper, Tin, Lead, Steel"
+    "value_list": "Gold, Silver, Bronze, Copper, Tin, Lead, Steel",
+    "resourceName": "api-gateway"
   },
   {
     "cardinality": 3,
     "key": "component",
     "type": "Resource",
-    "value_list": "Database, WebServer, Cache"
+    "value_list": "Database, WebServer, Cache",
+    "resourceName": "api-gateway"
   },
   {
     "cardinality": 2,
     "key": "backup_type",
     "type": "Resource",
-    "value_list": "Full, Incremental"
+    "value_list": "Full, Incremental",
+    "resourceName": "database-primary"
   },
   {
     "cardinality": 9,
     "key": "service_level",
     "type": "Project",
-    "value_list": "High, Medium, Low, Critical, Urgent, Normal, Standard, Basic, Priority"
+    "value_list": "High, Medium, Low, Critical, Urgent, Normal, Standard, Basic, Priority",
+    "resourceName": "demo-instance"
   },
   {
     "cardinality": 6,
     "key": "storage_class",
     "type": "Resource",
-    "value_list": "Standard, Nearline, Coldline, Durable Reduced Availability, Archive, MultiRegional"
+    "value_list": "Standard, Nearline, Coldline, Durable Reduced Availability, Archive, MultiRegional",
+    "resourceName": "log-aggregator"
   },
   {
     "cardinality": 4,
     "key": "service_account",
     "type": "Project",
-    "value_list": "admin, devops, analytics, monitoring"
+    "value_list": "admin, devops, analytics, monitoring",
+    "resourceName": "data-pipeline"
   },
   {
     "cardinality": 10,
     "key": "network_type",
     "type": "Resource",
-    "value_list": "Public, Private, VPN, DirectPeering, PartnerPeering, LoadBalancing, ContentDeliveryNetwork, ServerlessNetworking, HighAvailability, Edge"
+    "value_list": "Public, Private, VPN, DirectPeering, PartnerPeering, LoadBalancing, ContentDeliveryNetwork, ServerlessNetworking, HighAvailability, Edge",
+    "resourceName": "ml-training"
   },
   {
     "cardinality": 1,
     "key": "os",
     "type": "Resource",
-    "value_list": "Ubuntu"
+    "value_list": "Ubuntu",
+    "resourceName": "web-server-prod"
   },
   {
     "cardinality": 5,
     "key": "db_type",
     "type": "Project",
-    "value_list": "MySQL, PostgreSQL, MongoDB, Cassandra, Redis"
+    "value_list": "MySQL, PostgreSQL, MongoDB, Cassandra, Redis",
+    "resourceName": "log-aggregator"
   },
   {
     "cardinality": 8,
     "key": "subnetwork_type",
     "type": "Resource",
-    "value_list": "Auto, Custom, Regional, Legacy, CloudNetwork, OnPremises, PrivateIP, PublicIP"
+    "value_list": "Auto, Custom, Regional, Legacy, CloudNetwork, OnPremises, PrivateIP, PublicIP",
+    "resourceName": "stream-processor"
   },
   {
     "cardinality": 12,
     "key": "role",
     "type": "Project",
-    "value_list": "Admin, User, Editor, Viewer, Manager, Owner, Collaborator, Developer, Maintainer, Subscriber, Contributor, Author"
+    "value_list": "Admin, User, Editor, Viewer, Manager, Owner, Collaborator, Developer, Maintainer, Subscriber, Contributor, Author",
+    "resourceName": "monitoring-stack"
   },
   {
     "cardinality": 15,
     "key": "availability_zone",
     "type": "Resource",
-    "value_list": "AZ1, AZ2, AZ3, AZ4, AZ5, AZ6, AZ7, AZ8, AZ9, AZ10, AZ11, AZ12, AZ13, AZ14, AZ15"
+    "value_list": "AZ1, AZ2, AZ3, AZ4, AZ5, AZ6, AZ7, AZ8, AZ9, AZ10, AZ11, AZ12, AZ13, AZ14, AZ15",
+    "resourceName": "render-farm"
   },
   {
     "cardinality": 20,
     "key": "instance_group",
     "type": "Resource",
-    "value_list": "Group1, Group2, Group3, Group4, Group5, Group6, Group7, Group8, Group9, Group10, Group11, Group12, Group13, Group14, Group15, Group16, Group17, Group18, Group19, Group20"
+    "value_list": "Group1, Group2, Group3, Group4, Group5, Group6, Group7, Group8, Group9, Group10, Group11, Group12, Group13, Group14, Group15, Group16, Group17, Group18, Group19, Group20",
+    "resourceName": "cdn-origin"
   },
   {
     "cardinality": 13,
     "key": "ip_protocol",
     "type": "Project",
-    "value_list": "TCP, UDP, ICMP, IGMP, PIM, VRRP, RSVP, BGP, EIGRP, OSPF, RIP, ISIS, MRT"
+    "value_list": "TCP, UDP, ICMP, IGMP, PIM, VRRP, RSVP, BGP, EIGRP, OSPF, RIP, ISIS, MRT",
+    "resourceName": "service-mesh"
   },
   {
     "cardinality": 18,
     "key": "image_type",
     "type": "Resource",
-    "value_list": "Container, VM, Server, Laptop, Desktop, Tablet, Phone, Embedded, Automotive, Aerospace, Medical, Financial, Government, Education, NonProfit, Research, Development, Testing"
+    "value_list": "Container, VM, Server, Laptop, Desktop, Tablet, Phone, Embedded, Automotive, Aerospace, Medical, Financial, Government, Education, NonProfit, Research, Development, Testing",
+    "resourceName": "load-balancer"
   },
   {
     "cardinality": 5,
     "key": "firewall_rule_type",
     "type": "Project",
-    "value_list": "Ingress, Egress, Allow, Deny, Reject"
+    "value_list": "Ingress, Egress, Allow, Deny, Reject",
+    "resourceName": "payment-processor"
   },
   {
     "cardinality": 9,
     "key": "service_endpoint_type",
     "type": "Resource",
-    "value_list": "HTTP, HTTPS, SSH, RDP, FTP, SFTP, SMB, NFS, TELNET"
+    "value_list": "HTTP, HTTPS, SSH, RDP, FTP, SFTP, SMB, NFS, TELNET",
+    "resourceName": "render-farm"
   },
   {
     "cardinality": 7,
     "key": "load_balancing_type",
     "type": "Project",
-    "value_list": "Internal, External, Network, TCP, HTTP, HTTPS, SSL"
+    "value_list": "Internal, External, Network, TCP, HTTP, HTTPS, SSL",
+    "resourceName": "staging-env"
   }
 ]
-

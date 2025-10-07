@@ -11,10 +11,10 @@
     "projectNumber": "278365672081",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'image-cache-15'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "us-central1",
+    "region": "europe-west3",
     "resourceID": "2251670122189134142",
-    "resourceName": "image-cache-15",
-    "savings": 3.59,
+    "resourceName": "test-automation",
+    "savings": 651.33,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/cloud-compute-solutions/zones/us-central1-a/disks/image-cache-15",
     "service": "Compute Engine",
@@ -23,7 +23,7 @@
     "status": "READY",
     "tags": "project=app-project-059, env=prod",
     "type": "pd-standard",
-    "zone": "us-central1-a"
+    "zone": "us-west3-a"
   },
   {
     "accountID": "ai-engineering-tools",
@@ -37,10 +37,10 @@
     "projectNumber": "278365672082",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'ml-model-encoder-27'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "europe-west1",
+    "region": "us-west1",
     "resourceID": "2251670122189134143",
-    "resourceName": "ml-model-encoder-27",
-    "savings": 2.19,
+    "resourceName": "scheduler-cron",
+    "savings": 583.92,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/ai-engineering-tools/zones/europe-west1-b/disks/ml-model-encoder-27",
     "service": "Compute Engine",
@@ -49,7 +49,7 @@
     "status": "READY",
     "tags": "project=app-project-060, env=dev",
     "type": "pd-standard",
-    "zone": "europe-west1-b"
+    "zone": "us-west3-c"
   },
   {
     "accountID": "data-science-apps",
@@ -63,10 +63,10 @@
     "projectNumber": "278365672083",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'ds-project-34'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "asia-east2",
+    "region": "us-east4",
     "resourceID": "2251670122189134144",
-    "resourceName": "ds-project-34",
-    "savings": 1.79,
+    "resourceName": "app-backend",
+    "savings": 543.56,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/data-science-apps/zones/asia-east2-a/disks/ds-project-34",
     "service": "Compute Engine",
@@ -75,7 +75,7 @@
     "status": "READY",
     "tags": "project=app-project-061, env=test",
     "type": "pd-standard",
-    "zone": "asia-east2-a"
+    "zone": "southamerica-east1-a"
   },
   {
     "accountID": "cloud-it-infrastructure",
@@ -89,10 +89,10 @@
     "projectNumber": "278365672084",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'ci-cloud-30'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "us-west3",
+    "region": "us-east1",
     "resourceID": "2251670122189134145",
-    "resourceName": "ci-cloud-30",
-    "savings": 4.29,
+    "resourceName": "api-gateway",
+    "savings": 172.15,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/cloud-it-infrastructure/zones/us-west3-b/disks/ci-cloud-30",
     "service": "Compute Engine",
@@ -101,7 +101,7 @@
     "status": "READY",
     "tags": "project=app-project-062, env=dev",
     "type": "pd-standard",
-    "zone": "us-west3-b"
+    "zone": "europe-west4-a"
   },
   {
     "accountID": "ai-applications-suite",
@@ -115,10 +115,10 @@
     "projectNumber": "278365672085",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'ai-app-16'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "europe-west4",
+    "region": "us-east1",
     "resourceID": "2251670122189134146",
-    "resourceName": "ai-app-16",
-    "savings": 3.39,
+    "resourceName": "bastion-host",
+    "savings": 123.6,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/ai-applications-suite/zones/europe-west4-a/disks/ai-app-16",
     "service": "Compute Engine",
@@ -127,7 +127,7 @@
     "status": "READY",
     "tags": "project=app-project-063, env=test",
     "type": "pd-standard",
-    "zone": "europe-west4-a"
+    "zone": "europe-north1-c"
   },
   {
     "accountID": "ml-engineering-platform",
@@ -141,10 +141,10 @@
     "projectNumber": "278365672086",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'ml-platform-28'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "asia-northeast1",
+    "region": "europe-west2",
     "resourceID": "2251670122189134147",
-    "resourceName": "ml-platform-28",
-    "savings": 2.59,
+    "resourceName": "chat-backend",
+    "savings": 526.15,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/ml-engineering-platform/zones/asia-northeast1-a/disks/ml-platform-28",
     "service": "Compute Engine",
@@ -153,7 +153,7 @@
     "status": "READY",
     "tags": "project=app-project-064, env=prod",
     "type": "pd-standard",
-    "zone": "asia-northeast1-a"
+    "zone": "us-east1-b"
   },
   {
     "accountID": "cloud-compute-workloads",
@@ -167,10 +167,10 @@
     "projectNumber": "278365672087",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'ccw-workload-38'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "us-west4",
+    "region": "australia-southeast1",
     "resourceID": "2251670122189134148",
-    "resourceName": "ccw-workload-38",
-    "savings": 1.99,
+    "resourceName": "scheduler-cron",
+    "savings": 502.24,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/cloud-compute-workloads/zones/us-west4-b/disks/ccw-workload-38",
     "service": "Compute Engine",
@@ -179,7 +179,7 @@
     "status": "READY",
     "tags": "project=app-project-065, env=test",
     "type": "pd-standard",
-    "zone": "us-west4-b"
+    "zone": "asia-south1-a"
   },
   {
     "accountID": "data-engineering-platform",
@@ -193,10 +193,10 @@
     "projectNumber": "278365672088",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'dep-platform-32'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "europe-west2",
+    "region": "us-west2",
     "resourceID": "2251670122189134149",
-    "resourceName": "dep-platform-32",
-    "savings": 4.89,
+    "resourceName": "inventory-mgmt",
+    "savings": 355.93,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/data-engineering-platform/zones/europe-west2-a/disks/dep-platform-32",
     "service": "Compute Engine",
@@ -219,10 +219,10 @@
     "projectNumber": "278365672089",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'air-platform-25'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "asia-east1",
+    "region": "europe-west3",
     "resourceID": "2251670122189134150",
-    "resourceName": "air-platform-25",
-    "savings": 3.79,
+    "resourceName": "mail-server",
+    "savings": 593.35,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/ai-research-platform/zones/asia-east1-a/disks/air-platform-25",
     "service": "Compute Engine",
@@ -231,7 +231,7 @@
     "status": "READY",
     "tags": "project=app-project-067, env=test",
     "type": "pd-standard",
-    "zone": "asia-east1-a"
+    "zone": "us-east1-c"
   },
   {
     "accountID": "cloud-app-platform",
@@ -245,10 +245,10 @@
     "projectNumber": "278365672090",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'cap-platform-29'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "us-central2",
+    "region": "asia-northeast1",
     "resourceID": "2251670122189134151",
-    "resourceName": "cap-platform-29",
-    "savings": 2.99,
+    "resourceName": "content-delivery",
+    "savings": 80.47,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/cloud-app-platform/zones/us-central2-a/disks/cap-platform-29",
     "service": "Compute Engine",
@@ -257,7 +257,7 @@
     "status": "READY",
     "tags": "project=app-project-068, env=dev",
     "type": "pd-standard",
-    "zone": "us-central2-a"
+    "zone": "australia-southeast1-c"
   },
   {
     "accountID": "ml-research-platform",
@@ -271,10 +271,10 @@
     "projectNumber": "278365672091",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'mlr-platform-31'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "asia-northeast2",
+    "region": "northamerica-northeast1",
     "resourceID": "2251670122189134152",
-    "resourceName": "mlr-platform-31",
-    "savings": 1.99,
+    "resourceName": "session-store",
+    "savings": 213.64,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/ml-research-platform/zones/asia-northeast2-a/disks/mlr-platform-31",
     "service": "Compute Engine",
@@ -283,7 +283,7 @@
     "status": "READY",
     "tags": "project=app-project-069, env=test",
     "type": "pd-standard",
-    "zone": "asia-northeast2-a"
+    "zone": "asia-southeast1-c"
   },
   {
     "accountID": "ai-engineering-platform-1",
@@ -297,10 +297,10 @@
     "projectNumber": "278365672092",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'aiep-platform-24'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "europe-west5",
+    "region": "asia-northeast2",
     "resourceID": "2251670122189134153",
-    "resourceName": "aiep-platform-24",
-    "savings": 4.59,
+    "resourceName": "container-registry",
+    "savings": 226.32,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/ai-engineering-platform-1/zones/europe-west5-a/disks/aiep-platform-24",
     "service": "Compute Engine",
@@ -309,7 +309,7 @@
     "status": "READY",
     "tags": "project=app-project-070, env=dev",
     "type": "pd-standard",
-    "zone": "europe-west5-a"
+    "zone": "europe-west2-c"
   },
   {
     "accountID": "data-science-apps-platform",
@@ -323,10 +323,10 @@
     "projectNumber": "278365672093",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'dsap-platform-26'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "asia-east2",
+    "region": "us-west2",
     "resourceID": "2251670122189134154",
-    "resourceName": "dsap-platform-26",
-    "savings": 3.99,
+    "resourceName": "ci-cd-runner",
+    "savings": 441.58,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/data-science-apps-platform/zones/asia-east2-a/disks/dsap-platform-26",
     "service": "Compute Engine",
@@ -335,7 +335,7 @@
     "status": "READY",
     "tags": "project=app-project-071, env=test",
     "type": "pd-standard",
-    "zone": "asia-east2-a"
+    "zone": "asia-northeast1-c"
   },
   {
     "accountID": "ai-research-platform-1",
@@ -349,10 +349,10 @@
     "projectNumber": "278365672094",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'airp-platform-23'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "us-west1",
+    "region": "us-east1",
     "resourceID": "2251670122189134155",
-    "resourceName": "airp-platform-23",
-    "savings": 2.99,
+    "resourceName": "game-server",
+    "savings": 250.11,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/ai-research-platform-1/zones/us-west1-b/disks/airp-platform-23",
     "service": "Compute Engine",
@@ -361,7 +361,7 @@
     "status": "READY",
     "tags": "project=app-project-072, env=dev",
     "type": "pd-standard",
-    "zone": "us-west1-b"
+    "zone": "asia-northeast2-c"
   },
   {
     "accountID": "cloud-app-platform-1",
@@ -375,10 +375,10 @@
     "projectNumber": "278365672095",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'cap-platform-27'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "europe-west3",
+    "region": "europe-west1",
     "resourceID": "2251670122189134156",
-    "resourceName": "cap-platform-27",
-    "savings": 1.99,
+    "resourceName": "backup-instance",
+    "savings": 168.6,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/cloud-app-platform-1/zones/europe-west3-a/disks/cap-platform-27",
     "service": "Compute Engine",
@@ -387,7 +387,7 @@
     "status": "READY",
     "tags": "project=app-project-073, env=test",
     "type": "pd-standard",
-    "zone": "europe-west3-a"
+    "zone": "us-west4-a"
   },
   {
     "accountID": "ml-research-platform-1",
@@ -401,10 +401,10 @@
     "projectNumber": "278365672096",
     "recommendationDetails": "Save cost by deleting idle persistent disk 'mlrp-platform-30'.",
     "recommenderSubtype": "DELETE_DISK",
-    "region": "asia-northeast3",
+    "region": "australia-southeast1",
     "resourceID": "2251670122189134157",
-    "resourceName": "mlrp-platform-30",
-    "savings": 4.99,
+    "resourceName": "backup-instance",
+    "savings": 104.8,
     "savingsCurrency": "US$",
     "selfLink": "https://www.googleapis.com/compute/v1/projects/ml-research-platform-1/zones/asia-northeast3-a/disks/mlrp-platform-30",
     "service": "Compute Engine",
@@ -413,6 +413,6 @@
     "status": "READY",
     "tags": "project=app-project-074, env=dev",
     "type": "pd-standard",
-    "zone": "asia-northeast3-a"
+    "zone": "europe-west4-b"
   }
 ]
