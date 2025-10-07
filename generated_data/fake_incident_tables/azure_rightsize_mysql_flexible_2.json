@@ -1,6 +1,6 @@
 [
   {
-    "accountID": "b1e40d4b-3dbc-4aed-b149-b8ca94000184",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "internal-tools",
     "capacity": 6,
     "fqdn": "prod-instance1.mysql.database.azure.com",
@@ -25,7 +25,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "04de749f-06e5-465f-abc2-6ba95cd6d94f",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "internal-tools",
     "capacity": 1,
     "fqdn": "dev-instance2.mysql.database.azure.com",
@@ -50,7 +50,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "8148474f-4d5f-4ed2-b07d-ddd73f0c05e7",
+    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "testing-sandbox",
     "capacity": 8,
     "fqdn": "prod-instance3.mysql.database.azure.com",
@@ -75,7 +75,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "47422e2e-f90b-45c4-b29e-61ace22e6466",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "load-testing",
     "capacity": 3,
     "fqdn": "dev-instance4.mysql.database.azure.com",
@@ -100,7 +100,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "11c75cb3-48ff-46b1-bf19-e51c01be8a4e",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "e-commerce-platform",
     "capacity": 5,
     "fqdn": "prod-instance5.mysql.database.azure.com",
@@ -125,7 +125,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "c8a9c8ea-49f5-41a1-8785-62a7c7378a7b",
+    "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
     "accountName": "hr-systems",
     "capacity": 7,
     "fqdn": "dev-instance6.mysql.database.azure.com",
@@ -150,7 +150,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "498a4383-1dc0-4f43-b792-dc0e28a65b30",
+    "accountID": "8752afcb-f9b4-453b-b34c-cb9f3a9a0247",
     "accountName": "development-env",
     "capacity": 9,
     "fqdn": "prod-instance7.mysql.database.azure.com",
@@ -175,7 +175,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "3bf768ab-b134-4cfb-880d-8ea253a0f3cb",
+    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
     "accountName": "integration-testing",
     "capacity": 10,
     "fqdn": "dev-instance8.mysql.database.azure.com",
@@ -200,7 +200,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "8298fd47-d973-48ae-a498-42db8dc3ffcd",
+    "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
     "accountName": "testing-sandbox",
     "capacity": 11,
     "fqdn": "prod-instance9.mysql.database.azure.com",
@@ -225,7 +225,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "9281abf8-3d8f-4a0f-99f9-8fe5ffe9df25",
+    "accountID": "57e25d4f-1ba6-4ac3-8ae9-455e3f0236ec",
     "accountName": "finance-reporting",
     "capacity": 12,
     "fqdn": "dev-instance10.mysql.database.azure.com",
@@ -250,7 +250,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "eed9961e-a7f8-4b4b-ab51-0c8ee52dd747",
+    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
     "accountName": "internal-tools",
     "capacity": 13,
     "fqdn": "prod-instance11.mysql.database.azure.com",
@@ -275,7 +275,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "28a0fdca-7010-4ebe-b527-7528d71106c1",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "integration-testing",
     "capacity": 14,
     "fqdn": "dev-instance12.mysql.database.azure.com",
@@ -300,7 +300,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "4801aad9-2b25-4b1e-b4f8-40c9f64b233c",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "staging-workloads",
     "capacity": 15,
     "fqdn": "prod-instance13.mysql.database.azure.com",
@@ -325,7 +325,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "03c04fda-24c5-424f-b1ee-d41414585847",
+    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "edge-computing",
     "capacity": 16,
     "fqdn": "dev-instance14.mysql.database.azure.com",
@@ -350,7 +350,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "a5a9be2b-8834-4f1b-b98f-d673fdeb6141",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "staging-workloads",
     "capacity": 17,
     "fqdn": "prod-instance15.mysql.database.azure.com",

@@ -1,6 +1,6 @@
 [
   {
-    "accountID": "c6c7613f-394e-4092-a653-88b035775b55",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "customer-facing",
     "id": "/subscriptions/c6c7613f-394e-4092-a653-88b035775b55/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/bastion-host",
     "lookbackPeriod": 30,
@@ -16,7 +16,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "592a8b88-098c-4bae-bcff-b73b58c607e9",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "marketing-analytics",
     "id": "/subscriptions/592a8b88-098c-4bae-bcff-b73b58c607e9/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/search-cluster",
     "lookbackPeriod": 30,
@@ -32,7 +32,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "e21aea91-1dfd-48a7-9317-29c7f5744d63",
+    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "load-testing",
     "id": "/subscriptions/e21aea91-1dfd-48a7-9317-29c7f5744d63/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/monitoring-stack",
     "lookbackPeriod": 30,
@@ -48,7 +48,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "f8e43f9f-a731-4a84-94df-718ec5b8ae6e",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "quality-assurance",
     "id": "/subscriptions/f8e43f9f-a731-4a84-94df-718ec5b8ae6e/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/ci-cd-runner",
     "lookbackPeriod": 30,
@@ -64,7 +64,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "ac8b5856-b8e3-4672-82e7-ee63b38d39d7",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "ml-experiments",
     "id": "/subscriptions/ac8b5856-b8e3-4672-82e7-ee63b38d39d7/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/api-gateway",
     "lookbackPeriod": 30,
@@ -80,7 +80,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "508f6df9-eedb-4d5f-9e6f-01c66a9030c3",
+    "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
     "accountName": "load-testing",
     "id": "/subscriptions/508f6df9-eedb-4d5f-9e6f-01c66a9030c3/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/dns-resolver",
     "lookbackPeriod": 30,
@@ -96,7 +96,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "0abefae1-2c27-41c7-8976-ea245ec5408b",
+    "accountID": "8752afcb-f9b4-453b-b34c-cb9f3a9a0247",
     "accountName": "artifact-storage",
     "id": "/subscriptions/0abefae1-2c27-41c7-8976-ea245ec5408b/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/vpn-gateway",
     "lookbackPeriod": 30,
@@ -112,7 +112,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "2b26ca5a-b9cf-4a59-bea3-f63408d29cd0",
+    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
     "accountName": "e-commerce-platform",
     "id": "/subscriptions/2b26ca5a-b9cf-4a59-bea3-f63408d29cd0/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/payment-processor",
     "lookbackPeriod": 30,
@@ -128,7 +128,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "aa885df4-2890-4562-ad9e-9080556de63a",
+    "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
     "accountName": "security-ops",
     "id": "/subscriptions/aa885df4-2890-4562-ad9e-9080556de63a/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/video-streaming",
     "lookbackPeriod": 30,
@@ -144,7 +144,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "4cff4182-02fb-422f-b294-4c6aec5866a4",
+    "accountID": "57e25d4f-1ba6-4ac3-8ae9-455e3f0236ec",
     "accountName": "sales-crm",
     "id": "/subscriptions/4cff4182-02fb-422f-b294-4c6aec5866a4/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/search-cluster",
     "lookbackPeriod": 30,
@@ -160,7 +160,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "1dbcc83f-fdf6-4e81-8b7d-0444efc132a0",
+    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
     "accountName": "demo-environment",
     "id": "/subscriptions/1dbcc83f-fdf6-4e81-8b7d-0444efc132a0/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/worker-queue",
     "lookbackPeriod": 30,
@@ -176,7 +176,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "d6838ede-558f-47b9-a3af-11a0f6605926",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "e-commerce-platform",
     "id": "/subscriptions/d6838ede-558f-47b9-a3af-11a0f6605926/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/worker-queue",
     "lookbackPeriod": 30,
@@ -192,7 +192,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "39ae976e-9cf5-4124-a4ab-7dc2970907a0",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "research-development",
     "id": "/subscriptions/39ae976e-9cf5-4124-a4ab-7dc2970907a0/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/render-farm",
     "lookbackPeriod": 30,
@@ -208,7 +208,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "987dd0f4-c0ee-41b7-8f85-6d4338c8b35e",
+    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "engineering-team",
     "id": "/subscriptions/987dd0f4-c0ee-41b7-8f85-6d4338c8b35e/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/load-balancer",
     "lookbackPeriod": 30,
@@ -224,7 +224,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "7060d3d0-d88a-41cb-815e-da562d59b454",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "ml-experiments",
     "id": "/subscriptions/7060d3d0-d88a-41cb-815e-da562d59b454/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/data-pipeline",
     "lookbackPeriod": 30,
@@ -240,7 +240,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "c7bc5d10-30c8-4763-8869-64ad6cfd7ef4",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "ci-cd-pipeline",
     "id": "/subscriptions/c7bc5d10-30c8-4763-8869-64ad6cfd7ef4/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/load-balancer",
     "lookbackPeriod": 30,
@@ -256,7 +256,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "89518891-5452-4dac-bf33-2df9454bd0ea",
+    "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
     "accountName": "engineering-team",
     "id": "/subscriptions/89518891-5452-4dac-bf33-2df9454bd0ea/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/ml-training",
     "lookbackPeriod": 30,
@@ -272,7 +272,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "75e2e451-d99b-450c-a439-b8cc7074e916",
+    "accountID": "8752afcb-f9b4-453b-b34c-cb9f3a9a0247",
     "accountName": "internal-tools",
     "id": "/subscriptions/75e2e451-d99b-450c-a439-b8cc7074e916/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/mail-server",
     "lookbackPeriod": 30,
@@ -288,7 +288,7 @@
     "type": "Microsoft.Network/azureFirewalls"
   },
   {
-    "accountID": "29c56d9a-bdcb-47e7-ab99-80b0c8219be1",
+    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
     "accountName": "artifact-storage",
     "id": "/subscriptions/29c56d9a-bdcb-47e7-ab99-80b0c8219be1/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/ci-cd-runner",
     "lookbackPeriod": 30,

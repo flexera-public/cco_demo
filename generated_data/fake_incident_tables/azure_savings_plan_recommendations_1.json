@@ -1,6 +1,6 @@
 [
   {
-    "accountID": "20a146f0-6ceb-48c4-8d60-f560f3608a61",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "performance-testing",
     "benefitCost": 12190.55,
     "commitmentGranularity": "Hourly",
@@ -24,7 +24,7 @@
     "wastageCost": 29.01
   },
   {
-    "accountID": "5cfcdfaa-ffb7-4474-8ae7-ef003e2a7478",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "data-science",
     "benefitCost": 15617.89,
     "commitmentGranularity": "Hourly",
@@ -48,7 +48,7 @@
     "wastageCost": 31.79
   },
   {
-    "accountID": "e1d31b88-0b2f-496a-a524-bfa4c9be5ec6",
+    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "mobile-backend",
     "benefitCost": 14521.69,
     "commitmentGranularity": "Hourly",
@@ -72,7 +72,7 @@
     "wastageCost": 32.93
   },
   {
-    "accountID": "301590f2-c879-4eb8-a086-5e969723a337",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "ci-cd-pipeline",
     "benefitCost": 12783.39,
     "commitmentGranularity": "Hourly",
@@ -96,7 +96,7 @@
     "wastageCost": 34.19
   },
   {
-    "accountID": "569feef6-bdbc-40e5-a396-e782345a36e7",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "content-management",
     "benefitCost": 13887.51,
     "commitmentGranularity": "Hourly",
@@ -120,7 +120,7 @@
     "wastageCost": 35.79
   },
   {
-    "accountID": "dd31cacf-3273-4fe8-aad2-816cd99e3c0f",
+    "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
     "accountName": "staging-workloads",
     "benefitCost": 14291.49,
     "commitmentGranularity": "Hourly",
@@ -144,7 +144,7 @@
     "wastageCost": 36.73
   },
   {
-    "accountID": "6d575531-e403-492f-b681-dca04ec22bdf",
+    "accountID": "8752afcb-f9b4-453b-b34c-cb9f3a9a0247",
     "accountName": "logging-infrastructure",
     "benefitCost": 15482.51,
     "commitmentGranularity": "Hourly",
@@ -168,7 +168,7 @@
     "wastageCost": 37.67
   },
   {
-    "accountID": "86479268-dabb-4bd4-bd9a-68a5b26ff12a",
+    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
     "accountName": "marketing-analytics",
     "benefitCost": 16375.31,
     "commitmentGranularity": "Hourly",
@@ -192,7 +192,7 @@
     "wastageCost": 39.53
   },
   {
-    "accountID": "285ca40c-c863-411b-8d90-dc22484362cf",
+    "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
     "accountName": "finance-reporting",
     "benefitCost": 15987.91,
     "commitmentGranularity": "Hourly",
@@ -216,7 +216,7 @@
     "wastageCost": 41.29
   },
   {
-    "accountID": "52414b11-cb6f-46a7-aa9b-8d573e3606fa",
+    "accountID": "57e25d4f-1ba6-4ac3-8ae9-455e3f0236ec",
     "accountName": "demo-environment",
     "benefitCost": 17159.49,
     "commitmentGranularity": "Hourly",
@@ -240,7 +240,7 @@
     "wastageCost": 43.81
   },
   {
-    "accountID": "f6daa794-9ae1-430f-a333-cf865052811d",
+    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
     "accountName": "hr-systems",
     "benefitCost": 18132.69,
     "commitmentGranularity": "Hourly",
@@ -264,7 +264,7 @@
     "wastageCost": 46.69
   },
   {
-    "accountID": "5386b047-42d1-4bda-826b-c4680c964895",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "staging-workloads",
     "benefitCost": 19145.31,
     "commitmentGranularity": "Hourly",
@@ -288,7 +288,7 @@
     "wastageCost": 49.59
   },
   {
-    "accountID": "8270d40e-5941-4fa3-bfee-8638f0ce441c",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "monitoring-observability",
     "benefitCost": 20258.81,
     "commitmentGranularity": "Hourly",
@@ -312,7 +312,7 @@
     "wastageCost": 53.49
   },
   {
-    "accountID": "f0f964db-aef3-4c94-b8a7-29c870c7bb72",
+    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "production-platform",
     "benefitCost": 21371.93,
     "commitmentGranularity": "Hourly",
@@ -336,7 +336,7 @@
     "wastageCost": 57.39
   },
   {
-    "accountID": "1847e40d-c666-4a4b-85e7-8cc2f65ae80a",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "mobile-backend",
     "benefitCost": "22584.91",
     "commitmentGranularity": "Hourly",
@@ -360,7 +360,7 @@
     "wastageCost": "61.29"
   },
   {
-    "accountID": "993700a2-feb7-4d31-b75d-55fc5b6ed077",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "artifact-storage",
     "benefitCost": "23907.93",
     "commitmentGranularity": "Hourly",

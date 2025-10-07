@@ -1,6 +1,6 @@
 [
   {
-    "accountID": "829931da-0742-4d5d-9f3e-f771e8dd1f99",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "customer-facing",
     "age": 64,
     "id": "/subscriptions/829931da-0742-4d5d-9f3e-f771e8dd1f99/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/api-gateway",
@@ -18,7 +18,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "1e12c14e-e890-4f14-b192-c54fbd785607",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "logging-infrastructure",
     "age": 71,
     "id": "/subscriptions/1e12c14e-e890-4f14-b192-c54fbd785607/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/file-storage",
@@ -36,7 +36,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "968e8cf0-1e24-4f77-b11e-0f010fa1f050",
+    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "security-ops",
     "age": 61,
     "id": "/subscriptions/968e8cf0-1e24-4f77-b11e-0f010fa1f050/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/inventory-mgmt",
@@ -54,7 +54,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "991dd965-ae96-4dec-8ce7-8ebbbd0e02bc",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "production-platform",
     "age": 58,
     "id": "/subscriptions/991dd965-ae96-4dec-8ce7-8ebbbd0e02bc/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/media-encoder",
@@ -72,7 +72,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "7b0c5235-9a20-4209-9b8a-9eb46fc16e7f",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "ci-cd-pipeline",
     "age": 68,
     "id": "/subscriptions/7b0c5235-9a20-4209-9b8a-9eb46fc16e7f/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/search-cluster",
@@ -90,7 +90,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "80e4ba15-dc2c-4395-904b-6a3f76a1fc8a",
+    "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
     "accountName": "integration-testing",
     "age": 65,
     "id": "/subscriptions/80e4ba15-dc2c-4395-904b-6a3f76a1fc8a/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/game-server",
@@ -108,7 +108,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "30b58df8-8a89-425c-a7e5-a48183d61796",
+    "accountID": "8752afcb-f9b4-453b-b34c-cb9f3a9a0247",
     "accountName": "sales-crm",
     "age": 69,
     "id": "/subscriptions/30b58df8-8a89-425c-a7e5-a48183d61796/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/database-primary",
@@ -126,7 +126,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "75f6170d-b009-4fdb-a13a-161deddedc89",
+    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
     "accountName": "demo-environment",
     "age": 62,
     "id": "/subscriptions/75f6170d-b009-4fdb-a13a-161deddedc89/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/batch-worker",
@@ -144,7 +144,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "158ba44a-6619-4144-adab-d20560e8d062",
+    "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
     "accountName": "security-ops",
     "age": 63,
     "id": "/subscriptions/158ba44a-6619-4144-adab-d20560e8d062/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/cdn-origin",
@@ -162,7 +162,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "35b1595a-32ed-4607-bdd8-03d907ce57f0",
+    "accountID": "57e25d4f-1ba6-4ac3-8ae9-455e3f0236ec",
     "accountName": "ml-experiments",
     "age": 67,
     "id": "/subscriptions/35b1595a-32ed-4607-bdd8-03d907ce57f0/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/image-processor",
@@ -180,7 +180,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "147af54e-04f4-407b-b1a1-8ff2e5b1ef2b",
+    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
     "accountName": "integration-testing",
     "age": 70,
     "id": "/subscriptions/147af54e-04f4-407b-b1a1-8ff2e5b1ef2b/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/ci-cd-runner",
@@ -198,7 +198,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "5c001c31-31dd-4424-a774-6fba6362971d",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "artifact-storage",
     "age": 66,
     "id": "/subscriptions/5c001c31-31dd-4424-a774-6fba6362971d/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/order-processing",
@@ -216,7 +216,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "a00b5dd4-e6ea-488f-ba85-6e9abf3ae26e",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "staging-workloads",
     "age": 68,
     "id": "/subscriptions/a00b5dd4-e6ea-488f-ba85-6e9abf3ae26e/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/container-registry",
@@ -234,7 +234,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "d0f503d2-e413-487a-8762-d7805a4faa0c",
+    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "artifact-storage",
     "age": 71,
     "id": "/subscriptions/d0f503d2-e413-487a-8762-d7805a4faa0c/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/mail-server",
@@ -252,7 +252,7 @@
     "type": "Microsoft.Compute/snapshots"
   },
   {
-    "accountID": "36d95998-a44b-4b74-b241-30a3d933dbb8",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "hr-systems",
     "age": 72,
     "id": "/subscriptions/36d95998-a44b-4b74-b241-30a3d933dbb8/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/auth-service",
