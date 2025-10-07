@@ -1,6 +1,6 @@
 [
   {
-    "accountID": "a8e0f5b6-3db9-46d4-b67c-a7de2b1ed85f",
+    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
     "accountName": "DevOps Prodtest",
     "costWithNoRI": 184.93,
     "firstUsageDate": "2025-09-15T00:00:00Z",
@@ -22,7 +22,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "2c3f9e10-4a0b-e43d-b6df-d5b8c5da7b12",
+    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
     "accountName": "DevOps Devtest",
     "costWithNoRI": 936.67,
     "firstUsageDate": "2025-09-02T00:00:00Z",
@@ -44,7 +44,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "c3e0d7fa-5a8f-a4b2-f45d-bf6dc9eaec11",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "AppServices Stg",
     "costWithNoRI": 67.81,
     "firstUsageDate": "2025-09-10T00:00:00Z",
@@ -66,7 +66,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "b6f4c3a5-8bc9-f45e-bdf2-cd7bb1eb2ec8",
+    "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
     "accountName": "DevOps Prodtest",
     "costWithNoRI": 149.86,
     "firstUsageDate": "2025-09-16T00:00:00Z",
@@ -88,7 +88,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "e4f9b5d6-3c19-f47a-b3ca-d8d0cbab4ec7",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "DevOps Devtest",
     "costWithNoRI": 149.87,
     "firstUsageDate": "2025-08-29T00:00:00Z",
@@ -110,7 +110,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "d9b5c2a8-4f29-b6ea-fd3d-c7e0cbab5ec8",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "AppServices Devtest",
     "costWithNoRI": 149.85,
     "firstUsageDate": "2025-09-18T00:00:00Z",
@@ -132,7 +132,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "a9e4c3f6-8b0d-f45e-bdf2-c7bb1eb2ec11",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "DevOps Prodtest",
     "costWithNoRI": 67.82,
     "firstUsageDate": "2025-09-19T00:00:00Z",
@@ -154,7 +154,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "b6f4c3a5-8bc9-f45e-bdf2-cd7bb1eb2ec9",
+    "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
     "accountName": "DevOps Devtest",
     "costWithNoRI": 149.88,
     "firstUsageDate": "2025-08-28T00:00:00Z",
@@ -176,7 +176,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "c3e0d7fa-5a8f-a4b2-f45d-bf6dc9eaec12",
+    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
     "accountName": "AppServices Stg",
     "costWithNoRI": 936.69,
     "firstUsageDate": "2025-09-01T00:00:00Z",
@@ -198,7 +198,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "d9b5c2a8-4f29-b6ea-fd3d-c7e0cbab5ec9",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "DevOps Prodtest",
     "costWithNoRI": 149.89,
     "firstUsageDate": "2025-09-17T00:00:00Z",
@@ -220,9 +220,9 @@
     "term": "1 Year"
   },
   {
-    "accountID": "e4f9b5d6-3c19-f47a-b3ca-d8d0cbab4ec8",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "DevOps Devtest",
-    "costWithNoRI": 936.70,
+    "costWithNoRI": 936.7,
     "firstUsageDate": "2025-09-03T00:00:00Z",
     "id": "b2c4a1f3-d0e9-f3d7-b9ac-aec7aebabfc7",
     "instanceFlexibilityGroup": "Dsv5 Series",
@@ -242,9 +242,9 @@
     "term": "1 Year"
   },
   {
-    "accountID": "f6a3c0b4-cd19-b9e8-f8b7-d4a2bcba8fb5",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "AppServices Devtest",
-    "costWithNoRI": 149.90,
+    "costWithNoRI": 149.9,
     "firstUsageDate": "2025-09-05T00:00:00Z",
     "id": "a1b9c3f6-e3d5-bda2-f0e7-a8d7b6ba1fb3",
     "instanceFlexibilityGroup": "Dv2 Series",
@@ -264,7 +264,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "b6f4c3a5-8bc9-f45e-bdf2-cd7bb1eb2eca",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "DevOps Prodtest",
     "costWithNoRI": 67.83,
     "firstUsageDate": "2025-09-06T00:00:00Z",
@@ -279,14 +279,14 @@
     "resourceGroup": null,
     "resourceID": "f6c4a0b9-cd1f-b9e8-f8b7-d4a2bcba8fb5",
     "resourceType": "Standard_DS13_v2",
-    "savings": 3499.90,
+    "savings": 3499.9,
     "savingsCurrency": "US$",
     "scope": "Single",
     "service": "VirtualMachines",
     "term": "1 Year"
   },
   {
-    "accountID": "c3e0d7fa-5a8f-a4b2-f45d-bf6dc9eaec13",
+    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
     "accountName": "DevOps Devtest",
     "costWithNoRI": 149.91,
     "firstUsageDate": "2025-09-07T00:00:00Z",
@@ -308,7 +308,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "d9b5c2a8-4f29-b6ea-fd3d-c7e0cbab5ecA",
+    "accountID": "8752afcb-f9b4-453b-b34c-cb9f3a9a0247",
     "accountName": "AppServices Stg",
     "costWithNoRI": 936.71,
     "firstUsageDate": "2025-09-08T00:00:00Z",
@@ -330,4 +330,3 @@
     "term": "1 Year"
   }
 ]
-

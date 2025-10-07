@@ -1,6 +1,6 @@
 [
   {
-    "accountID": "4c8a9b43-65db-44fd-bd2e-e3fca93c95ec",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "Operations",
     "capacity": 6,
     "fqdn": "prod-instance1.mysql.database.azure.com",
@@ -25,7 +25,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "a5c6d7e8-90ab-cdef-fghi-jklmnopqrstu",
+    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "Services",
     "capacity": 1,
     "fqdn": "dev-instance2.mysql.database.azure.com",
@@ -50,7 +50,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "a9b0c1d2-e3f4-g567-hij8-klmnopqrstu",
+    "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
     "accountName": "Development",
     "capacity": 8,
     "fqdn": "prod-instance3.mysql.database.azure.com",
@@ -75,7 +75,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "e1f2g3h4-i5j6k-l7m8n-p9o0q-rstu123v",
+    "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
     "accountName": "Services",
     "capacity": 3,
     "fqdn": "dev-instance4.mysql.database.azure.com",
@@ -100,7 +100,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "f4g5h6i7-j8k9l-m0n1p-q2r3s-tu456v78w",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "Operations",
     "capacity": 5,
     "fqdn": "prod-instance5.mysql.database.azure.com",
@@ -125,7 +125,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "b7c6d5e4-f3g2h1-i0j9k-l8m7n-6o5p-q456r78t",
+    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
     "accountName": "Development",
     "capacity": 7,
     "fqdn": "dev-instance6.mysql.database.azure.com",
@@ -150,7 +150,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "d2e3f4g-h5i6j-k78l9-m0n1p-2q34r56s789t",
+    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "Services",
     "capacity": 9,
     "fqdn": "prod-instance7.mysql.database.azure.com",
@@ -175,7 +175,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "c9d8e7f-h6g5i-4j3k-l2m1n-o0p9q-78r7t6v5u",
+    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
     "accountName": "Operations",
     "capacity": 10,
     "fqdn": "dev-instance8.mysql.database.azure.com",
@@ -200,7 +200,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "a3b2c1-d0e9-f8g7-h6i5-j4k3l2m-n1o9p8q",
+    "accountID": "57e25d4f-1ba6-4ac3-8ae9-455e3f0236ec",
     "accountName": "Development",
     "capacity": 11,
     "fqdn": "prod-instance9.mysql.database.azure.com",
@@ -225,7 +225,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "f1e2d3-c4b6a-98g7-f6h5-i4k3l2m-n0o9p8q7r",
+    "accountID": "57e25d4f-1ba6-4ac3-8ae9-455e3f0236ec",
     "accountName": "Operations",
     "capacity": 12,
     "fqdn": "dev-instance10.mysql.database.azure.com",
@@ -250,7 +250,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "e4f3d2-c6b8a-9g7h-f6i5-j4k3l2m-n1o9p8q7r6t",
+    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
     "accountName": "Development",
     "capacity": 13,
     "fqdn": "prod-instance11.mysql.database.azure.com",
@@ -275,7 +275,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "d6e5f4-c7b9a-8gfh-i7j6k-l2m1n-o0p9q78r7t6v",
+    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "Operations",
     "capacity": 14,
     "fqdn": "dev-instance12.mysql.database.azure.com",
@@ -300,7 +300,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "b8c9d0-e6f7g-5h4i-j3k2l-m1n0o-p9q78r7t65u",
+    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "Development",
     "capacity": 15,
     "fqdn": "prod-instance13.mysql.database.azure.com",
@@ -325,7 +325,7 @@
     "version": "8.0"
   },
   {
-    "accountID": "a4b5c6-d7e9-f1g2h-3i4j-k5l6m-n7o8p-q97r65t",
+    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "Operations",
     "capacity": 16,
     "fqdn": "dev-instance14.mysql.database.azure.com",
@@ -350,7 +350,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "c9d0e1-f2g3h-4i5j-k6l-m7n-o8p-q97r65t43u",
+    "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
     "accountName": "Development",
     "capacity": 17,
     "fqdn": "prod-instance15.mysql.database.azure.com",
