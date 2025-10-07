@@ -1,0 +1,80 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for underutilized Azure flexible MySQL instances to downsize.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+Keep the "savingsCurrency" field set to "US$" for all items.
+
+Note: Azure subscriptions ("accountID") are in hexadecimal format and should never vary in number of characters or use any letters or numbers not used in hexadecimal.
+
+[
+  {
+    "accountID": "944cfd94-ed42-495a-809d-856ee8a0b5e1",
+    "accountName": "Services",
+    "capacity": 4,
+    "cpuAverage": 1.42,
+    "cpuMaximum": 8.91,
+    "cpuMinimum": 0.87,
+    "cpuP90": 2.56,
+    "cpuP95": 2.76,
+    "cpuP99": 6.38,
+    "fqdn": "prod-db.mysql.database.azure.com",
+    "id": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/prod/providers/Microsoft.DBforMySQL/flexibleServers/prod-db",
+    "lookbackPeriod": 7,
+    "newCapacity": 2,
+    "newResourceType": "Standard_D2ds_v4",
+    "platform": "Azure MySQL Flexible Server",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server prod-db in Azure Subscription Services (944cfd94-ed42-495a-809d-856ee8a0b5e1) from SKU Standard_D4ds_v4 to Standard_D2ds_v4",
+    "region": "East US",
+    "resourceGroup": "prod",
+    "resourceID": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/prod/providers/Microsoft.DBforMySQL/flexibleServers/prod-db",
+    "resourceName": "prod-db",
+    "resourceType": "Standard_D4ds_v4",
+    "savings": 45.25,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.DBforMySQL",
+    "state": "Ready",
+    "tags": "",
+    "threshold": 99,
+    "thresholdType": "Average",
+    "tier": "GeneralPurpose",
+    "type": "Microsoft.DBforMySQL/flexibleServers",
+    "version": "5.7"
+  },
+  {
+    "accountID": "944cfd94-ed42-495a-809d-856ee8a0b5e1",
+    "accountName": "Services",
+    "capacity": 2,
+    "cpuAverage": 2.94,
+    "cpuMaximum": 19.47,
+    "cpuMinimum": 2.02,
+    "cpuP90": 5.22,
+    "cpuP95": 5.6,
+    "cpuP99": 12.91,
+    "fqdn": "dev-db.mysql.database.azure.com",
+    "id": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/dev/providers/Microsoft.DBforMySQL/flexibleServers/dev-db",
+    "lookbackPeriod": 7,
+    "newCapacity": 1,
+    "newResourceType": "Standard_B1ms",
+    "platform": "Azure MySQL Flexible Server",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server dev-db in Azure Subscription Services (944cfd94-ed42-495a-809d-856ee8a0b5e1) from SKU Standard_B2ms to Standard_B1ms",
+    "region": "East US",
+    "resourceGroup": "dev",
+    "resourceID": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/dev/providers/Microsoft.DBforMySQL/flexibleServers/dev-db",
+    "resourceName": "dev-db",
+    "resourceType": "Standard_B2ms",
+    "savings": 11.84,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.DBforMySQL",
+    "state": "Ready",
+    "tags": "",
+    "threshold": 99,
+    "thresholdType": "Average",
+    "tier": "Burstable",
+    "type": "Microsoft.DBforMySQL/flexibleServers",
+    "version": "5.7"
+  }
+]

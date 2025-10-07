@@ -1,0 +1,64 @@
+I am creating demo data for a cloud cost optimization tool that provides recommendations for idle Azure flexible MySQL instances to delete.
+
+Using the below sample JSON data, please generate a JSON list with 20 similar objects. The objects should contain the exact same keys but populated with new, fictional data that resembles real Azure infrastructure. Do not use words like "example" or numbers like "123456789"; the data should look real.
+
+Do not include any preambles or explanations of the data. Return only the JSON array list so it can be used as-is.
+
+Do not stop until the JSON list contains exactly 20 items. Do not end early.
+
+Keep the "savingsCurrency" field set to "US$" for all items.
+
+Note: Azure subscriptions ("accountID") are in hexadecimal format and should never vary in number of characters or use any letters or numbers not used in hexadecimal.
+
+[
+  {
+    "accountID": "944cfd94-ed42-495a-809d-856ee8a0b5e1",
+    "accountName": "Services",
+    "capacity": 4,
+    "fqdn": "prod-instance.mysql.database.azure.com",
+    "id": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/prod/providers/Microsoft.DBforMySQL/flexibleServers/prod-instance",
+    "lookbackPeriod": 7,
+    "newCapacity": null,
+    "newResourceType": "Delete Instance",
+    "platform": "Azure MySQL Flexible Server",
+    "recommendationDetails": "Delete Azure MySQL Flexible Server prod-instance in Azure Subscription Services (944cfd94-ed42-495a-809d-856ee8a0b5e1)",
+    "region": "East US",
+    "resourceGroup": "prod",
+    "resourceID": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/prod/providers/Microsoft.DBforMySQL/flexibleServers/prod-instance",
+    "resourceName": "prod-instance",
+    "resourceType": "Standard_D4ds_v4",
+    "savings": 132.98,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.DBforMySQL",
+    "state": "Ready",
+    "tags": "",
+    "tier": "GeneralPurpose",
+    "type": "Microsoft.DBforMySQL/flexibleServers",
+    "version": "5.7"
+  },
+  {
+    "accountID": "944cfd94-ed42-495a-809d-856ee8a0b5e1",
+    "accountName": "Services",
+    "capacity": 2,
+    "fqdn": "dev-instance1.mysql.database.azure.com",
+    "id": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/dev/providers/Microsoft.DBforMySQL/flexibleServers/dev-instance1",
+    "lookbackPeriod": 7,
+    "newCapacity": null,
+    "newResourceType": "Delete Instance",
+    "platform": "Azure MySQL Flexible Server",
+    "recommendationDetails": "Delete Azure MySQL Flexible Server dev-instance1 in Azure Subscription Services (944cfd94-ed42-495a-809d-856ee8a0b5e1)",
+    "region": "East US",
+    "resourceGroup": "dev",
+    "resourceID": "/subscriptions/944cfd94-ed42-495a-809d-856ee8a0b5e1/resourceGroups/dev/providers/Microsoft.DBforMySQL/flexibleServers/dev-instance1",
+    "resourceName": "dev-instance1",
+    "resourceType": "Standard_B2ms",
+    "savings": 67.52,
+    "savingsCurrency": "US$",
+    "service": "Microsoft.DBforMySQL",
+    "state": "Ready",
+    "tags": "",
+    "tier": "Burstable",
+    "type": "Microsoft.DBforMySQL/flexibleServers",
+    "version": "5.7"
+  }
+]

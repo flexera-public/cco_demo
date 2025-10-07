@@ -23,6 +23,7 @@
   "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/savings_plan/recommendations/azure_savings_plan_recommendations.pt",
   "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/unused_app_service_plans/azure_unused_app_service_plans.pt",
   "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/long_stopped_instances/long_stopped_instances_azure.pt",
+  "https://github.com/flexera-public/policy_templates/blob/master/cost/azure/rightsize_mysql_flexible/azure_rightsize_mysql_flexible.pt",
   "https://github.com/flexera-public/policy_templates/blob/master/operational/azure/tag_cardinality/azure_tag_cardinality.pt",
   "https://github.com/flexera-public/policy_templates/blob/master/cost/google/cud_recommendations/google_committed_use_discount_recommendations.pt",
   "https://github.com/flexera-public/policy_templates/blob/master/cost/google/idle_ip_address_recommendations/google_idle_ip_address_recommendations.pt",

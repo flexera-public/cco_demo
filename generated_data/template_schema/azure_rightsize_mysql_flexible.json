@@ -1,0 +1,245 @@
+{
+  "name": "Azure Rightsize MySQL Flexible Servers",
+  "version": "0.2.6",
+  "cloud": "Azure",
+  "service": "MySQL",
+  "policy_set": "Rightsize Database Instances",
+  "recommendation_type": "Usage Reduction",
+  "short_description": "Checks for Azure MySQL Flexible Servers that have inefficient utilization for a user-specified number of days and downsizes or deletes them after approval. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/azure/rightsize_mysql_flexible/) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/azure/rightsize_mysql_flexible/azure_rightsize_mysql_flexible.pt",
+  "filename": "azure_rightsize_mysql_flexible",
+  "incident": [
+    {
+      "summary_template": "Azure Rightsize MySQL Flexible Servers: {{ len data }} Azure Underutilized MySQL Flexible Servers Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Subscription ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Subscription Name"
+        },
+        {
+          "name": "resourceGroup",
+          "label": "Resource Group"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID",
+          "path": "id"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "tier",
+          "label": "Tier"
+        },
+        {
+          "name": "resourceType",
+          "label": "Current SKU"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended SKU"
+        },
+        {
+          "name": "capacity",
+          "label": "Current Capacity"
+        },
+        {
+          "name": "newCapacity",
+          "label": "Recommended Capacity"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "state",
+          "label": "Status"
+        },
+        {
+          "name": "fqdn",
+          "label": "FQDN"
+        },
+        {
+          "name": "version",
+          "label": "Version"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "cpuMaximum",
+          "label": "CPU Maximum %"
+        },
+        {
+          "name": "cpuMinimum",
+          "label": "CPU Minimum %"
+        },
+        {
+          "name": "cpuAverage",
+          "label": "CPU Average %"
+        },
+        {
+          "name": "cpuP90",
+          "label": "CPU p90"
+        },
+        {
+          "name": "cpuP95",
+          "label": "CPU p95"
+        },
+        {
+          "name": "cpuP99",
+          "label": "CPU p99"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "id",
+          "label": "Resource ID"
+        },
+        {
+          "name": "thresholdType",
+          "label": "Threshold Statistic"
+        },
+        {
+          "name": "threshold",
+          "label": "CPU Threshold"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Lookback Period"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_rightsize_mysql_flexible_1.json"
+    },
+    {
+      "summary_template": "Azure Rightsize MySQL Flexible Servers: {{ len data }} Azure Unused MySQL Flexible Servers Found",
+      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}{{ .total_savings }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
+      "export": [
+        {
+          "name": "accountID",
+          "label": "Subscription ID"
+        },
+        {
+          "name": "accountName",
+          "label": "Subscription Name"
+        },
+        {
+          "name": "resourceGroup",
+          "label": "Resource Group"
+        },
+        {
+          "name": "resourceName",
+          "label": "Resource Name"
+        },
+        {
+          "name": "resourceID",
+          "label": "Resource ID",
+          "path": "id"
+        },
+        {
+          "name": "tags",
+          "label": "Resource Tags"
+        },
+        {
+          "name": "recommendationDetails",
+          "label": "Recommendation"
+        },
+        {
+          "name": "tier",
+          "label": "Tier"
+        },
+        {
+          "name": "resourceType",
+          "label": "Current SKU"
+        },
+        {
+          "name": "newResourceType",
+          "label": "Recommended SKU"
+        },
+        {
+          "name": "capacity",
+          "label": "Current Capacity"
+        },
+        {
+          "name": "newCapacity",
+          "label": "Recommended Capacity"
+        },
+        {
+          "name": "type",
+          "label": "Type"
+        },
+        {
+          "name": "region",
+          "label": "Region"
+        },
+        {
+          "name": "state",
+          "label": "Status"
+        },
+        {
+          "name": "fqdn",
+          "label": "FQDN"
+        },
+        {
+          "name": "version",
+          "label": "Version"
+        },
+        {
+          "name": "savings",
+          "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "savingsCurrency",
+          "label": "Savings Currency"
+        },
+        {
+          "name": "service",
+          "label": "Service"
+        },
+        {
+          "name": "platform",
+          "label": "Platform"
+        },
+        {
+          "name": "id",
+          "label": "Resource ID"
+        },
+        {
+          "name": "lookbackPeriod",
+          "label": "Lookback Period"
+        }
+      ],
+      "path": "generated_data/fake_incident_tables/azure_rightsize_mysql_flexible_2.json"
+    }
+  ]
+}
