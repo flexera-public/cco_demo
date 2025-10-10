@@ -198,9 +198,19 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
 
     with open(list_path, "r", encoding="utf-8") as f:
-        urls = json.load(f)
-        if not isinstance(urls, list):
-            raise SystemExit("lists/template_list.json must be a JSON array of URLs")
+        data = json.load(f)
+        if not isinstance(data, list):
+            raise SystemExit("lists/template_list.json must be a JSON array")
+
+        # Handle both old format (list of strings) and new format (list of objects with "url" key)
+        urls = []
+        for item in data:
+            if isinstance(item, str):
+                urls.append(item)
+            elif isinstance(item, dict) and "url" in item:
+                urls.append(item["url"])
+            else:
+                print(f"[WARN] Skipping invalid item: {item}", file=sys.stderr)
 
     for url in urls:
         raw  = to_raw_github(url)

@@ -1,6 +1,6 @@
 {
   "name": "AWS Rightsize EC2 Instances",
-  "version": "5.4.5",
+  "version": "5.4.6",
   "cloud": "AWS",
   "service": "Compute",
   "policy_set": "Rightsize Compute Instances",

@@ -1,6 +1,6 @@
 {
   "name": "AWS Reserved Instances Recommendations",
-  "version": "3.6.6",
+  "version": "3.6.7",
   "cloud": "AWS",
   "service": "Compute",
   "policy_set": "Reserved Instances",
