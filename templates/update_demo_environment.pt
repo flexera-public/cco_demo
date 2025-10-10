@@ -74,6 +74,10 @@ script "js_flexera_api_hosts", type: "javascript" do
 EOS
 end
 
+#####################################################################
+# Find and terminate existing applied demo policies
+#####################################################################
+
 datasource "ds_applied_policies" do
   request do
     auth $auth_flexera
@@ -115,6 +119,10 @@ datasource "ds_delete_applied_demo_policies" do
     path join(["/policy/v1/orgs/", rs_org_id, "/projects/", rs_project_id, "/applied-policies/", val(iter_item, "id")])
   end
 end
+
+#####################################################################
+# Find and apply demo policies uploaded to the org
+#####################################################################
 
 datasource "ds_policy_templates" do
   request do
