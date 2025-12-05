@@ -1,0 +1,1841 @@
+name "Rule-Based Dimensions from CMDB - Demo Org"
+rs_pt_ver 20180301
+type "policy"
+short_description "Creates and/or updates individual Rule-Based Dimensions based on AWS Account tags. See the [README](https://github.com/flexera-public/policy_templates/tree/master/automation/aws/aws_rbd_from_tag) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more."
+long_description ""
+severity "low"
+category "Cost"
+default_frequency "daily"
+info(
+  version: "0.1.0",
+  provider: "Flexera",
+  service: "Optima",
+  policy_set: "Automation",
+  publish: "false"
+)
+
+###############################################################################
+# Parameters
+###############################################################################
+
+parameter "param_month_effective_date" do
+  type "string"
+  label "Effective Date"
+  description "Choose whether you want the Effective Date for the rules to be the Current Month or a Specific Month."
+  default "Specific Month"
+  allowed_values "Current Month", "Specific Month"
+end
+
+parameter "param_specific_effective_date" do
+  type "string"
+  label "Specific Effective Date"
+  description "If you chose Specific Effective Date, please enter the Year/month you want rules to start applying in YYYY-MM format"
+  default "1970-01"
+  allowed_pattern /^(19|20)\d\d-(0[1-9]|1[0-2])$/
+end
+
+parameter "param_sn_endpoint" do
+  type "string"
+  category "Policy Settings"
+  label "ServiceNow API Endpoint"
+  description "The ServiceNow API Endpoint to use. Example: account12345.service-now.com"
+  default "buyersellercorp.service-now.com"
+end
+
+
+###############################################################################
+# Authentication
+###############################################################################
+
+credentials "auth_flexera" do
+  schemes "oauth2"
+  label "flexera"
+  description "Select FlexeraOne OAuth2 credential."
+  tags "provider=flexera"
+end
+
+###############################################################################
+# Datasources & Scripts
+###############################################################################
+
+pagination "pagination_servicenow" do
+  get_page_marker do
+    body_path jq(response, 'if .result | length < 10000 then null else if $marker != "" then $marker | tonumber + 10000 else 10000 end end')
+  end
+  set_page_marker do
+    query "sysparm_offset"
+  end
+end
+
+# Get the data from CMDB Tables
+datasource "ds_snow_pm_portfolio" do
+  request do
+    pagination $pagination_servicenow
+    host $param_sn_endpoint
+    path "/api/now/table/pm_portfolio"
+    query "sysparm_fields", "sys_id,name,portfolio_manager,u_portfolio_rollup"
+    header "User-Agent", "RS Policies"
+    header "Content-Type", "application/json"
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "result[*]") do
+      field "name", jmes_path(col_item, "name")
+      field "sys_id", jmes_path(col_item, "sys_id")
+      field "portfolio_manager", jmes_path(col_item, "portfolio_manager")
+      field "u_portfolio_rollup", jmes_path(col_item, "u_portfolio_rollup")
+    end
+  end
+end
+
+datasource "ds_snow_sys_user" do
+  request do
+    pagination $pagination_servicenow
+    host $param_sn_endpoint
+    path '/api/now/table/sys_user'
+    query "sysparm_fields", "sys_id,name"
+    query "sysparm_query", "active=true" # We need to limit to active users to reduce the number of results.  This is OK because we only need this data to map "Cost Approvers" which should be comprised of only active users.
+    header "User-Agent", "RS Policies"
+    header "Content-Type", "application/json"
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "result[*]") do
+      field "name", jmes_path(col_item, "name")
+      field "sys_id", jmes_path(col_item, "sys_id")
+    end
+  end
+end
+
+datasource "ds_snow_pm_program" do
+  request do
+    pagination $pagination_servicenow
+    host $param_sn_endpoint
+    path "/api/now/table/pm_program"
+    query "sysparm_fields", "sys_id,portfolio,short_description"
+    header "User-Agent", "RS Policies"
+    header "Content-Type", "application/json"
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "result[*]") do
+      field "portfolio", jmes_path(col_item, "portfolio.value")
+      field "short_description", jmes_path(col_item, "short_description")
+      field "sys_id", jmes_path(col_item, "sys_id")
+    end
+  end
+end
+
+datasource "ds_snow_cmdb_ci_business_app" do
+  request do
+    pagination $pagination_servicenow
+    host $param_sn_endpoint
+    path "/api/now/table/cmdb_ci_business_app"
+    query "sysparm_fields", "sys_id,portfolio,name,u_application_code,u_disaster_recovery_code,u_program,install_status,operational_status"
+    header "User-Agent", "RS Policies"
+    header "Content-Type", "application/json"
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "result[*]") do
+      field "name", jmes_path(col_item, "name")
+      field "portfolio", jmes_path(col_item, "portfolio.value")
+      field "sys_id", jmes_path(col_item, "sys_id")
+      field "u_application_code", jmes_path(col_item, "u_application_code")
+      field "u_disaster_recovery_code", jmes_path(col_item, "u_disaster_recovery_code")
+      field "u_program", jmes_path(col_item, "u_program.value")
+      field "install_status", jmes_path(col_item, "install_status")
+      field "operational_status", jmes_path(col_item, "operational_status")
+    end
+  end
+end
+
+# Full list of Rule-Based Dimensions that will be created/managed based on CMDB data
+datasource "ds_target_rbd_ids" do
+  run_script $js_create_list_of_target_rbds
+end
+
+script "js_create_list_of_target_rbds", type: "javascript" do
+  result "result"
+  code <<-EOS
+  result = [
+    // Foundation Layer - Applications and Services
+    {
+      "id": "rbd_application",
+      "name": "Application"
+    },
+    {
+      "id": "rbd_environment_type",
+      "name": "Environment Type"
+    },
+    {
+      "id": "rbd_service_tier",
+      "name": "CMDB-Service Tier"
+    },
+    // Business Layer
+    {
+      "id": "rbd_business_capability",
+      "name": "CMDB-Business Capability" // Name must be under 30 characters (from CMDB) resulted in 31 chars
+    },
+    {
+      "id": "rbd_service_portfolio",
+      "name": "CMDB-Service Portfolio"
+    },
+    // Organizational Layer
+    {
+      "id": "rbd_team",
+      "name": "CMDB-Team"
+    },
+    {
+      "id": "rbd_service_owner",
+      "name": "CMDB-Service Owner"
+    },
+    {
+      "id": "rbd_technical_owner",
+      "name": "CMDB-Technical Owner"
+    },
+    {
+      "id": "rbd_department",
+      "name": "CMDB-Department"
+    },
+    // Financial Layer
+    {
+      "id": "rbd_cost_center",
+      "name": "CMDB-Cost Center"
+    },
+    {
+      "id": "rbd_cost_approver",
+      "name": "CMDB-Cost Approver"
+    },
+    // Enterprise Layer
+    {
+      "id": "rbd_operating_company",
+      "name": "CMDB-Operating Company"
+    }
+  ]
+  EOS
+end
+
+# Create the RBD (if not exists)
+datasource "ds_create_rbds" do
+  iterate $ds_rbds
+  request do
+    run_script $js_create_rbds, val(iter_item, "id"), val(iter_item, "verb"), val(iter_item, "name"), val($ds_flexera_api_hosts, "flexera"), rs_org_id
+  end
+  result do
+    encoding "text"
+  end
+end
+
+script "js_create_rbds", type: "javascript" do
+  parameters "rbd_id", "verb", "name", "api_host", "rs_org_id"
+  result "request"
+  code <<-EOS
+  var request = {
+    auth: "auth_flexera",
+    verb: verb,
+    host: api_host,
+    path: ["/finops-customizations/v1/orgs/", rs_org_id, "/rule-based-dimensions/", rbd_id].join(''),
+    body_fields: { name: name }
+  }
+EOS
+end
+
+# Update the RBDs
+datasource "ds_apply_rbds" do
+  iterate $ds_rbds
+  request do
+    # ds_create_rbds is a parameter to ensure that it executes before ds_apply_rbds does
+    run_script $js_apply_rbds, val(iter_item, "id"), val(iter_item, "dated_rules"), val($ds_flexera_api_hosts, "flexera"), $ds_create_rbds, rs_org_id
+  end
+  result do
+    encoding "text"
+  end
+end
+
+script "js_apply_rbds", type: "javascript" do
+  parameters "rbd_id", "dated_rules", "api_host", "ds_create_rbds", "rs_org_id"
+  result "request"
+  code <<-EOS
+  var request = {
+    auth: "auth_flexera",
+    verb: "PUT",
+    host: api_host,
+    path: ["/finops-customizations/v1/orgs/", rs_org_id, "/rule-based-dimensions/", rbd_id, "/rules/", dated_rules[0].effective_at].join(''),
+    body_fields: { rules: dated_rules[0].rules }
+  }
+EOS
+end
+
+###############################################################################
+# Demo Logic
+###############################################################################
+
+# Get region-specific Flexera API endpoints (not sure if this is required anymore)
+datasource "ds_flexera_api_hosts" do
+  run_script $js_flexera_api_hosts, rs_optima_host
+end
+
+script "js_flexera_api_hosts", type: "javascript" do
+  parameters "rs_optima_host"
+  result "result"
+  code <<-EOS
+  host_table = {
+    "api.optima.flexeraeng.com": {
+      flexera: "api.flexera.com",
+      fsm: "api.fsm.flexeraeng.com"
+    },
+    "api.optima-eu.flexeraeng.com": {
+      flexera: "api.flexera.eu",
+      fsm: "api.fsm-eu.flexeraeng.com"
+    },
+    "api.optima-apac.flexeraeng.com": {
+      flexera: "api.flexera.au",
+      fsm: "api.fsm-apac.flexeraeng.com"
+    }
+  }
+
+  result = host_table[rs_optima_host]
+EOS
+end
+
+# Billing Centers required to get Costs
+datasource "ds_billing_centers" do
+  request do
+    auth $auth_flexera
+    host rs_optima_host
+    path join(["/analytics/orgs/", rs_org_id, "/billing_centers"])
+    header "Api-Version", "1.0"
+    header "User-Agent", "RS Policies"
+    query "view", "allocation_table"
+    ignore_status [403]
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "[*]") do
+      field "href", jmes_path(col_item, "href")
+      field "id", jmes_path(col_item, "id")
+      field "name", jmes_path(col_item, "name")
+      field "parent_id", jmes_path(col_item, "parent_id")
+    end
+  end
+end
+
+# Gather top level billing center IDs for when we pull cost data
+datasource "ds_top_level_bcs" do
+  run_script $js_top_level_bcs, $ds_billing_centers
+end
+
+script "js_top_level_bcs", type: "javascript" do
+  parameters "ds_billing_centers"
+  result "result"
+  code <<-'EOS'
+  filtered_bcs = _.filter(ds_billing_centers, function(bc) {
+    return bc['parent_id'] == null || bc['parent_id'] == undefined
+  })
+
+  result = { "billing_center_ids": _.compact(_.pluck(filtered_bcs, 'id')) }
+EOS
+end
+
+# Get Effective Date (specified by user) for the Rules
+datasource "ds_effective_date" do
+  run_script $js_get_effective_date, $param_month_effective_date, $param_specific_effective_date
+end
+
+script "js_get_effective_date", type: "javascript" do
+  parameters "param_month_effective_date", "param_specific_effective_date"
+  result "result"
+  code <<-EOS
+  var effective_date = ""
+  if (param_month_effective_date == "Specific Month" && param_specific_effective_date != "") {
+    effective_date = param_specific_effective_date
+  } else {
+    var current_bill_date = new Date()
+    // current_bill_date.setDate(current_bill_date.getDate() - 2)
+    effective_date = current_bill_date.toISOString().split("-")[0] + "-" + current_bill_date.toISOString().split("-")[1]
+  }
+
+  var result = {
+    // Effective Date for the rules
+    "effective_date": effective_date,
+  }
+  EOS
+end
+
+# Get Effective Date (specified by user) for the Rules
+datasource "ds_cost_periods" do
+  run_script $js_cost_periods, $param_month_effective_date, $param_specific_effective_date
+end
+
+script "js_cost_periods", type: "javascript" do
+  parameters "param_month_effective_date", "param_specific_effective_date"
+  result "result"
+  code <<-EOS
+  // Function to take date object or YYYY-MM formatted string and move it backwards or forwards by month
+  function move_month(date_string, amount) {
+    clean_date = new Date(date_string).toISOString()
+    year = Number(clean_date.split('-')[0])
+    month = Number(clean_date.split('-')[1])
+    if (amount > 0) {
+      for (var i = 1; i <= amount; i++) {
+        if (month == 12) {
+          year += 1; month = 1
+        } else {
+          month += 1
+        }
+      }
+    } else {
+      for (var i = -1; i >= amount; i--) {
+        if (month == 1) {
+          year -= 1; month = 12
+        } else {
+          month -= 1
+        }
+      }
+    }
+    if (month < 10) { month = '0' + month }
+    return [year, month].join('-')
+  }
+
+  function parseYearMonthToDate(yearMonth) {
+    var year = yearMonth.split('-')[0]
+    var month = yearMonth.split('-')[1]
+    var date = new Date(year, month - 1, 1); // Month is 0-indexed (January = 0)
+    return date
+}
+
+  // Get Costs Start At / End At
+  var now = new Date()
+  now.setHours(0,0,0,0) // Set now Hours/Mins/Ms to 00:00:00:00
+  // Get now in YYYY-MM format
+  var now_yyyymm = now.toISOString().split("-")[0] + "-" + now.toISOString().split("-")[1]
+  cost_periods = []
+  aws_9221_startBillPeriod = "2018-06" // First bill period for the AWS Payer starting in 9211 was June 2018
+  period = move_month(aws_9221_startBillPeriod, 24)
+  // loop through increments of 24 months until we reach the current month
+  while(parseYearMonthToDate(aws_9221_startBillPeriod).getTime() < parseYearMonthToDate(now_yyyymm).getTime()) {
+    console.log("parseYearMonthToDate(aws_9221_startBillPeriod) != parseYearMonthToDate(now_yyyymm)="+parseYearMonthToDate(aws_9221_startBillPeriod) != parseYearMonthToDate(now_yyyymm))
+    // Push startBillPeriod and endBillPeriod to cost_periods
+    cost_periods.push({
+        "start_at": aws_9221_startBillPeriod,
+        "end_at": move_month(aws_9221_startBillPeriod, 24)
+    })
+    // Move startBillPeriod forward by 24 months
+    aws_9221_startBillPeriod = move_month(aws_9221_startBillPeriod, 24)
+  }
+
+  var result = cost_periods
+  EOS
+end
+
+datasource "ds_costs_by_cloud_vendor_account" do
+  iterate $ds_cost_periods
+  request do
+    auth $auth_flexera
+    host rs_optima_host
+    path join(["/bill-analysis/orgs/", rs_org_id, "/costs/aggregated"])
+    verb  "POST"
+    header "Api-Version", "1.0"
+    header "Content-Type", "application/json"
+    body_field "dimensions", ["vendor_account","vendor_account_name"]
+    body_field "metrics", ["cost_nonamortized_unblended_adj"]
+    body_field "granularity", "month"
+    body_field "start_at", val(iter_item, "start_at")
+    body_field "end_at", val(iter_item, "end_at")
+    body_field "billing_center_ids", val($ds_top_level_bcs, "billing_center_ids")
+  end
+  result do
+    encoding "json"
+    collect jq(response, ".rows[]") do
+      field "timestamp", jq(col_item, ".timestamp")
+      field "vendor_account", jq(col_item, ".dimensions.vendor_account")
+      field "vendor_account_name", jq(col_item, ".dimensions.vendor_account_name")
+      field "cost_nonamortized_unblended_adj", jq(col_item, ".metrics.cost_nonamortized_unblended_adj")
+    end
+  end
+end
+
+datasource "ds_recommendations" do
+  request do
+    auth $auth_flexera
+    host rs_optima_host
+    path join(["/recommendations/orgs/", rs_org_id, "/recommendations"])
+    header "Api-Version", "1.0"
+    header "Content-Type", "application/json"
+    body_field "billingCenterIDs", val($ds_top_level_bcs, "billing_center_ids")
+  end
+  result do
+    encoding "json"
+    collect jq(response, ".[]") do
+      field "vendor_account", jq(col_item, ".accountID")
+      field "vendor_account_name", jq(col_item, ".accountName")
+    end
+  end
+end
+
+datasource "ds_complete_vendor_account_list" do
+  run_script $js_complete_vendor_account_list, $ds_costs_by_cloud_vendor_account, $ds_recommendations
+end
+
+script "js_complete_vendor_account_list", type: "javascript" do
+  parameters "ds_costs_by_cloud_vendor_account", "ds_recommendations"
+  result "result"
+  code <<-EOS
+  indexed_costs_by_cloud_vendor_account = _.groupBy(ds_costs_by_cloud_vendor_account, "vendor_account")
+  // get the min(timestamp) and max(timestamp) for each vendor_account
+  // since we already have the cost rows grouped by vendor_account, we can just pluck the timestamps
+  var vendor_account_timestamps = {}
+  var youngest_cloud_account = {
+    "vendor_account": "",
+    "min_timestamp": null
+    "max_timestamp": null
+  }
+  _.each(_.keys(indexed_costs_by_cloud_vendor_account), function(vendor_account) {
+    var timestamps = _.pluck(indexed_costs_by_cloud_vendor_account[vendor_account], "timestamp")
+    var min_timestamp = null
+    var max_timestamp = null
+    _.each(timestamps, function(ts) {
+      var dt = new Date(ts)
+      if (min_timestamp == null || ts < min_timestamp) {
+        min_timestamp = ts
+      }
+      if (max_timestamp == null || ts > max_timestamp) {
+        max_timestamp = ts
+      }
+    })
+    vendor_account_timestamps[vendor_account] = {
+      "min_timestamp": min_timestamp,
+      "max_timestamp": max_timestamp
+    }
+    // max_timestamp must be in the current month or previous month to be considered
+    current_date = new Date()
+    max_timestamp_date = new Date(max_timestamp)
+    if (max_timestamp_date.getFullYear() == current_date.getFullYear() &&
+        (max_timestamp_date.getMonth() == current_date.getMonth() ||
+         max_timestamp_date.getMonth() == current_date.getMonth() - 1)) {
+          // This cloud account has costs for current or previous month
+          // Check if it's the youngest cloud account
+      if (youngest_cloud_account["min_timestamp"] == null || min_timestamp > youngest_cloud_account["min_timestamp"]) {
+        // This is the youngest cloud account so far
+        // Update youngest_cloud_account
+        youngest_cloud_account["vendor_account"] = vendor_account
+        youngest_cloud_account["min_timestamp"] = min_timestamp
+        youngest_cloud_account["max_timestamp"] = max_timestamp
+      }
+    }
+
+
+  })
+  // Determine which cloud account has the "newest" min_timestamp, and costs in the current month
+
+
+  indexed_recommendations = _.groupBy(ds_recommendations, "vendor_account")
+  // Unique list of all vendor accounts from both datasources
+  all_vendor_accounts = _.union(_.keys(indexed_costs_by_cloud_vendor_account), _.keys(indexed_recommendations))
+  result = []
+  _.each(all_vendor_accounts, function(vendor_account) {
+    vendor_account_name = ""
+    // Get vendor_account_name from costs_by_cloud_vendor_account if exists
+    if (indexed_costs_by_cloud_vendor_account[vendor_account] && indexed_costs_by_cloud_vendor_account[vendor_account][0]['vendor_account_name']) {
+      vendor_account_name = indexed_costs_by_cloud_vendor_account[vendor_account][0]['vendor_account_name']
+    }
+    // Else get vendor_account_name from recommendations if exists
+    else if (indexed_recommendations[vendor_account] && indexed_recommendations[vendor_account][0]['vendor_account_name']) {
+      vendor_account_name = indexed_recommendations[vendor_account][0]['vendor_account_name']
+    }
+    result.push({
+      "vendor_account": vendor_account,
+      "vendor_account_name": vendor_account_name,
+      "cost_timestamps": vendor_account_timestamps[vendor_account] || {},
+      // Youngest account is used to showcase some "Unallocated" costs
+      // The story is that this is a new account that just started incurring costs
+      // Enables showcasing how FinOps Persona can remediate this (add tag to cloud account or RG, or add rule to RBD)
+      "is_youngest_account": (vendor_account == youngest_cloud_account["vendor_account"])? true : false
+    })
+  })
+EOS
+end
+
+# Get list of current dimensions in Org
+datasource "ds_current_dimensions" do
+  request do
+    auth $auth_flexera
+    host rs_optima_host
+    path join (["/bill-analysis/orgs/", rs_org_id, "/costs/dimensions"])
+    verb "GET"
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "dimensions") do
+      field "id", jmes_path(col_item, "id")
+      field "name", jmes_path(col_item, "name")
+      field "type", jmes_path(col_item, "type")
+    end
+  end
+end
+
+datasource "ds_existing_rbds" do
+  request do
+    auth $auth_flexera
+    host val($ds_flexera_api_hosts, "flexera")
+    path join(["/finops-customizations/v1/orgs/", rs_org_id, "/rule-based-dimensions"])
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "values[*]") do
+      field "id", jmes_path(col_item, "id")
+      field "name", jmes_path(col_item, "name")
+    end
+  end
+end
+
+datasource "ds_rbds" do
+  run_script $js_rbds, $ds_target_rbd_ids, $ds_effective_date, $ds_complete_vendor_account_list, $ds_existing_rbds
+end
+
+script "js_rbds", type: "javascript" do
+  parameters "ds_target_rbd_ids", "ds_effective_date", "ds_complete_vendor_account_list", "ds_existing_rbds"
+  result "result"
+  code <<-EOS
+    //Create new rules json
+
+    // Every potential character that a vendor_account can start with
+    // 0-9
+    // a-z
+    var account_starts_with = [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+    // Name of Target Allocation Groups - Application-centric mapping
+    var allocation_group_names = {
+      // Application definitions - the foundation layer (~580 unique business services)
+      "rbd_application" : [
+        // Customer Experience Domain (97 services)
+        "Customer Portal", "Mobile App", "Web Dashboard", "Customer Login", "User Profile Service",
+        "Account Management", "Shopping Cart", "Product Catalog", "Search Engine", "Recommendation Engine",
+        "Wishlist Service", "Product Reviews", "Customer Ratings", "Loyalty Program", "Rewards Platform",
+        "Gift Card Service", "Promotional Engine", "Coupon Manager", "Email Marketing", "SMS Notifications",
+        "Push Notifications", "In-App Messaging", "Chat Support", "Video Chat", "Customer Feedback",
+        "Survey Platform", "NPS Tracker", "Social Media Integration", "Social Login", "Community Forum",
+        "Knowledge Base", "FAQ Engine", "Help Center", "API Documentation", "Developer Portal",
+        "Partner Portal", "Affiliate Platform", "Referral Program", "Product Demo", "Virtual Showroom",
+        "Personalization Engine", "A/B Testing", "Heat Mapping", "Session Recording", "User Behavior Analytics",
+        "Journey Mapping", "Funnel Analysis", "Conversion Optimization", "Landing Page Builder", "Form Builder",
+        "Product Configurator", "Price Calculator", "Shipping Calculator", "Inventory Checker", "Store Locator",
+        "Geolocation Service", "Address Validation", "Delivery Tracking", "Order Status", "Shipment Tracking",
+        "Returns Portal", "RMA System", "Warranty Registration", "Subscription Management", "Recurring Billing",
+        "Auto-Renewal", "Payment Retry", "Dunning Management", "Invoice Generator", "Receipt Service",
+        "Statement Generator", "Refund Processor", "Chargeback Handler", "Dispute Resolution", "Fraud Detection",
+        "Risk Scoring", "Identity Verification", "Document Verification", "KYC Service", "AML Screening",
+        "Credit Check", "Background Check", "Bank Verification", "Account Linking", "Payment Gateway",
+        "Payment Processing", "Card Tokenization", "3D Secure", "Payment Methods", "Digital Wallet",
+        "Buy Now Pay Later", "Booking System", "Reservation Platform", "Appointment Scheduler", "Calendar Integration",
+        "Event Registration", "Ticket Sales", "Queue Management", "Waitlist Manager",
+
+        // Operations & Infrastructure (144 services)
+        "Load Balancer", "API Gateway", "Service Mesh", "Reverse Proxy", "CDN Manager",
+        "Edge Computing", "Content Delivery", "Image Resizer", "Video Transcoding", "Media Converter",
+        "Backup Service", "Disaster Recovery", "Snapshot Manager", "Replication Service", "Data Sync",
+        "Database Primary", "Database Replica", "Read Replica", "Sharding Service", "Query Router",
+        "Connection Pool", "Database Proxy", "Migration Tool", "Schema Manager", "Index Manager",
+        "Query Optimizer", "Maintenance Window", "Patch Manager", "Configuration Manager", "Secret Manager",
+        "Key Vault", "Certificate Manager", "SSL/TLS Handler", "Encryption Service", "Key Rotation",
+        "Password Manager", "Credential Store", "Token Service", "JWT Generator", "OAuth Server",
+        "SAML Provider", "OpenID Connect", "LDAP Integration", "Active Directory", "Identity Provider",
+        "User Directory", "Group Manager", "Role Manager", "Permission Engine", "Access Control",
+        "Authorization Service", "Authentication Gateway", "MFA Service", "2FA Generator", "Biometric Auth",
+        "Session Manager", "Session Store", "Single Sign-On", "Federation Service", "DNS Manager",
+        "DNS Resolver", "Traffic Manager", "Failover Manager", "Health Check", "Liveness Probe",
+        "Circuit Breaker", "Retry Logic", "Rate Limiter", "Throttle Service", "Quota Manager",
+        "API Metering", "Cost Tracking", "Resource Tagging", "Asset Inventory", "CMDB Sync",
+        "Discovery Service", "Topology Mapper", "Service Registry", "Service Discovery", "Configuration Server",
+        "Feature Flags", "Canary Release", "Blue-Green Deploy", "Rolling Update", "Deployment Manager",
+        "Release Orchestrator", "Pipeline Controller", "Build Service", "Artifact Repository", "Container Registry",
+        "Image Scanner", "Vulnerability Scan", "Security Scan", "Policy Enforcer", "Admission Controller",
+        "GitOps Agent", "ArgoCD Server", "Tekton Pipeline", "Jenkins Controller", "GitHub Actions",
+        "Container Builder", "Image Builder", "Terraform Runner", "Ansible Controller", "CloudFormation Stack",
+        "Infrastructure Controller", "Resource Manager", "Lifecycle Manager", "State Manager", "Drift Detector",
+        "Scheduler", "Kubelet", "Ingress Controller", "Istio Gateway", "Envoy Proxy",
+        "Network Policy", "Namespace Manager", "Resource Quota", "Horizontal Autoscaler", "Cluster Autoscaler",
+        "Node Manager", "Storage Provisioner", "Volume Manager", "Backup Controller", "S3 Backup",
+        "Event Bridge", "Event Store", "Message Queue", "Message Broker", "Pub/Sub Service",
+        "Dead Letter Queue", "Stream Processor", "Kafka Broker", "Schema Registry", "Data Transformer",
+        "ETL Pipeline", "Data Pipeline", "Airflow Scheduler", "Job Scheduler",
+
+        // Data & Analytics Platform (118 services)
+        "Data Lake", "Data Warehouse", "Data Mart", "Operational Data Store", "Staging Area",
+        "Landing Zone", "Raw Zone", "Curated Zone", "Consumption Zone", "Archive Zone",
+        "Data Catalog", "Metadata Repository", "Data Dictionary", "Business Glossary", "Data Lineage",
+        "Impact Analysis", "Data Quality", "Quality Rules", "Quality Metrics", "Data Profiling",
+        "Data Sampling", "Statistical Analysis", "Anomaly Detection", "Outlier Detection", "Pattern Recognition",
+        "Trend Analysis", "Forecasting Engine", "Predictive Model", "Machine Learning", "Deep Learning",
+        "Neural Network", "Model Training", "Model Inference", "Model Registry", "Experiment Tracking",
+        "Feature Store", "Feature Engineering", "Feature Selection", "Feature Extraction", "Feature Transformation",
+        "Data Labeling", "Annotation Tool", "Training Data", "Test Data", "Validation Data",
+        "Model Evaluation", "Model Monitoring", "Model Drift", "Concept Drift", "Data Drift",
+        "A/B Test Engine", "Experimentation Platform", "Hypothesis Testing", "Statistical Significance", "Power Analysis",
+        "Sample Size Calculator", "Randomization", "Treatment Assignment", "Control Group", "Test Group",
+        "Variant Manager", "Traffic Splitter", "Gradual Rollout", "Feature Rollout", "Kill Switch",
+        "Reporting Engine", "Dashboard Builder", "Visualization Service", "Chart Generator", "Graph Renderer",
+        "Map Visualization", "Geospatial Analysis", "Heat Map", "Choropleth Map", "Scatter Plot",
+        "Line Chart", "Bar Chart", "Pie Chart", "Donut Chart", "Gauge Chart",
+        "Funnel Chart", "Sankey Diagram", "Tree Map", "Sunburst Chart", "Network Graph",
+        "Timeline View", "Gantt Chart", "Calendar View", "Matrix View", "Grid View",
+        "Table View", "List View", "Card View", "Gallery View", "Carousel View",
+        "Interactive Dashboard", "Real-Time Dashboard", "Executive Dashboard", "Operational Dashboard", "Analytical Dashboard",
+        "KPI Tracker", "Metrics Collector", "Performance Metrics", "Business Metrics", "Technical Metrics",
+        "SLA Monitor", "SLO Tracker", "SLI Calculator", "Error Budget", "Burn Rate",
+        "Alert Manager", "Notification Service", "Escalation Policy", "On-Call Schedule", "Incident Manager",
+        "Problem Manager", "Change Manager", "Release Manager", "Knowledge Manager", "Service Catalog",
+        "CMDB Manager", "Asset Manager", "License Manager", "Contract Manager", "Vendor Manager",
+        "Supplier Portal", "Procurement System", "Purchase Order", "Invoice Matching", "Three-Way Match",
+        "Accounts Payable", "Accounts Receivable", "General Ledger", "Journal Entry", "Chart of Accounts",
+        "Cost Center Manager", "Profit Center Manager", "Business Unit", "Division Manager", "Region Manager",
+        "Country Manager", "Legal Entity", "Company Code", "Plant Manager", "Warehouse Manager",
+        "Inventory Manager", "Stock Manager", "SKU Manager", "Product Master", "Material Master",
+        "BOM Manager", "Recipe Manager", "Formula Manager", "Specification Manager", "Quality Specs",
+        "Inspection Plan", "Quality Control", "Quality Assurance", "Test Manager", "Lab Manager",
+        "Calibration Manager", "Maintenance Manager", "Work Order", "Service Order", "Repair Order",
+        "Preventive Maintenance", "Predictive Maintenance", "Condition Monitoring", "Sensor Data", "IoT Platform",
+        "Device Management", "Fleet Management", "Asset Tracking", "GPS Tracking", "Telematics",
+        "Route Optimization", "Dispatch System", "Driver App", "Delivery App", "Proof of Delivery",
+        "Electronic Signature", "Document Signing", "Contract Signing", "Approval Workflow", "Review Process",
+        "Collaboration Platform", "Team Workspace", "Project Management", "Task Management", "Issue Tracking",
+        "Bug Tracking", "Feature Requests", "Product Backlog", "Sprint Planning", "Capacity Planning",
+        "Resource Planning", "Demand Planning", "Supply Planning", "Production Planning", "MRP System",
+        "MPS System", "Master Schedule", "Rough Cut", "Detailed Schedule", "Shop Floor",
+        "Manufacturing Execution", "Production Control", "Quality Inspection", "Final Inspection", "Packaging Line",
+        "Labeling System", "Serialization", "Track and Trace", "Lot Tracking", "Batch Tracking",
+        "Expiry Management", "Recall Management", "Complaint Handler", "CAPA System", "Deviation Manager",
+        "Change Control", "Document Control", "Version Control", "Audit Trail", "Compliance Manager",
+        "Regulatory Affairs", "Submission Manager", "Registration Tracker", "License Tracker", "Permit Manager",
+        "Environmental Manager", "Safety Manager", "Health Manager", "Risk Manager", "Insurance Manager",
+        "Claims Processing", "Underwriting Engine", "Policy Administration", "Premium Calculator", "Commission Calculator",
+        "Agent Portal", "Broker Portal", "Adjuster System", "Loss Adjuster", "Damage Assessment",
+        "Fraud Analytics", "Fraud Investigation", "Suspicious Activity", "Transaction Monitoring", "Behavior Analysis",
+        "Pattern Matching", "Rule Engine", "Decision Engine", "Scoring Engine", "Rating Engine",
+        "Pricing Engine", "Quote Generator", "Proposal Builder", "Contract Generator", "Terms Manager",
+        "Clause Library", "Template Manager", "Document Assembly", "Document Generation", "PDF Generator",
+        "Report Generator", "Excel Generator", "Word Generator", "PowerPoint Generator", "Email Generator",
+        "Letter Generator", "Statement Generator", "Notice Generator", "Reminder Service", "Collection Manager",
+        "Debt Recovery", "Payment Plan", "Settlement Offer", "Negotiation Tool", "Mediation Platform",
+        "Arbitration System", "Litigation Support", "Case Management", "Evidence Manager", "Discovery Tool",
+        "eDiscovery", "Legal Hold", "Data Preservation", "Chain of Custody", "Forensic Analysis",
+        "Security Investigation", "Threat Intelligence", "Vulnerability Management", "Patch Management", "Configuration Baseline",
+        "Compliance Baseline", "Security Baseline", "Hardening Service", "Security Controls", "Access Review",
+        "Certification Manager", "Attestation Service", "SOX Compliance", "GDPR Compliance", "HIPAA Compliance",
+        "PCI Compliance", "SOC2 Compliance", "ISO Compliance", "NIST Framework", "CIS Benchmark",
+        "Security Assessment", "Risk Assessment", "Threat Assessment", "Impact Assessment", "Privacy Assessment",
+        "Data Protection", "Privacy Manager", "Consent Manager", "Cookie Manager", "Preference Center",
+        "Opt-In Manager", "Opt-Out Manager", "Unsubscribe Handler", "Suppression List", "Blacklist Manager",
+        "Whitelist Manager", "Allow List", "Deny List", "IP Filtering", "Geo Blocking",
+        "Content Filtering", "Spam Filter", "Malware Scanner", "Virus Scanner", "Antivirus Service",
+        "Endpoint Protection", "Host Firewall", "Network Firewall", "Web Application Firewall", "API Security",
+        "Bot Detection", "Bot Mitigation", "CAPTCHA Service", "reCAPTCHA", "Human Verification",
+        "Proof of Work", "Rate Limiting", "DDoS Protection", "DDoS Mitigation", "Scrubbing Center",
+        "Traffic Analysis", "Network Monitoring", "Packet Capture", "Flow Analysis", "Protocol Analysis",
+        "Intrusion Detection", "Intrusion Prevention", "Security Monitoring", "SIEM Platform", "Log Management",
+        "Log Aggregation", "Log Analysis", "Log Correlation", "Log Enrichment", "Log Visualization",
+        "Trace Collector", "Trace Analyzer", "Distributed Tracing", "APM Service", "Performance Monitoring",
+        "User Monitoring", "Real User Monitoring", "Synthetic Monitoring", "Uptime Monitoring", "Website Monitoring",
+        "API Monitoring", "Transaction Monitoring", "Database Monitoring", "Infrastructure Monitoring", "Cloud Monitoring",
+        "Multi-Cloud Monitoring", "Hybrid Monitoring", "On-Prem Monitoring", "Observability Platform",
+
+        // Integration & Middleware (73 services)
+        "Enterprise Service Bus", "Integration Hub", "API Manager", "API Gateway", "API Analytics",
+        "API Marketplace", "API Catalog", "Service Repository", "Integration Platform", "iPaaS Service",
+        "ETL Service", "Data Integration", "Application Integration", "B2B Integration", "EDI Gateway",
+        "AS2 Gateway", "SFTP Gateway", "File Transfer", "Managed File Transfer", "File Gateway",
+        "Protocol Converter", "Format Converter", "Message Converter", "Data Mapper", "Transformation Engine",
+        "XSLT Processor", "JSONPath Processor", "GraphQL Server", "GraphQL Gateway", "REST API",
+        "SOAP API", "JSON API", "gRPC Service", "Protocol Buffers", "Apache Avro",
+        "Webhook Manager", "Webhook Receiver", "Callback Handler", "Event Webhook", "Integration Connector",
+        "SAP Connector", "Salesforce Connector", "Oracle Connector", "Database Connector", "Cloud Connector",
+        "Kafka Connector", "Message Queue", "ActiveMQ", "IBM MQ", "Azure Service Bus",
+        "AWS SQS", "AWS SNS", "GCP Pub/Sub", "Event Hub", "Slack Integration",
+        "Teams Integration", "Zoom Integration", "Google Workspace", "Microsoft 365", "Gmail Integration",
+        "Outlook Integration", "Calendar Sync", "Contact Sync", "Drive Integration", "SharePoint Integration",
+        "Confluence Integration", "Jira Integration", "ServiceNow Integration", "HubSpot Integration", "Salesforce Integration",
+        "Marketo Integration", "SendGrid Integration", "Twilio Integration", "Payment Integration", "Stripe Integration",
+        "PayPal Integration", "E-commerce Integration",
+
+        // Security & Compliance (49 services)
+        "Security Operations Center", "Threat Hunting", "Incident Response", "Forensics Platform", "SIEM Correlation",
+        "Security Analytics", "Threat Analytics", "User Behavior Analytics", "Anomaly Detection", "Risk Scoring",
+        "Threat Intelligence", "Vulnerability Scanning", "Penetration Testing", "Security Assessment", "Phishing Detection",
+        "Malware Analysis", "Sandbox Environment", "Threat Feed", "Dark Web Monitoring", "Brand Monitoring",
+        "Email Security Gateway", "Web Security Gateway", "Secure Web Gateway", "CASB Platform", "Data Loss Prevention",
+        "DLP Policy Engine", "Content Inspection", "SSL Inspection", "Firewall Management", "WAF Service",
+        "Identity Management", "Access Management", "Privileged Access", "PAM Service", "Secrets Management",
+        "Key Management", "Encryption Service", "Certificate Management", "PKI Service",
+        "MFA Service", "Authentication Gateway", "SSO Service", "SAML Provider",
+        "Compliance Manager", "Policy Engine", "Audit Manager", "SOX Compliance",
+        "Cloud Security Platform",
+
+        // Business Intelligence & Reporting (52 services)
+        "BI Platform", "OLAP Engine", "Cube Builder", "Dashboard Builder", "Report Builder",
+        "Data Visualization", "Executive Dashboard", "KPI Tracker", "Scorecard Builder", "Performance Dashboard",
+        "Financial Reporting", "Operational Reporting", "Analytical Reporting", "Ad-Hoc Reporting", "Scheduled Reports",
+        "Report Distribution", "Data Export", "Excel Integration", "PDF Generation", "Chart Builder",
+        "Forecasting", "Budget Planning", "Variance Analysis", "Trend Analysis", "Cohort Analysis",
+        "Customer Analytics", "Sales Analytics", "Marketing Analytics", "Product Analytics", "Financial Analytics",
+        "Predictive Analytics", "Descriptive Analytics", "Prescriptive Analytics", "Statistical Analysis", "Time Series Analysis",
+        "Segmentation Engine", "Customer Segmentation", "Market Segmentation", "RFM Analysis", "CLV Calculator",
+        "Sentiment Analysis", "Text Analytics", "NLP Service", "Data Mining", "Pattern Recognition",
+        "Recommendation Engine", "Personalization", "A/B Testing", "Campaign Analytics", "Attribution Modeling",
+        "Churn Prediction", "Lead Scoring",
+
+        // Enterprise Applications (47 services)
+        "ERP Core", "Financial Management", "General Ledger", "Accounts Payable", "Accounts Receivable",
+        "Asset Management", "Cash Management", "Treasury Management", "Revenue Recognition", "Lease Accounting",
+        "Payment Processing", "Bank Reconciliation", "Intercompany Reconciliation", "Credit Management", "Collections Management",
+        "Dispute Management", "Financial Consolidation", "Financial Reporting", "Budget Management", "Expense Management",
+        "HR Management", "Core HR", "Personnel Administration", "Organizational Management", "Payroll Processing",
+        "Time & Attendance", "Leave Management", "Benefits Administration", "Compensation Management", "Performance Management",
+        "Talent Acquisition", "Recruiting", "Applicant Tracking", "Onboarding",
+        "Training Management", "Employee Self-Service", "Manager Self-Service",
+        "Supply Chain Management", "Procurement", "Purchase Orders", "Inventory Management",
+        "Warehouse Management", "Demand Planning", "Manufacturing",
+      ],
+      // Business Capabilities - domain categorization
+      "business_capabilities": [
+        "Customer Experience", "API Management", "Supply Chain Management", "Operations Automation",
+        "Security & Access Control", "Platform Observability", "Data Management", "Compliance & Governance",
+        "Business Intelligence", "Platform Performance", "Integration Services", "Infrastructure Management",
+        "Content Management", "Communication Services", "Financial Operations", "HR & Talent Management",
+        "Analytics & Insights", "Application Security", "Network Services", "Storage Management"
+      ],
+      // Service Portfolios - collections of related capabilities
+      "service_portfolios": [
+        "Digital Front Office", "Integration Platform", "Operations Platform",
+        "Security Platform", "Data & Analytics Platform", "Enterprise Applications"
+      ],
+      // Service Tiers - criticality levels
+      "service_tiers": [
+        "Tier 1 - Mission Critical",
+        "Tier 2 - Business Critical",
+        "Tier 3 - Business Operational",
+        "Tier 4 - Development/Test"
+      ],
+      // Team definitions with full organizational context
+      "rbd_team": {
+        "Team Zero": {
+          "department": "Cloud Center of Excellence",
+          "cost_center": "CC-000",
+          "cost_approver": "EClapton@example.com",
+          "service_owner": "EClapton@example.com",
+          "technical_owner": "JPage@example.com"
+        },
+        "Team One": {
+          "department": "Engineering",
+          "cost_center": "CC-111",
+          "cost_approver": "JHendrix@example.com",
+          "service_owner": "JHendrix@example.com",
+          "technical_owner": "KRichards@example.com"
+        },
+        "Team Two": {
+          "department": "IT",
+          "cost_center": "CC-222",
+          "cost_approver": "BBKing@example.com",
+          "service_owner": "BBKing@example.com",
+          "technical_owner": "SRayVaughan@example.com"
+        },
+        "Team Three": {
+          "department": "Marketing",
+          "cost_center": "CC-333",
+          "cost_approver": "EFitzgerald@example.com",
+          "service_owner": "EFitzgerald@example.com",
+          "technical_owner": "DHoliday@example.com"
+        },
+        "Team Four": {
+          "department": "Finance",
+          "cost_center": "CC-444",
+          "cost_approver": "PFloyd@example.com",
+          "service_owner": "PFloyd@example.com",
+          "technical_owner": "DGilmour@example.com"
+        },
+        "Team Five": {
+          "department": "Engineering",
+          "cost_center": "CC-555",
+          "cost_approver": "CBerry@example.com",
+          "service_owner": "CBerry@example.com",
+          "technical_owner": "BDiddley@example.com"
+        },
+        "Team Six": {
+          "department": "Engineering",
+          "cost_center": "CC-666",
+          "cost_approver": "LArmstrong@example.com",
+          "service_owner": "LArmstrong@example.com",
+          "technical_owner": "MDavis@example.com"
+        },
+        "Team Seven": {
+          "department": "IT",
+          "cost_center": "CC-777",
+          "cost_approver": "JCash@example.com",
+          "service_owner": "JCash@example.com",
+          "technical_owner": "WNelson@example.com"
+        },
+        "Team Eight": {
+          "department": "Sales",
+          "cost_center": "CC-888",
+          "cost_approver": "TBraxton@example.com",
+          "service_owner": "TBraxton@example.com",
+          "technical_owner": "ABFranklin@example.com"
+        },
+        "Team Nine": {
+          "department": "Professional Services",
+          "cost_center": "CC-999",
+          "cost_approver": "FZappa@example.com",
+          "service_owner": "FZappa@example.com",
+          "technical_owner": "SWonder@example.com"
+        }
+      },
+      // Operating company list for enterprise hierarchy
+      "rbd_operating_company" : [
+        "BuyerCorp Inc.",
+        "SellerCorp Inc."
+      ],
+      // Environment types for application deployment
+      "environment_types": [
+        "Production",
+        "Staging",
+        "Development",
+        "Sandbox"
+      ],
+      // 921148333203 is the AWS Payer that is used in the demo
+      // Allocate the costs that we typically see in an AWS Payer account to the Cloud CoE who typically own those costs in a company
+      "vendor_account=921148333203" : {
+        "department": "Cloud Center of Excellence",
+        "environment_type": "Internal",
+        "cost_center": "CC-456",
+        "cost_approver": "EPresley@example.com",
+        "service_owner": "EPresley@example.com",
+        "technical_owner": "BBDylan@example.com",
+        "team": "Team Zero",
+        "application": "Cloud Platform Infrastructure",
+        "business_capability": "Cloud Operations",
+        "service_tier": "Tier 1 - Mission Critical"
+      },
+      // These are actual production applications which generally have high costs
+      // Some overrides for the allocations to make demo data more realistic
+      // 008416063763 is "FNMS-PROD"
+      "vendor_account=008416063763" : {
+        "cost_center": "CC-008",
+        "cost_approver": "EJohn@example.com",
+        "service_owner": "EJohn@example.com",
+        "technical_owner": "BTaupin@example.com",
+        "application": "Asset Management Service",
+        "business_capability": "IT Asset Management",
+        "service_tier": "Tier 1 - Mission Critical",
+        "environment_type": "Production"
+      },
+      // 247207444519 is "swm-prod-almlfs-database-production"
+      "vendor_account=247207444519" : {
+        "cost_center": "CC-247",
+        "cost_approver": "FMercury@example.com",
+        "service_owner": "FMercury@example.com",
+        "technical_owner": "BMay@example.com",
+        "application": "License Management Database",
+        "business_capability": "Software License Management",
+        "service_tier": "Tier 1 - Mission Critical",
+        "environment_type": "Production"
+      },
+      // 311221965255 is "SWM FNO PROD Legacy"
+      "vendor_account=311221965255" : {
+        "cost_center": "CC-311",
+        "cost_approver": "MJackson@example.com",
+        "service_owner": "MJackson@example.com",
+        "technical_owner": "QJones@example.com",
+        "application": "Legacy Operations Platform",
+        "business_capability": "IT Operations",
+        "service_tier": "Tier 2 - Business Critical",
+        "environment_type": "Production"
+      },
+      // 474539232528 is "cls-producton"
+      "vendor_account=474539232528" : {
+        "cost_center": "CC-474",
+        "cost_approver": "MCarey@example.com",
+        "service_owner": "MCarey@example.com",
+        "technical_owner": "PDudley@example.com",
+        "application": "Cloud Licensing Service",
+        "business_capability": "Software License Management",
+        "service_tier": "Tier 1 - Mission Critical",
+        "environment_type": "Production"
+      }
+      // End production applications - no comma needed, last item
+    }
+
+    // Get the existing dimensions in the Org which includes RBDs
+    existing_rbd_ids = _.pluck(ds_existing_rbds, "id")
+
+    // Generate application-to-attribute mappings dynamically for ~2000 applications
+    // This simulates CMDB as single source of truth
+    var application_to_attributes = {}
+    var app_list = allocation_group_names["rbd_application"]
+
+    _.each(app_list, function(app_name, app_index) {
+      // Use app index to deterministically assign attributes (simulates CMDB lookup)
+      application_to_attributes[app_name] = {
+        "business_capability": allocation_group_names["business_capabilities"][app_index % allocation_group_names["business_capabilities"].length],
+        "service_tier": allocation_group_names["service_tiers"][app_index % allocation_group_names["service_tiers"].length],
+        "team": _.keys(allocation_group_names["rbd_team"])[app_index % _.keys(allocation_group_names["rbd_team"]).length],
+        "operating_company": allocation_group_names["rbd_operating_company"][app_index % allocation_group_names["rbd_operating_company"].length],
+        "environment_type": allocation_group_names["environment_types"][app_index % allocation_group_names["environment_types"].length]
+      }
+
+      // Derive portfolio from capability
+      var capability = application_to_attributes[app_name]["business_capability"]
+      var portfolio_map = {
+        "Customer Experience": "Digital Front Office",
+        "API Management": "Integration Platform",
+        "Supply Chain Management": "Operations Platform",
+        "Operations Automation": "Operations Platform",
+        "Security & Access Control": "Security Platform",
+        "Platform Observability": "Operations Platform",
+        "Data Management": "Data & Analytics Platform",
+        "Compliance & Governance": "Security Platform",
+        "Business Intelligence": "Data & Analytics Platform",
+        "Platform Performance": "Operations Platform",
+        "Integration Services": "Integration Platform",
+        "Infrastructure Management": "Operations Platform",
+        "Content Management": "Digital Front Office",
+        "Communication Services": "Digital Front Office",
+        "Financial Operations": "Enterprise Applications",
+        "HR & Talent Management": "Enterprise Applications",
+        "Analytics & Insights": "Data & Analytics Platform",
+        "Application Security": "Security Platform",
+        "Network Services": "Operations Platform",
+        "Storage Management": "Operations Platform"
+      }
+      application_to_attributes[app_name]["service_portfolio"] = portfolio_map[capability] || "Operations Platform"
+
+      // Get team attributes
+      var team = application_to_attributes[app_name]["team"]
+      var team_data = allocation_group_names["rbd_team"][team] || {}
+      application_to_attributes[app_name]["department"] = team_data["department"] || "Engineering"
+      application_to_attributes[app_name]["cost_center"] = team_data["cost_center"] || "CC-000"
+      application_to_attributes[app_name]["cost_approver"] = team_data["cost_approver"] || ""
+      application_to_attributes[app_name]["service_owner"] = team_data["service_owner"] || ""
+      application_to_attributes[app_name]["technical_owner"] = team_data["technical_owner"] || ""
+    })
+
+    // Process each account to build application-centric dimension hierarchy
+    _.each(ds_complete_vendor_account_list, function(acc) {
+      // Step 1: Assign Application (foundation layer) - use second character for variety
+      var account_first_char = acc.vendor_account.charAt(0).toLowerCase()
+      var account_second_char = acc.vendor_account.charAt(1).toLowerCase()
+      var account_last_char = acc.vendor_account.charAt(acc.vendor_account.length - 1).toLowerCase()
+
+      var second_char_index = account_starts_with.indexOf(account_second_char)
+      if (second_char_index === -1) { second_char_index = 0 }
+      acc["rbd_application"] = allocation_group_names["rbd_application"][second_char_index % allocation_group_names["rbd_application"].length] || ""
+
+      // Skip defining an application if this is the "youngest" account
+      // This is to simulate accounts which are not yet mapped in the CMDB
+
+      // Step 2-9: Derive ALL CMDB attributes from Application (simulates CMDB as single source of truth)
+      var app_attributes = application_to_attributes[acc["rbd_application"]] || {}
+      acc["rbd_business_capability"] = app_attributes["business_capability"] || ""
+      acc["rbd_service_portfolio"] = app_attributes["service_portfolio"] || ""
+      acc["rbd_service_tier"] = app_attributes["service_tier"] || "Tier 4 - Development/Test"
+      acc["rbd_team"] = app_attributes["team"] || ""
+      acc["rbd_department"] = app_attributes["department"] || ""
+      acc["rbd_cost_center"] = app_attributes["cost_center"] || ""
+      acc["rbd_cost_approver"] = app_attributes["cost_approver"] || ""
+      acc["rbd_service_owner"] = app_attributes["service_owner"] || ""
+      acc["rbd_technical_owner"] = app_attributes["technical_owner"] || ""
+      acc["rbd_operating_company"] = app_attributes["operating_company"] || ""
+      acc["rbd_environment_type"] = app_attributes["environment_type"] || "Development"
+
+      // Step 10: Override Environment Type based on account name patterns
+      // Account name patterns can override CMDB defaults for environment type
+      if (acc.vendor_account_name.toLowerCase().indexOf("prod") > -1) {
+        acc["rbd_environment_type"] = "Production"
+        // Production apps typically owned by Engineering
+        acc["rbd_department"] = "Engineering"
+        // Tier up critical production services
+        if (acc["rbd_service_tier"] === "Tier 3 - Business Operational") {
+          acc["rbd_service_tier"] = "Tier 2 - Business Critical"
+        }
+      } else if (acc.vendor_account_name.toLowerCase().indexOf("stag") > -1) {
+        acc["rbd_environment_type"] = "Staging"
+        acc["rbd_department"] = "Engineering"
+      } else if (acc.vendor_account_name.toLowerCase().indexOf("dev") > -1) {
+        acc["rbd_environment_type"] = "Development"
+      } else if (acc.vendor_account_name.toLowerCase().indexOf("sandbox") > -1 || acc.vendor_account_name.toLowerCase().indexOf("test") > -1) {
+        acc["rbd_environment_type"] = "Sandbox"
+      }
+
+      // Override mappings if the override exists for a vendor_account
+      if (allocation_group_names["vendor_account="+acc.vendor_account]) {
+        // Loop through the keys in the override and override the RBD value
+        _.each(allocation_group_names["vendor_account="+acc.vendor_account], function(value, key) {
+          acc["rbd_"+key] = value
+        })
+      }
+    })
+
+
+    //New rules list
+    var new_rbds = []
+
+    // For each target RBD, create the rules
+    _.each(ds_target_rbd_ids, function(target_rbd){
+      // rbd_team - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_team") {
+        var rules = []
+        // Create unique application-to-team mappings from CMDB
+        var unique_mappings = {}
+        // First, add all applications from CMDB (application_to_attributes)
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["team"]
+        })
+        // Then override with actual values from vendor accounts (if different)
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_team) {
+            unique_mappings[acc.rbd_application] = acc.rbd_team
+          }
+        })
+        // Generate rules based on rbd_application dimension
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [
+            {
+              "effective_at": ds_effective_date.effective_date,
+              "rules": rules
+            }
+          ]
+        }
+        new_rbds.push(rbd_json)
+      }
+      // rbd_cost_center - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_cost_center") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["cost_center"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_cost_center) {
+            unique_mappings[acc.rbd_application] = acc.rbd_cost_center
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [
+            {
+              "effective_at": ds_effective_date.effective_date,
+              "rules": rules
+            }
+          ]
+        }
+        new_rbds.push(rbd_json)
+      }
+      // rbd_cost_approver - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_cost_approver") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["cost_approver"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_cost_approver) {
+            unique_mappings[acc.rbd_application] = acc.rbd_cost_approver
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [
+            {
+              "effective_at": ds_effective_date.effective_date,
+              "rules": rules
+            }
+          ]
+        }
+        new_rbds.push(rbd_json)
+      }
+      // rbd_application
+      if (target_rbd.id == "rbd_application") {
+        //Add Rules
+        var rules = []
+
+        // Few Static Rules at the top
+        // These are intended to be an example of rules that may be manually managed by the Centralized FinOps Personas (in addition to rules generated from CMDB/tags)
+        // At top, so that they take precedence over application-based rules which is correct because they have been manually/varified and added by FinOps persona
+        // Databricks Commitments
+        rules.push({
+          "condition": { "type": "and", "expressions": [
+            { "dimension": "service", "type": "dimension_contains", "substring": "Databricks Unified Analytics Platform" },
+            { "dimension": "service", "type": "dimension_contains", "substring": "Annual Commitment" }
+          ] },
+          "value": {
+            "text": "Data Lake"
+          }
+        })
+        // MongoDB Atlas ODS
+        rules.push({
+          "condition": { "type": "and", "expressions": [
+            { "dimension": "service", "type": "dimension_contains", "substring": "MongoDB Atlas on AWS" },
+            { "dimension": "service", "type": "dimension_contains", "substring": "Contract with Usage" }
+          ] },
+          "value": {
+            "text": "Operational Data Store"
+          }
+        })
+        // Prisma Cloud (Annual Contract)
+        rules.push({
+          "condition": { "type": "and", "expressions": [
+            { "dimension": "service", "type": "dimension_contains", "substring": "Prisma Cloud" },
+            { "dimension": "service", "type": "dimension_contains", "substring": "Annual Contract" }
+          ] },
+          "value": {
+            "text": "Cloud Security Platform"
+          }
+        })
+        rules.push({
+          "condition": { "dimension": "service", "type": "dimension_contains", "substring": "Prisma Access/Prisma SaaS (Private)" },
+          "value": {
+            "text": "Cloud Security Platform"
+          }
+        })
+        rules.push({
+          "condition": { "dimension": "service", "type": "dimension_contains", "substring": "Prisma Cloud Extended Expertise (Resident Engineer - Half Time)" },
+          "value": {
+            "text": "Cloud Security Platform"
+          }
+        })
+        // Sumo Logic Monitoring and Analytics Platform
+        rules.push({
+          "condition": { "dimension": "service", "type": "dimension_contains", "substring": "Sumo Logic Monitoring and Analytics Platform" },
+          "value": {
+            "text": "Observability Platform"
+          }
+        })
+        // PageDuty Operations Cloud
+        rules.push({
+          "condition": { "dimension": "service", "type": "dimension_contains", "substring": "PagerDuty Operations Cloud" },
+          "value": {
+            "text": "Incident Response"
+          }
+        })
+        // Udemy Business
+        rules.push({
+          "condition": { "dimension": "service", "type": "dimension_contains", "substring": "Udemy Business" },
+          "value": {
+            "text": "Training Management"
+          }
+        })
+        // SolarWinds Solution
+        rules.push({
+          "condition": { "dimension": "service", "type": "dimension_contains", "substring": "SolarWinds Solution" },
+          "value": {
+            "text": "Network Monitoring"
+          }
+        })
+        // F5 BIG-IP Virtual Edition
+        rules.push({
+          "condition": { "dimension": "service", "type": "dimension_contains", "substring": "F5 BIG-IP Virtual Edition" },
+          "value": {
+            "text": "Load Balancer"
+          }
+        })
+
+        // Everything below simulates rules generated from Cloud Tenant Tags (i.e. Cloud Account and RGs)
+        // This is a typicaly "baseline" strategy, but the rules above show how manual rules can be added to improve coverage or accuracy of allocations
+
+        // Add a Start "Delimiter" which is similar to what we use in "RBD From Account Tag" Policy Templates
+        rules.push({
+          "condition": { "dimension": "vendor_account", "type": "dimension_equals", "value": "Start: Rule-Based Dimensions from CMDB - Demo Org" },
+          "value": {
+            "text": "Start: Rule-Based Dimensions from CMDB - Demo Org"
+          }
+        })
+
+        // Add rules for each Cloud Account
+        // We can say these values are derived from the `appplication` tag on Cloud Tenant (Cloud Account or Resource Group)
+        // These will allocate costs that are NOT owned by rbd_team=Engineering using the second character of the vendor_account
+
+        // To minimize RBD "Rule Groups", we need a function to group the acc by rbd_application value and run through them in grouped order
+        // compactRuleGroups() takes in the
+        // function compactRuleGroups(acc_list) {
+        //   var grouped = _.groupBy(acc_list, "rbd_application")
+        //   var compacted = []
+        //   _.each(_.keys(grouped), function(app_name) {
+        //     compacted = compacted.concat(grouped[app_name])
+        //   })
+        //   return compacted
+        // }
+
+        // cloud_vendor_accounts = compactRuleGroups(ds_cloud_vendor_accounts)
+
+        _.each(ds_complete_vendor_account_list, function (acc){
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "vendor_account",
+              "value": acc.vendor_account
+            },
+            "value": {
+              "text": acc.rbd_application
+            }
+          })
+        })
+
+        // Add a End "Delimiter" which is similar to what we use in "RBD From Account Tag" Policy Templates
+        rules.push({
+          "condition": { "dimension": "vendor_account", "type": "dimension_equals", "value": "End: Rule-Based Dimensions from CMDB - Demo Org" },
+          "value": {
+            "text": "End: Rule-Based Dimensions from CMDB - Demo Org"
+          }
+        })
+
+        // Add a Start "Delimiter" rule
+        // rules.push({
+        //   "condition": { "dimension": "vendor_account", "type": "dimension_contains", "substring": "Start: Rule-Based Dimensions from CMDB - Demo Org", "caseInsensitive": true },
+        //   "value": {
+        //     "text": "Start: Fallback rules for Demo Org"
+        //   }
+        // })
+        // // Fallback rules for demo env, in case we have recommendations that do not have any costs (i.e. Demo PT)
+        // for (var i = 0; i < account_starts_with.length; i++) {
+        //   var char = account_starts_with[i]
+        //   rules.push({
+        //     "condition": {
+        //       "type": "dimension_contains",
+        //       "dimension": "vendor_account",
+        //       "substring": char,
+        //       "caseInsensitive": true
+        //     },
+        //     "value": {
+        //       "text": allocation_group_names["rbd_application"][i % allocation_group_names["rbd_application"].length]
+        //     }
+        //   })
+        // }
+        // rules.push({
+        //   "condition": { "dimension": "vendor_account", "type": "dimension_contains", "substring": "End: Rule-Based Dimensions from CMDB - Demo Org", "caseInsensitive": true },
+        //   "value": {
+        //     "text": "End: Fallback rules for Demo Org"
+        //   }
+        // })
+
+        // Construct final RBD Payload
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [
+            {
+              "effective_at": ds_effective_date.effective_date,
+              "rules": rules
+            }
+          ]
+        }
+        //Push to new RBDs json
+        new_rbds.push(rbd_json)
+      }
+      // rbd_environment_type - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_environment_type") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["environment_type"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_environment_type) {
+            unique_mappings[acc.rbd_application] = acc.rbd_environment_type
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [
+            {
+              "effective_at": ds_effective_date.effective_date,
+              "rules": rules
+            }
+          ]
+        }
+        //Push to new RBDs json
+        new_rbds.push(rbd_json)
+      }
+      // rbd_department - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_department") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["department"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_department) {
+            unique_mappings[acc.rbd_application] = acc.rbd_department
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [{
+            "effective_at": ds_effective_date.effective_date,
+            "rules": rules
+          }]
+        }
+        new_rbds.push(rbd_json)
+      }
+      // rbd_operating_company - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_operating_company") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["operating_company"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_operating_company) {
+            unique_mappings[acc.rbd_application] = acc.rbd_operating_company
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [{
+            "effective_at": ds_effective_date.effective_date,
+            "rules": rules
+          }]
+        }
+        new_rbds.push(rbd_json)
+      }
+      // rbd_business_capability - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_business_capability") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["business_capability"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_business_capability) {
+            unique_mappings[acc.rbd_application] = acc.rbd_business_capability
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [{
+            "effective_at": ds_effective_date.effective_date,
+            "rules": rules
+          }]
+        }
+        new_rbds.push(rbd_json)
+      }
+      // rbd_service_portfolio - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_service_portfolio") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["service_portfolio"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_service_portfolio) {
+            unique_mappings[acc.rbd_application] = acc.rbd_service_portfolio
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [{
+            "effective_at": ds_effective_date.effective_date,
+            "rules": rules
+          }]
+        }
+        new_rbds.push(rbd_json)
+      }
+      // rbd_service_tier - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_service_tier") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["service_tier"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_service_tier) {
+            unique_mappings[acc.rbd_application] = acc.rbd_service_tier
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [{
+            "effective_at": ds_effective_date.effective_date,
+            "rules": rules
+          }]
+        }
+        new_rbds.push(rbd_json)
+      }
+      // rbd_service_owner - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_service_owner") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["service_owner"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_service_owner) {
+            unique_mappings[acc.rbd_application] = acc.rbd_service_owner
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [{
+            "effective_at": ds_effective_date.effective_date,
+            "rules": rules
+          }]
+        }
+        new_rbds.push(rbd_json)
+      }
+      // rbd_technical_owner - CMDB dimension mapped from application
+      if (target_rbd.id == "rbd_technical_owner") {
+        var rules = []
+        var unique_mappings = {}
+        // First, add all applications from CMDB
+        _.each(_.keys(application_to_attributes), function(app_name) {
+          unique_mappings[app_name] = application_to_attributes[app_name]["technical_owner"]
+        })
+        // Then override with actual values from vendor accounts
+        _.each(ds_complete_vendor_account_list, function (acc){
+          if (acc.rbd_application && acc.rbd_technical_owner) {
+            unique_mappings[acc.rbd_application] = acc.rbd_technical_owner
+          }
+        })
+        _.each(_.keys(unique_mappings), function(app_name) {
+          rules.push({
+            "condition": {
+              "type": "dimension_equals",
+              "dimension": "rbd_application",
+              "value": app_name
+            },
+            "value": {
+              "text": unique_mappings[app_name]
+            }
+          })
+        })
+        rbd_json = {
+          "verb": _.contains(existing_rbd_ids, target_rbd.id) ? "PATCH" : "POST",
+          "id": target_rbd.id,
+          "name": target_rbd.name,
+          "dated_rules": [{
+            "effective_at": ds_effective_date.effective_date,
+            "rules": rules
+          }]
+        }
+        new_rbds.push(rbd_json)
+      }
+    })
+
+    console.log(new_rbds)
+
+    result = new_rbds
+
+  EOS
+end
+
+###############################################################################
+# Policy
+###############################################################################
+
+policy "pol_rbds" do
+  validate $ds_rbds do
+  summary_template "Rule Based Dimensions Updated/Created: {{ len data }}"
+  detail_template <<-EOS
+  {{- range data -}}
+  - {{ .name }} (`{{ .id }}`) - {{ len (index .dated_rules 0).rules }} rules
+  {{ end -}}
+  EOS
+    check eq(0, 1) # Always trigger
+    escalate $flexera_rbd_upsert
+    export do
+      resource_level true
+      field "id"
+      field "name"
+      field "dated_rules"
+    end
+  end
+
+  validate $ds_apply_rbds do
+    summary_template "RBDs Generated & Applied"
+    detail_template ""
+    check eq(0, 0)
+  end
+end
+
+###############################################################################
+# Escalations
+###############################################################################
+
+escalation "flexera_rbd_upsert" do
+  automatic false # Always automatically run when triggered
+  label "Update / Create Rule Based Dimensions"
+  run "flexera_rbd_upsert", data, rs_org_id, rs_optima_host
+end
+
+###############################################################################
+# Cloud Workflow
+###############################################################################
+
+# Core CWF function to upsert RBD and dated rules
+# Expects 1 RBD per data[] item
+define flexera_rbd_upsert($data, $rs_org_id, $rs_optima_host) do
+  # Wrap the call in a "sub" process to gracefully handle any errors
+  sub on_error: handle_error() do
+    # Get API Host Map using rs_optima_host from incident
+    call get_api_hostnames($rs_optima_host) retrieve $host_map
+    # Loop through each item in the data array
+    $item_index = 0
+    $item_total = size($data)
+    foreach $data_item in $data do
+      # Check if the RBD exists
+      $request = {
+        auth: $$auth_flexera,
+        url: join(['https://',$host_map['flexera'],'/finops-customizations/v1/orgs/', $rs_org_id, '/rule-based-dimensions/', $data_item["id"]], ""),
+        headers: { "Content-Type": "application/json" }
+      }
+      $response = http_get($request)
+      call log_message(to_json({"request": $request, "response": $response}))
+      # If response code is 404, RBD does not exist
+      if to_n($response["code"]) == 404
+        # construct request to create RBD
+        $request = {
+          auth: $$auth_flexera,
+          url: join(['https://',$host_map['flexera'],'/finops-customizations/v1/orgs/', $rs_org_id, '/rule-based-dimensions/', $data_item["id"] ], ""),
+          headers: { "Content-Type": "application/json" },
+          body: {
+            "name": $data_item["name"]
+          }
+        }
+        $response = http_post($request)
+        # Log all request and response details
+        call log_message(to_json({"request": $request, "response": $response}))
+      end
+      # Construct request to update/create RBD dated rules
+      $request = {
+        auth: $$auth_flexera,
+        url: join(['https://',$host_map['flexera'],'/finops-customizations/v1/orgs/', $rs_org_id, '/rule-based-dimensions/', $data_item["id"] ,"/rules/", $data_item["dated_rules"][0]["effective_at"] ], ""),
+        headers: { "Content-Type": "application/json" },
+        body: {
+          "rules": $data_item["dated_rules"][0]["rules"]
+        }
+      }
+      $response = http_put($request)
+      # Log all request and response details
+      call log_message(to_json({"request": $request, "response": $response}))
+      # Check that the request was successful -- expect 204 HTTP response code
+      if to_n($response["code"]) != 204
+        # Raise error if request was not successful
+        raise join(["Unexpected result updating/creating RBD ",$data_item["id"],": ",to_json({"request": join(["PUT"," https://",$request['host'],$request['href']],""), "response": $response})], "")
+      end
+    end # end foreach
+  end # end sub
+
+  # If we encountered any errors, use `raise` to mark the CWF process as errored
+  if inspect($$errors) != "null"
+    raise join($$errors,"\n")
+  end
+end
+
+# CWF function to handle errors
+define handle_error() do
+  if !$$errors
+    $$errors = []
+  end
+  $$errors << $_error["type"] + ": " + $_error["message"]
+  # We check for errors at the end, and raise them all together
+  # Skip errors handled by this definition
+  $_error_behavior = "skip"
+end
+
+# CWF function to help with capturing log output
+define log_message($message) do
+  if !$$log_messages
+    $$log_messages = []
+  end
+  # Convert response object to JSON string.  Easier to interpret
+  $$log_messages << to_json($message)
+end
+
+# CWF function to get API hostnames
+define get_api_hostnames($rs_optima_host) return $host_map do
+  # Use rs_optima_host and a static map to determine the correct Flexera API host
+  $host_mappings = {
+    "api.optima.flexeraeng.com": {
+      flexera: "api.flexera.com",
+      fsm: "api.fsm.flexeraeng.com"
+    },
+    "api.optima-eu.flexeraeng.com": {
+      flexera: "api.flexera.eu",
+      fsm: "api.fsm-eu.flexeraeng.com"
+    },
+    "api.optima-apac.flexeraeng.com": {
+      flexera: "api.flexera.au",
+      fsm: "api.fsm-apac.flexeraeng.com"
+    }
+  }
+  if type($host_mappings[$rs_optima_host]) == "object"
+    $host_map = $host_mappings[$rs_optima_host]
+  else
+    raise "Unable to lookup host map using rs_optima_host="+$rs_optima_host
+  end
+  # Log the host table for debugging
+  call log_message("Host table: " + to_json($host_map))
+end
