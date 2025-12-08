@@ -7,6 +7,7 @@ This document outlines the allocation strategy, dimension hierarchy, and specifi
 The policy creates and manages Rule-Based Dimensions to showcase an **Application-Centric Allocation Strategy**.
 
 ### Primary Key = Application
+
 The `Application` dimension is the single source of truth. It is assigned at the cloud account level (simulating a tag or registration process).
 
 ### Cloud Account / Resource Groups Tags are baseline allocation strategy
@@ -15,7 +16,7 @@ Cloud Accounts (and "Resource Groups" on Azure) are used by Engineering/FinOps t
 
 ### Automated Enrichment (CMDB)
 
-`Application` is mapped from Cloud Account, Resource Group tags. The policy automatically manages mapping rules for all other dimensions (Business, Organizational, Financial) based on a simulated CMDB (ServiceNow) lookup.  Logic
+`Application` is mapped from Cloud Account, Resource Group tags. The policy automatically manages mapping rules for all other dimensions (Business, Organizational, Financial) based on a simulated CMDB (ServiceNow) lookup.
 
 The policy template demonstrates how we can retrieve mappings from CMDB and have left the functional code in the Policy Template to give a high level of transparency into how this outcome is accomplished in a real-world environment.
 
