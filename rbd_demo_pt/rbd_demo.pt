@@ -1302,21 +1302,13 @@ script "js_rbds", type: "javascript" do
         // Add rules for each Cloud Account
         // We can say these values are derived from the `appplication` tag on Cloud Tenant (Cloud Account or Resource Group)
         // These will allocate costs that are NOT owned by rbd_team=Engineering using the second character of the vendor_account
-
-        // To minimize RBD "Rule Groups", we need a function to group the acc by rbd_application value and run through them in grouped order
-        // compactRuleGroups() takes in the
-        // function compactRuleGroups(acc_list) {
-        //   var grouped = _.groupBy(acc_list, "rbd_application")
-        //   var compacted = []
-        //   _.each(_.keys(grouped), function(app_name) {
-        //     compacted = compacted.concat(grouped[app_name])
-        //   })
-        //   return compacted
-        // }
-
-        // cloud_vendor_accounts = compactRuleGroups(ds_cloud_vendor_accounts)
-
         _.each(ds_complete_vendor_account_list, function (acc){
+          // Check if this is the "youngest" account
+          if (acc.is_youngest_account) {
+            // We intentionally skip adding a rule for the youngest account to simulate "imperfect" environment
+            return
+          }
+
           rules.push({
             "condition": {
               "type": "dimension_equals",
