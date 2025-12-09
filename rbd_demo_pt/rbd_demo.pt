@@ -439,7 +439,7 @@ datasource "ds_costs_by_cloud_vendor_account" do
     header "Api-Version", "1.0"
     header "Content-Type", "application/json"
     body_field "dimensions", ["vendor_account","vendor_account_name"]
-    body_field "metrics", ["cost_nonamortized_unblended_adj"]
+    body_field "metrics", ["cost_nonamortized_unblended_adj", "cost_amortized_unblended_adj"]
     body_field "granularity", "month"
     body_field "start_at", val(iter_item, "start_at")
     body_field "end_at", val(iter_item, "end_at")
@@ -452,6 +452,7 @@ datasource "ds_costs_by_cloud_vendor_account" do
       field "vendor_account", jq(col_item, ".dimensions.vendor_account")
       field "vendor_account_name", jq(col_item, ".dimensions.vendor_account_name")
       field "cost_nonamortized_unblended_adj", jq(col_item, ".metrics.cost_nonamortized_unblended_adj")
+      field "cost_amortized_unblended_adj", jq(col_item, ".metrics.cost_amortized_unblended_adj")
     end
   end
 end
@@ -493,6 +494,8 @@ script "js_complete_vendor_account_list", type: "javascript" do
   }
   _.each(_.keys(indexed_costs_by_cloud_vendor_account), function(vendor_account) {
     var timestamps = _.pluck(indexed_costs_by_cloud_vendor_account[vendor_account], "timestamp")
+    var total_cost_amortized_unblended_adj = _.reduce(_.pluck(indexed_costs_by_cloud_vendor_account[vendor_account], "cost_amortized_unblended_adj"), function(memo, num) { return memo + num; }, 0)
+    var total_cost_nonamortized_unblended_adj = _.reduce(_.pluck(indexed_costs_by_cloud_vendor_account[vendor_account], "cost_nonamortized_unblended_adj"), function(memo, num) { return memo + num; }, 0)
     var min_timestamp = null
     var max_timestamp = null
     _.each(timestamps, function(ts) {
@@ -509,11 +512,13 @@ script "js_complete_vendor_account_list", type: "javascript" do
       "max_timestamp": max_timestamp
     }
     // max_timestamp must be in the current month or previous month to be considered
+    // both amortized and nonamortized view of costs must be > 0 to be considered (to prevent $0.00 Unallocated, ensure "imperfect" view)
     current_date = new Date()
     max_timestamp_date = new Date(max_timestamp)
     if (max_timestamp_date.getFullYear() == current_date.getFullYear() &&
         (max_timestamp_date.getMonth() == current_date.getMonth() ||
-         max_timestamp_date.getMonth() == current_date.getMonth() - 1)) {
+         max_timestamp_date.getMonth() == current_date.getMonth() - 1) &&
+         (total_cost_amortized_unblended_adj > 0 && total_cost_nonamortized_unblended_adj > 0)) {
           // This cloud account has costs for current or previous month
           // Check if it's the youngest cloud account
       if (youngest_cloud_account["min_timestamp"] == null || min_timestamp > youngest_cloud_account["min_timestamp"]) {
@@ -544,10 +549,15 @@ script "js_complete_vendor_account_list", type: "javascript" do
     else if (indexed_recommendations[vendor_account] && indexed_recommendations[vendor_account][0]['vendor_account_name']) {
       vendor_account_name = indexed_recommendations[vendor_account][0]['vendor_account_name']
     }
+    var cost_rows = indexed_costs_by_cloud_vendor_account[vendor_account] || []
     result.push({
       "vendor_account": vendor_account,
       "vendor_account_name": vendor_account_name,
       "cost_timestamps": vendor_account_timestamps[vendor_account] || {},
+      // Pluck "cost_nonamortized_unblended_adj" from indexed_costs_by_cloud_vendor_account[vendor_account]
+      // Sum the total costs for vendor_account using _.reduce()
+      "total_cost_nonamortized_unblended_adj": _.reduce(_.pluck(cost_rows, "cost_nonamortized_unblended_adj"), function(memo, num) { return memo + num; }, 0),
+      "total_cost_amortized_unblended_adj": _.reduce(_.pluck(cost_rows, "cost_amortized_unblended_adj"), function(memo, num) { return memo + num; }, 0),
       // Youngest account is used to showcase some "Unallocated" costs
       // The story is that this is a new account that just started incurring costs
       // Enables showcasing how FinOps Persona can remediate this (add tag to cloud account or RG, or add rule to RBD)
