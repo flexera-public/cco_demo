@@ -34,6 +34,10 @@ This is helpful when considering potential automatic notifications for Unallocat
 
 `Application` dimension has rules defined by FinOps team which work in addition to Cloud Tenant tag based allocation to allocate costs that are unallocated i.e. not tagged, can't be tagged (coverage), or incorrectly allocated (accuracy).
 
+### Kubernetes / Container Cost Visibility Context Leveraged for Allocation
+
+Static rules included to represent fixed allocations based on cloud account tags/mappings, to the correct allocation based on Kubernetes Namespace (which is coming from Flexera Container Cost Visibility).
+
 ## Dimension Hierarchy
 
 The dimensions are layered to serve specific personas within the organization.

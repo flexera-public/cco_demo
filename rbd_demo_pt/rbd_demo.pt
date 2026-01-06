@@ -7,7 +7,7 @@ severity "low"
 category "Cost"
 default_frequency "daily"
 info(
-  version: "0.1.0",
+  version: "0.2.0",
   provider: "Flexera",
   service: "Optima",
   policy_set: "Automation",
@@ -1220,6 +1220,54 @@ script "js_rbds", type: "javascript" do
         // Few Static Rules at the top
         // These are intended to be an example of rules that may be manually managed by the Centralized FinOps Personas (in addition to rules generated from CMDB/tags)
         // At top, so that they take precedence over application-based rules which is correct because they have been manually/varified and added by FinOps persona
+
+        // Container Visibility Rules
+        // Prove that we can leverage the granular context provided by Ocean's Container Visibility to create precise RBD allocations for Kubernetes workloads
+        // Eventually to be replaced with a single tag dimension rule when CCV supports labels
+        rules.push({
+          "condition": { "dimension": "tag_kubernetes_resource_namespace", "type": "dimension_equals", "value": "kube-system" },
+          "value": {
+            "text": "Infrastructure Controller"
+          }
+        })
+        rules.push({
+          "condition": { "dimension": "tag_kubernetes_resource_namespace", "type": "dimension_equals", "value": "spot-system" },
+          "value": {
+            "text": "Infrastructure Controller"
+          }
+        })
+        rules.push({
+          "condition": { "dimension": "tag_kubernetes_resource_namespace", "type": "dimension_equals", "value": "wordsmith" },
+          "value": {
+            "text": "Product Reviews"
+          }
+        })
+        rules.push({
+          "condition": { "dimension": "tag_kubernetes_resource_namespace", "type": "dimension_equals", "value": "monitoring" },
+          "value": {
+            "text": "Infrastructure Monitoring"
+          }
+        })
+        rules.push({
+          "condition": { "dimension": "tag_kubernetes_resource_namespace", "type": "dimension_equals", "value": "httpbin" },
+          "value": {
+            "text": "Load Balancer"
+          }
+        })
+        rules.push({
+          "condition": { "dimension": "tag_kubernetes_resource_namespace", "type": "dimension_equals", "value": "coder" },
+          "value": {
+            "text": "Developer Portal"
+          }
+        })
+        rules.push({
+          "condition": { "dimension": "tag_kubernetes_resource_namespace", "type": "dimension_equals", "value": "boinc" },
+          "value": {
+            "text": "Data Mart"
+          }
+        })
+          
+
         // Databricks Commitments
         rules.push({
           "condition": { "type": "and", "expressions": [
