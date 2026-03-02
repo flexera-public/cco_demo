@@ -1,6 +1,6 @@
 {
   "name": "Google Label Cardinality Report",
-  "version": "0.2.4",
+  "version": "0.3.2",
   "cloud": "Google",
   "service": "Tags",
   "policy_set": "Tag Cardinality",
@@ -10,6 +10,7 @@
   "incident": [
     {
       "summary_template": "Google Label Cardinality Report: {{ len data }} Google Label Keys Found",
+      "detail_template": "{{ with index data 0 }}{{ .csv_message }}{{ end }}",
       "export": [
         {
           "name": "type",

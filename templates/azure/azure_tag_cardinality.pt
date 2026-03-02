@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "3.2.6",
+  version: "3.3.1",
   provider: "Azure",
   service: "Tags",
   policy_set: "Tag Cardinality",

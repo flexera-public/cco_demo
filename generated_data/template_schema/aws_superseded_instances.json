@@ -1,6 +1,6 @@
 {
   "name": "AWS Superseded EC2 Instances",
-  "version": "3.0.1",
+  "version": "3.2.4",
   "cloud": "AWS",
   "service": "Compute",
   "policy_set": "Superseded Compute Instances",
@@ -104,6 +104,11 @@
         }
       ],
       "path": "generated_data/fake_incident_tables/aws_superseded_instances_1.json"
+    },
+    {
+      "summary_template": "AWS Superseded EC2 Instances: {{ len data }} Errors Identified",
+      "detail_template": "The policy was unable to retrieve EC2 instance data from one or more AWS regions due to permission or configuration errors.\n\n **Error Details:**\n {{ range data -}}\n - {{ .error }}\n {{ end -}}\n\n **Recommended Actions:**\n 1. Verify that the AWS credential has the 'ec2:DescribeInstances' permission for all regions where the policy should execute\n 2. Ensure that the required AWS regions are enabled in your AWS account (some regions require explicit opt-in)\n 3. Consider updating the 'Allow/Deny Regions List' parameter to exclude regions that are not accessible or not relevant to your use case\n\n **Additional Information:**\n If certain regions should be excluded from this policy's scope, you can configure the region filter parameters to prevent these errors from appearing in future policy runs.",
+      "path": "generated_data/fake_incident_tables/aws_superseded_instances_2.json"
     }
   ]
 }

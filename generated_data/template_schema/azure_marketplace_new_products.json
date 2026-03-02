@@ -1,6 +1,6 @@
 {
   "name": "Azure New Marketplace Products",
-  "version": "0.5.3",
+  "version": "0.6.1",
   "cloud": "Azure",
   "service": "Marketplace",
   "policy_set": "New Marketplace Products",

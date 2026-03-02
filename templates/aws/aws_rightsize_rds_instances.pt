@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "5.8.6",
+  version: "5.10.4",
   provider: "AWS",
   service: "RDS",
   policy_set: "Rightsize Database Instances",
@@ -52,6 +52,14 @@ datasource "ds_aws_rightsize_rds_instances_2" do
     verb "GET"
     host "raw.githubusercontent.com"
     path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_rightsize_rds_instances_2.json"
+  end
+end
+
+datasource "ds_aws_rightsize_rds_instances_3" do
+  request do
+    verb "GET"
+    host "raw.githubusercontent.com"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_rightsize_rds_instances_3.json"
   end
 end
 
@@ -264,6 +272,13 @@ policy "pol_incident" do
       field "id" do
         label "id"
       end
+    end
+  end
+  validate_each $ds_aws_rightsize_rds_instances_3 do
+    summary_template "AWS Rightsize RDS Instances: {{ len data }} Errors Identified"
+    check eq(0, 1)
+    export do
+      resource_level false
     end
   end
 end

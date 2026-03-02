@@ -1,6 +1,6 @@
 {
   "name": "Google Idle Persistent Disk Recommender",
-  "version": "4.3.4",
+  "version": "4.4.3",
   "cloud": "Google",
   "service": "Storage",
   "policy_set": "Unused Volumes",
@@ -20,10 +20,6 @@
         {
           "name": "accountName",
           "label": "Project Name"
-        },
-        {
-          "name": "projectNumber",
-          "label": "Project Number"
         },
         {
           "name": "resourceID",

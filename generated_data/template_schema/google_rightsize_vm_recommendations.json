@@ -1,11 +1,11 @@
 {
   "name": "Google Rightsize VM Recommender",
-  "version": "3.2.4",
+  "version": "3.3.3",
   "cloud": "Google",
   "service": "Compute",
   "policy_set": "Rightsize Compute Instances",
   "recommendation_type": "Usage Reduction",
-  "short_description": "This Policy finds underutilized and idle Google VM instances and downsizes, stops, or deletes them after approval. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/google/rightsize_vm_recommendations) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
+  "short_description": "This policy template reports native Google recommendations for idle and underutilized VMs and downsizes, stops, or deletes them after approval. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/google/rightsize_vm_recommendations) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more.",
   "url": "https://raw.githubusercontent.com/flexera-public/policy_templates/master/cost/google/rightsize_vm_recommendations/google_rightsize_vm_recommendations.pt",
   "filename": "google_rightsize_vm_recommendations",
   "incident": [
@@ -20,10 +20,6 @@
         {
           "name": "accountName",
           "label": "Project Name"
-        },
-        {
-          "name": "projectNumber",
-          "label": "Project Number"
         },
         {
           "name": "resourceID",
@@ -132,10 +128,6 @@
         {
           "name": "accountName",
           "label": "Project Name"
-        },
-        {
-          "name": "projectNumber",
-          "label": "Project Number"
         },
         {
           "name": "resourceID",

@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "4.2.4",
+  version: "4.5.1",
   provider: "Azure",
   service: "Compute",
   policy_set: "Reserved Instances",
@@ -92,6 +92,12 @@ policy "pol_incident" do
       end
       field "savings" do
         label "Estimated Monthly Savings"
+      end
+      field "estimatedBreakEvenInMonths" do
+        label "Estimated Break Even In Months"
+      end
+      field "paymentOption" do
+        label "Payment Option"
       end
       field "firstUsageDate" do
         label "First Usage Date"

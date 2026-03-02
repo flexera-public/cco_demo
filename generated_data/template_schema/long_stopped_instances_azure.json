@@ -1,6 +1,6 @@
 {
   "name": "Azure Long Stopped Compute Instances",
-  "version": "6.0.4",
+  "version": "6.1.4",
   "cloud": "Azure",
   "service": "Compute",
   "policy_set": "Long Stopped Instances",

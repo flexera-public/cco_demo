@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "0.2.8",
+  version: "0.4.4",
   provider: "AWS",
   service: "Network",
   policy_set: "Unused Load Balancers",
@@ -44,6 +44,14 @@ datasource "ds_aws_unused_albs_1" do
     verb "GET"
     host "raw.githubusercontent.com"
     path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_unused_albs_1.json"
+  end
+end
+
+datasource "ds_aws_unused_albs_2" do
+  request do
+    verb "GET"
+    host "raw.githubusercontent.com"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_unused_albs_2.json"
   end
 end
 
@@ -117,6 +125,13 @@ policy "pol_incident" do
       field "id" do
         label "ID"
       end
+    end
+  end
+  validate_each $ds_aws_unused_albs_2 do
+    summary_template "AWS Unused Application Load Balancers: {{ len data }} Errors Identified"
+    check eq(0, 1)
+    export do
+      resource_level false
     end
   end
 end

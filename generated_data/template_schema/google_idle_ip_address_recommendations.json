@@ -1,6 +1,6 @@
 {
   "name": "Google Idle IP Address Recommender",
-  "version": "4.3.4",
+  "version": "4.4.3",
   "cloud": "Google",
   "service": "Compute",
   "policy_set": "Unused IP Addresses",
@@ -20,10 +20,6 @@
         {
           "name": "accountName",
           "label": "Project Name"
-        },
-        {
-          "name": "projectNumber",
-          "label": "Project Number"
         },
         {
           "name": "ipAddress",

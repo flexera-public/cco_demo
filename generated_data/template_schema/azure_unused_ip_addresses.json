@@ -1,6 +1,6 @@
 {
   "name": "Azure Unused IP Addresses",
-  "version": "7.3.6",
+  "version": "7.4.1",
   "cloud": "Azure",
   "service": "Compute",
   "policy_set": "Unused IP Addresses",

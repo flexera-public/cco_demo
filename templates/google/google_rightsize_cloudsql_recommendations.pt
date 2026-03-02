@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "0.2.4",
+  version: "0.4.3",
   provider: "Google",
   service: "Compute",
   policy_set: "Rightsize Database Instances",
@@ -70,9 +70,6 @@ policy "pol_incident" do
       end
       field "accountName" do
         label "Project Name"
-      end
-      field "projectNumber" do
-        label "Project Number"
       end
       field "resourceID" do
         label "Resource ID"
@@ -158,9 +155,6 @@ policy "pol_incident" do
       end
       field "accountName" do
         label "Project Name"
-      end
-      field "projectNumber" do
-        label "Project Number"
       end
       field "resourceID" do
         label "Resource ID"

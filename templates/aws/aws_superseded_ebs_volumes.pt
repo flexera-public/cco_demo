@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "6.3.10",
+  version: "6.5.4",
   provider: "AWS",
   service: "Compute",
   policy_set: "Inefficient Disk Usage",
@@ -44,6 +44,14 @@ datasource "ds_aws_superseded_ebs_volumes_1" do
     verb "GET"
     host "raw.githubusercontent.com"
     path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_superseded_ebs_volumes_1.json"
+  end
+end
+
+datasource "ds_aws_superseded_ebs_volumes_2" do
+  request do
+    verb "GET"
+    host "raw.githubusercontent.com"
+    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_superseded_ebs_volumes_2.json"
   end
 end
 
@@ -120,6 +128,13 @@ policy "pol_incident" do
       field "id" do
         label "ID"
       end
+    end
+  end
+  validate_each $ds_aws_superseded_ebs_volumes_2 do
+    summary_template "AWS Superseded EBS Volumes: {{ len data }} Errors Identified"
+    check eq(0, 1)
+    export do
+      resource_level false
     end
   end
 end

@@ -1,6 +1,6 @@
 {
   "name": "Azure Savings Plan Recommendations",
-  "version": "3.1.6",
+  "version": "3.3.1",
   "cloud": "Azure",
   "service": "Compute",
   "policy_set": "Savings Plans",
@@ -36,6 +36,10 @@
         {
           "name": "term",
           "label": "Term"
+        },
+        {
+          "name": "paymentOption",
+          "label": "Payment Option"
         },
         {
           "name": "recommendedQuantity",

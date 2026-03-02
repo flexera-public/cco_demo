@@ -1,6 +1,6 @@
 {
   "name": "Azure Tag Cardinality Report",
-  "version": "3.2.6",
+  "version": "3.3.1",
   "cloud": "Azure",
   "service": "Tags",
   "policy_set": "Tag Cardinality",
@@ -10,6 +10,7 @@
   "incident": [
     {
       "summary_template": "Azure Tag Cardinality Report",
+      "detail_template": "{{ with index data 0 }}{{ .csv_message }}{{ end }}",
       "export": [
         {
           "name": "type",

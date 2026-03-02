@@ -1,6 +1,6 @@
 {
   "name": "AWS Unused Network Load Balancers",
-  "version": "0.2.8",
+  "version": "0.4.4",
   "cloud": "AWS",
   "service": "Network",
   "policy_set": "Unused Load Balancers",
@@ -96,6 +96,11 @@
         }
       ],
       "path": "generated_data/fake_incident_tables/aws_unused_nlbs_1.json"
+    },
+    {
+      "summary_template": "AWS Unused Network Load Balancers: {{ len data }} Errors Identified",
+      "detail_template": "The policy was unable to retrieve Network Load Balancers from one or more AWS regions due to permission or configuration errors.\n\n **Error Details:**\n {{ range data -}}\n - {{ .error }}\n {{ end }}",
+      "path": "generated_data/fake_incident_tables/aws_unused_nlbs_2.json"
     }
   ]
 }
