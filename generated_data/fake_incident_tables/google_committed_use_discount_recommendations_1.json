@@ -2,6 +2,7 @@
   {
     "accountID": "digitalocean.com:dev-ops-team",
     "accountName": "DigitalOcean-DevOps-Team",
+    "paymentOption": "No Upfront",
     "projectNumber": "1056289341115",
     "resourceID": "projects/1056289341115/locations/us-west1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2DHighcpu-m CPU",
     "resourceName": "database-primary",
@@ -22,6 +23,7 @@
   {
     "accountID": "aws.com:prod-ops-team",
     "accountName": "AWS-ProdB-DevOps-Team",
+    "paymentOption": "No Upfront",
     "projectNumber": "9321137291114",
     "resourceID": "projects/9321137291114/locations/europe-west3/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N1Highcpu-m CPU",
     "resourceName": "bastion-host",
@@ -42,6 +44,7 @@
   {
     "accountID": "azure.com:resat-std",
     "accountName": "Azure-Resat-Standard",
+    "paymentOption": "No Upfront",
     "projectNumber": "1234567890124",
     "resourceID": "projects/1234567890124/locations/us-central1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2Highcpu-m CPU",
     "resourceName": "scheduler-cron",
@@ -62,6 +65,7 @@
   {
     "accountID": "googlecloud.com:dev-ops",
     "accountName": "GoogleCloudDevOps",
+    "paymentOption": "No Upfront",
     "projectNumber": "7890123451115",
     "resourceID": "projects/7890123451115/locations/us-east4/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 1 year new standard CUD for N2Standard CPU",
     "resourceName": "test-automation",
@@ -82,6 +86,7 @@
   {
     "accountID": "vmware.com:prod-ops",
     "accountName": "VMware-ProdB-DevOps-Team",
+    "paymentOption": "No Upfront",
     "projectNumber": "4567890121114",
     "resourceID": "projects/4567890121114/locations/europe-west2/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N1Highcpu-m CPU",
     "resourceName": "gpu-compute",
@@ -102,6 +107,7 @@
   {
     "accountID": "ibm.com:dev-ops",
     "accountName": "IBM-DevOps-Team",
+    "paymentOption": "No Upfront",
     "projectNumber": "2345678901115",
     "resourceID": "projects/2345678901115/locations/us-west2/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2Standard CPU",
     "resourceName": "auth-service",
@@ -122,6 +128,7 @@
   {
     "accountID": "oracle.com:prod-ops",
     "accountName": "Oracle-ProdB-DevOps-Team",
+    "paymentOption": "No Upfront",
     "projectNumber": "9876543211114",
     "resourceID": "projects/9876543211114/locations/europe-west1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2Highcpu-m CPU",
     "resourceName": "worker-queue",
@@ -142,6 +149,7 @@
   {
     "accountID": "microsoft.com:resat-std",
     "accountName": "Microsoft-Resat-Standard",
+    "paymentOption": "No Upfront",
     "projectNumber": "1111111111115",
     "resourceID": "projects/1111111111115/locations/us-east1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2DHighcpu-m CPU",
     "resourceName": "recommendation-engine",
@@ -162,6 +170,7 @@
   {
     "accountID": "amazonaws.com:dev-ops",
     "accountName": "AmazonAWSDevOpsTeam",
+    "paymentOption": "No Upfront",
     "projectNumber": "5555555551115",
     "resourceID": "projects/5555555551115/locations/europe-west4/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N1Highcpu-m CPU",
     "resourceName": "user-profile-svc",
@@ -182,6 +191,7 @@
   {
     "accountID": "vmware.com:prod-ops",
     "accountName": "VMware-ProdB-DevOps-Team",
+    "paymentOption": "No Upfront",
     "projectNumber": "4444444441114",
     "resourceID": "projects/4444444441114/locations/us-west3/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 1 year new standard CUD for N2DStandard CPU",
     "resourceName": "order-processing",
@@ -202,6 +212,7 @@
   {
     "accountID": "ibm.com:dev-ops",
     "accountName": "IBM-DevOps-Team",
+    "paymentOption": "No Upfront",
     "projectNumber": "6666666661115",
     "resourceID": "projects/6666666661115/locations/europe-west2/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N1Highcpu-m CPU",
     "resourceName": "scheduler-cron",
@@ -222,6 +233,7 @@
   {
     "accountID": "microsoft.com:resat-std",
     "accountName": "Microsoft-Resat-Standard",
+    "paymentOption": "No Upfront",
     "projectNumber": "7777777771115",
     "resourceID": "projects/7777777771115/locations/us-east2/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2DHighcpu-m CPU",
     "resourceName": "analytics-engine",
@@ -242,6 +254,7 @@
   {
     "accountID": "googlecloud.com:dev-ops",
     "accountName": "GoogleCloudDevOpsTeam",
+    "paymentOption": "No Upfront",
     "projectNumber": "8888888881115",
     "resourceID": "projects/8888888881115/locations/europe-west3/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N1Highcpu-m CPU",
     "resourceName": "dns-resolver",
@@ -262,6 +275,7 @@
   {
     "accountID": "microsoft.com:prod-ops",
     "accountName": "Microsoft-ProdB-DevOpsTeam",
+    "paymentOption": "No Upfront",
     "projectNumber": "9999999991114",
     "resourceID": "projects/9999999991114/locations/europe-west1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2DHighcpu-m CPU",
     "resourceName": "inventory-mgmt",
@@ -282,6 +296,7 @@
   {
     "accountID": "amazonaws.com:resat-std",
     "accountName": "AmazonAWSResatStandardTeam",
+    "paymentOption": "No Upfront",
     "projectNumber": "2222222221115",
     "resourceID": "projects/2222222221115/locations/us-west1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2Highcpu-m CPU",
     "resourceName": "load-balancer",
@@ -302,6 +317,7 @@
   {
     "accountID": "vmware.com:prod-ops",
     "accountName": "VMware-ProdB-DevOpsTeam",
+    "paymentOption": "No Upfront",
     "projectNumber": "3333333331114",
     "resourceID": "projects/3333333331114/locations/europe-west4/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 1 year new standard CUD for N2DStandard CPU",
     "resourceName": "game-server",
@@ -322,6 +338,7 @@
   {
     "accountID": "googlecloud.com:dev-ops",
     "accountName": "GoogleCloudDevOpsTeam",
+    "paymentOption": "No Upfront",
     "projectNumber": "4444444441115",
     "resourceID": "projects/4444444441115/locations/europe-west2/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N1Highcpu-m CPU",
     "resourceName": "scheduler-cron",
@@ -342,6 +359,7 @@
   {
     "accountID": "microsoft.com:resat-std",
     "accountName": "Microsoft-Resat-Standard",
+    "paymentOption": "No Upfront",
     "projectNumber": "5555555551115",
     "resourceID": "projects/5555555551115/locations/europe-west3/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2DHighcpu-m CPU",
     "resourceName": "cdn-origin",
@@ -362,6 +380,7 @@
   {
     "accountID": "amazonaws.com:prod-ops",
     "accountName": "AmazonAWSProdOpsTeam",
+    "paymentOption": "No Upfront",
     "projectNumber": "6666666661114",
     "resourceID": "projects/6666666661114/locations/us-east1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2DHighcpu-m CPU",
     "resourceName": "gpu-compute",
@@ -382,6 +401,7 @@
   {
     "accountID": "vmware.com:resat-std",
     "accountName": "VMware-Resat-StandardTeam",
+    "paymentOption": "No Upfront",
     "projectNumber": "7777777771115",
     "resourceID": "projects/7777777771115/locations/europe-west1/recommenders/google.compute.commitment.UsageCommitmentRecommender/recommendations/Purchase a 3 year new standard CUD for N2Highcpu-m CPU",
     "resourceName": "cache-redis",
