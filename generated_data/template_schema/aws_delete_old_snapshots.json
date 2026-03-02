@@ -1,6 +1,6 @@
 {
   "name": "AWS Old Snapshots",
-  "version": "8.4.9",
+  "version": "8.6.4",
   "cloud": "AWS",
   "service": "Storage",
   "policy_set": "Old Snapshots",

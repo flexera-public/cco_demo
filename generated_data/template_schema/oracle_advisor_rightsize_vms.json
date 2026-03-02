@@ -1,6 +1,6 @@
 {
   "name": "Oracle Cloud Advisor: Rightsize Virtual Machines",
-  "version": "0.2.2",
+  "version": "0.3.1",
   "cloud": "Oracle",
   "service": "Compute",
   "policy_set": "Rightsize Compute Instances",

@@ -1,6 +1,6 @@
 {
   "name": "AWS Superseded EBS Volumes",
-  "version": "6.3.10",
+  "version": "6.5.4",
   "cloud": "AWS",
   "service": "Compute",
   "policy_set": "Inefficient Disk Usage",

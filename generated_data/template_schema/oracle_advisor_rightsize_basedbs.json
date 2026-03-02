@@ -1,6 +1,6 @@
 {
   "name": "Oracle Cloud Advisor: Rightsize Base Database Service",
-  "version": "0.1.1",
+  "version": "0.2.1",
   "cloud": "Oracle",
   "service": "Database",
   "policy_set": "Rightsize Database Instances",

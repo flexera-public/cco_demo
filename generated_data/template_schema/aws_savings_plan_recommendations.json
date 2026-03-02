@@ -1,6 +1,6 @@
 {
   "name": "AWS Savings Plan Recommendations",
-  "version": "3.3.7",
+  "version": "3.4.5",
   "cloud": "AWS",
   "service": "Compute",
   "policy_set": "Savings Plans",

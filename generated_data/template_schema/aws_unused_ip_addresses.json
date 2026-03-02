@@ -1,6 +1,6 @@
 {
   "name": "AWS Unused IP Addresses",
-  "version": "9.2.8",
+  "version": "9.4.4",
   "cloud": "AWS",
   "service": "Compute",
   "policy_set": "Unused IP Addresses",

@@ -1,6 +1,6 @@
 {
   "name": "Google Committed Use Discount Recommender",
-  "version": "4.3.4",
+  "version": "4.5.3",
   "cloud": "Google",
   "service": "Compute",
   "policy_set": "Reserved Instances",
@@ -20,10 +20,6 @@
         {
           "name": "accountName",
           "label": "Project Name"
-        },
-        {
-          "name": "projectNumber",
-          "label": "Project Number"
         },
         {
           "name": "resourceID",
@@ -52,6 +48,10 @@
         {
           "name": "algorithm",
           "label": "Algorithm"
+        },
+        {
+          "name": "paymentOption",
+          "label": "Payment Option"
         },
         {
           "name": "recommendationDetails",

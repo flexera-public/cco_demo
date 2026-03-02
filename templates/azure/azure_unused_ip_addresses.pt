@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "7.3.6",
+  version: "7.4.1",
   provider: "Azure",
   service: "Compute",
   policy_set: "Unused IP Addresses",

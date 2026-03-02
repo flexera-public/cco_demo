@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "4.3.4",
+  version: "4.4.3",
   provider: "Google",
   service: "Compute",
   policy_set: "Unused IP Addresses",
@@ -62,9 +62,6 @@ policy "pol_incident" do
       end
       field "accountName" do
         label "Project Name"
-      end
-      field "projectNumber" do
-        label "Project Number"
       end
       field "ipAddress" do
         label "IP Address"

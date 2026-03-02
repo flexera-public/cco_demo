@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "6.3.10",
+  version: "6.5.4",
   provider: "AWS",
   service: "Compute",
   policy_set: "Inefficient Disk Usage",

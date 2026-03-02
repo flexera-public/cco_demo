@@ -1,6 +1,6 @@
 {
   "name": "Azure Unused Firewalls",
-  "version": "0.2.7",
+  "version": "0.3.1",
   "cloud": "Azure",
   "service": "Network",
   "policy_set": "Unused Firewalls",

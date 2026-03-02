@@ -1,6 +1,6 @@
 {
   "name": "Azure Reserved Instances Recommendations",
-  "version": "4.2.4",
+  "version": "4.5.1",
   "cloud": "Azure",
   "service": "Compute",
   "policy_set": "Reserved Instances",
@@ -60,6 +60,14 @@
         {
           "name": "savings",
           "label": "Estimated Monthly Savings"
+        },
+        {
+          "name": "estimatedBreakEvenInMonths",
+          "label": "Estimated Break Even In Months"
+        },
+        {
+          "name": "paymentOption",
+          "label": "Payment Option"
         },
         {
           "name": "firstUsageDate",

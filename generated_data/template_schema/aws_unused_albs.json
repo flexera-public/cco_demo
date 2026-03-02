@@ -1,6 +1,6 @@
 {
   "name": "AWS Unused Application Load Balancers",
-  "version": "0.2.8",
+  "version": "0.4.4",
   "cloud": "AWS",
   "service": "Network",
   "policy_set": "Unused Load Balancers",

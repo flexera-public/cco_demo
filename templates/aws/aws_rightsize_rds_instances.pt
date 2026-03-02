@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "5.8.6",
+  version: "5.10.4",
   provider: "AWS",
   service: "RDS",
   policy_set: "Rightsize Database Instances",

@@ -1,6 +1,6 @@
 {
   "name": "AWS Tag Cardinality Report",
-  "version": "3.1.7",
+  "version": "3.2.1",
   "cloud": "AWS",
   "service": "Tags",
   "policy_set": "Tag Cardinality",
@@ -10,6 +10,7 @@
   "incident": [
     {
       "summary_template": "AWS Tag Cardinality Report",
+      "detail_template": "{{ with index data 0 }}{{ .csv_message }}{{ end }}",
       "export": [
         {
           "name": "type",

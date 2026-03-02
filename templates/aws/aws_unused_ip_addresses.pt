@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "9.2.8",
+  version: "9.4.4",
   provider: "AWS",
   service: "Compute",
   policy_set: "Unused IP Addresses",

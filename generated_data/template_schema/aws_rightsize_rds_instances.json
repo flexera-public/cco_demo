@@ -1,6 +1,6 @@
 {
   "name": "AWS Rightsize RDS Instances",
-  "version": "5.8.6",
+  "version": "5.10.4",
   "cloud": "AWS",
   "service": "RDS",
   "policy_set": "Rightsize Database Instances",

@@ -1,6 +1,6 @@
 {
   "name": "AWS Superseded EC2 Instances",
-  "version": "3.0.1",
+  "version": "3.2.4",
   "cloud": "AWS",
   "service": "Compute",
   "policy_set": "Superseded Compute Instances",

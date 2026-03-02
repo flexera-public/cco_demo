@@ -1,6 +1,6 @@
 {
   "name": "Azure Rightsize Managed Disks",
-  "version": "2.6.4",
+  "version": "2.7.2",
   "cloud": "Azure",
   "service": "Managed Disks",
   "policy_set": "Rightsize Storage",
@@ -11,7 +11,7 @@
   "incident": [
     {
       "summary_template": "{{ with index data 0 }}{{ .policyName }}{{ end }}: {{ len data }} Azure Oversized Managed Disks Found",
-      "detail_template": "**Potential Monthly Savings:** {{ with index data 0 }}${{ .totalSavings }} {{ .savingsCurrency }}\n\n {{ .message }}{{ end }}",
+      "detail_template": "**Potential Monthly Savings:** ${{ with index data 0 }}{{ .totalSavings }}{{ end }} {{ with index data 0 }}{{ .savingsCurrency }}{{ end }}\n\n {{ with index data 0 }}{{ .message }}{{ end }}",
       "export": [
         {
           "name": "accountID",

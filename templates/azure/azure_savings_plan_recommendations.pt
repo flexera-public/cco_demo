@@ -11,7 +11,7 @@ category "Cost"
 severity "low"
 default_frequency "weekly"
 info(
-  version: "3.1.6",
+  version: "3.3.1",
   provider: "Azure",
   service: "Compute",
   policy_set: "Savings Plans",
@@ -74,6 +74,9 @@ policy "pol_incident" do
       end
       field "term" do
         label "Term"
+      end
+      field "paymentOption" do
+        label "Payment Option"
       end
       field "recommendedQuantity" do
         label "Recommended Quantity to Purchase"
