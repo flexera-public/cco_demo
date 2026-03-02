@@ -184,6 +184,9 @@ def parse_incidents(text: str, template_name: str) -> list[dict]:
         for e_start, e_end in find_blocks(vblock, re.compile(r'\bexport\b')):
             eblock = vblock[e_start:e_end]
             exports.extend(extract_export_fields(eblock))
+        # Skip incidents with "Errors Identified" in summary template
+        if summary and "Errors Identified" in summary:
+            continue
         inc = {}
         if summary is not None: inc["summary_template"] = summary
         if detail  is not None: inc["detail_template"]  = detail

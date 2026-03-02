@@ -47,14 +47,6 @@ datasource "ds_aws_unused_albs_1" do
   end
 end
 
-datasource "ds_aws_unused_albs_2" do
-  request do
-    verb "GET"
-    host "raw.githubusercontent.com"
-    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_unused_albs_2.json"
-  end
-end
-
 ###############################################################################
 # Policy
 ###############################################################################
@@ -125,13 +117,6 @@ policy "pol_incident" do
       field "id" do
         label "ID"
       end
-    end
-  end
-  validate_each $ds_aws_unused_albs_2 do
-    summary_template "AWS Unused Application Load Balancers: {{ len data }} Errors Identified"
-    check eq(0, 1)
-    export do
-      resource_level false
     end
   end
 end
