@@ -2,7 +2,7 @@
   {
     "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "monitoring-observability",
-    "age": null,
+    "age": 135,
     "allocation": "Dynamic",
     "id": "/subscriptions/3b88d467-711d-4ef7-9e42-0cc7c2d3063e/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/cache-redis",
     "ipAddress": "52.177.213.81",
@@ -21,7 +21,7 @@
   {
     "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "ml-experiments",
-    "age": null,
+    "age": 329,
     "allocation": "Static",
     "id": "/subscriptions/5f72a6e0-c3a9-46a4-977e-17eadb788696/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/staging-env",
     "ipAddress": "40.114.216.190",
@@ -40,7 +40,7 @@
   {
     "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "data-science",
-    "age": null,
+    "age": 86,
     "allocation": "Dynamic",
     "id": "/subscriptions/fb7acc74-3e3a-41bd-8cc2-2b1b2f1b0e62/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/recommendation-engine",
     "ipAddress": "13.89.104.120",
@@ -59,7 +59,7 @@
   {
     "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "ml-experiments",
-    "age": null,
+    "age": 218,
     "allocation": "Static",
     "id": "/subscriptions/488ad9b8-a8db-4064-ac99-8b85350308f9/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/stream-processor",
     "ipAddress": "52.178.226.130",
@@ -78,7 +78,7 @@
   {
     "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "engineering-team",
-    "age": null,
+    "age": 184,
     "allocation": "Dynamic",
     "id": "/subscriptions/5bc7800a-c908-477a-82ea-8e3228ba105a/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/container-registry",
     "ipAddress": "20.234.162.140",
@@ -97,7 +97,7 @@
   {
     "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
     "accountName": "internal-tools",
-    "age": null,
+    "age": 224,
     "allocation": "Static",
     "id": "/subscriptions/ed744423-27eb-4847-97b7-e77942be98ce/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/chat-backend",
     "ipAddress": "40.114.216.141",
@@ -116,7 +116,7 @@
   {
     "accountID": "8752afcb-f9b4-453b-b34c-cb9f3a9a0247",
     "accountName": "ml-experiments",
-    "age": null,
+    "age": 329,
     "allocation": "Dynamic",
     "id": "/subscriptions/377289ff-9c5a-4632-a859-611f308095c2/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/recommendation-engine",
     "ipAddress": "52.177.213.82",
@@ -135,7 +135,7 @@
   {
     "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
     "accountName": "sales-crm",
-    "age": null,
+    "age": 201,
     "allocation": "Static",
     "id": "/subscriptions/d87c5f75-dc0c-416e-988a-601341a7a3e9/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/test-automation",
     "ipAddress": "20.227.113.50",
@@ -154,7 +154,7 @@
   {
     "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
     "accountName": "hr-systems",
-    "age": null,
+    "age": 281,
     "allocation": "Dynamic",
     "id": "/subscriptions/9aa30b5b-e238-4f05-96bf-e169efe9ca9a/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/game-server",
     "ipAddress": "52.178.226.131",
@@ -173,7 +173,7 @@
   {
     "accountID": "57e25d4f-1ba6-4ac3-8ae9-455e3f0236ec",
     "accountName": "mobile-backend",
-    "age": null,
+    "age": 131,
     "allocation": "Static",
     "id": "/subscriptions/2496c728-b743-4f1d-988b-843e5c1920a0/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/proxy-nginx",
     "ipAddress": "40.114.216.142",
@@ -192,7 +192,7 @@
   {
     "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
     "accountName": "monitoring-observability",
-    "age": null,
+    "age": 51,
     "allocation": "Dynamic",
     "id": "/subscriptions/f77d2ddd-638b-4f35-b1d3-c01c08fb3f6e/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/gpu-compute",
     "ipAddress": "20.234.162.141",
@@ -211,7 +211,7 @@
   {
     "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
     "accountName": "finance-reporting",
-    "age": null,
+    "age": 253,
     "allocation": "Static",
     "id": "/subscriptions/5ccfe42b-2bab-4426-a607-db45c2082db8/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/api-gateway",
     "ipAddress": "52.177.213.83",
@@ -230,7 +230,7 @@
   {
     "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
     "accountName": "integration-testing",
-    "age": null,
+    "age": 231,
     "allocation": "Dynamic",
     "id": "/subscriptions/5ca0c7b5-d049-40f2-a72c-56810123b99e/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/web-server-prod",
     "ipAddress": "40.114.216.143",
@@ -249,7 +249,7 @@
   {
     "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
     "accountName": "ci-cd-pipeline",
-    "age": null,
+    "age": 364,
     "allocation": "Static",
     "id": "/subscriptions/9625f8ad-ca1e-4052-9f8d-54b339b43af9/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/metrics-collector",
     "ipAddress": "20.227.113.51",
@@ -268,7 +268,7 @@
   {
     "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
     "accountName": "hr-systems",
-    "age": null,
+    "age": 37,
     "allocation": "Dynamic",
     "id": "/subscriptions/2b2b2593-1076-401f-ae06-b89e0fe30a85/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/app-backend",
     "ipAddress": "52.178.226.132",
@@ -287,7 +287,7 @@
   {
     "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
     "accountName": "backup-disaster-recovery",
-    "age": null,
+    "age": 345,
     "allocation": "Static",
     "id": "/subscriptions/8e14ab97-c010-4f56-93d8-9d4aa075ed96/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/fraud-detection",
     "ipAddress": "40.114.216.144",
@@ -306,7 +306,7 @@
   {
     "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
     "accountName": "internal-tools",
-    "age": null,
+    "age": 285,
     "allocation": "Dynamic",
     "id": "/subscriptions/2d4a7856-79cf-440b-96d4-e2b77f303e7e/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/backup-instance",
     "ipAddress": "20.234.162.142",

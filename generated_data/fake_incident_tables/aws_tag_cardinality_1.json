@@ -63,7 +63,7 @@
     "cardinality": 11,
     "key": "team",
     "type": "Resource",
-    "value_list": "Falcon, Armistice, Phoenix, Phoeix, Titan, Apollo, apoll, Orion, Zeus, Hermes, Athena"
+    "value_list": "Falcon, Armistice, Phoenix, Titan, Apollo, Orion, Zeus, Hermes, Athena"
   },
   {
     "cardinality": 5,
