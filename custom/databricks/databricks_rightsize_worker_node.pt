@@ -1,0 +1,228 @@
+# DEMO POLICY TEMPLATE. DOES NOT PRODUCE REAL RESULTS.
+# More info available here: https://github.com/flexera-public/cco_demo
+name "Databricks Rightsize Worker Node [Demo]"
+rs_pt_ver 20180301
+type "policy"
+short_description "Databricks Rightsize Worker Node [Demo]"
+long_description ""
+# This is to make it easy to identify this template as a demo template via API
+doc_link "https://github.com/flexera-public/cco_demo"
+category "Cost"
+severity "low"
+default_frequency "weekly"
+info(
+  version: "0.0.1",
+  provider: "Databricks",
+  service: "Compute",
+  policy_set: "Databricks",
+  recommendation_type: "Usage Reduction",
+  hide_skip_approvals: "true",
+  demo: "true"
+)
+
+###############################################################################
+# Parameters
+###############################################################################
+
+# This is to make it easy for automation to determine if an applied policy is
+# a demo policy or not.
+parameter "param_demo" do
+  type "string"
+  category "Policy Settings"
+  label "Demo Policy"
+  description "Indicates that this is a demo policy. Should generally be left at its default value."
+  allowed_values "True", "False"
+  default "True"
+end
+
+parameter "param_db_recommendation" do
+  type "string"
+  category "Policy Settings"
+  label "Databricks Recommendation"
+  description "Indicates the Databricks recommendation to provide. Should generally be left at its default value."
+  allowed_values "Worker Node Rightsizing"
+  default "Worker Node Rightsizing"
+end
+
+###############################################################################
+# Datasources & Scripts
+###############################################################################
+
+datasource "ds_databricks_data" do
+  request do
+    verb "GET"
+    host "raw.githubusercontent.com"
+    path "/flexera-public/cco_demo/refs/heads/main/custom/databricks/databricks_data.json"
+  end
+end
+
+datasource "ds_databricks_data_normalized" do
+  run_script $js_databricks_data_normalized, $ds_databricks_data
+end
+
+script "js_databricks_data_normalized", type:"javascript" do
+  parameters "ds_databricks_data"
+  result "result"
+  code <<-'EOS'
+  result = _.map(ds_databricks_data, function(entry) {
+    // Copy existing keys into new object with some normalization to replace spaces with underscores
+    new_entry = {}
+    _.each(_.keys(entry), function(key) { new_entry[key.replace(/ /g, "_")] = entry[key] })
+
+    if (entry["details"]) {
+      _.each(_.keys(entry["details"]), function(key) { new_entry[key.replace(/ /g, "_")] = entry["details"][key] })
+    }
+
+    // Copy some values to new keys to match with what the scraper is going to expect
+    new_entry["cpuAverage"] = entry["cpu_utilization_avg"]
+    new_entry["cpuMaximum"] = entry["cpu_utilization_max"]
+    new_entry["cpuP95"] = entry["cpu_utilization_p95"]
+    new_entry["memAverage"] = entry["memory_utilization_avg"]
+    new_entry["memMaximum"] = entry["memory_utilization_max"]
+    new_entry["memP95"] = entry["memory_utilization_p95"]
+    new_entry["iopsAverage"] = entry["iops_utilization_avg"]
+    new_entry["iopsP95"] = entry["iops_p95"]
+    new_entry["throughputAverage"] = entry["throughput_average_percent"]
+    new_entry["throughputP95"] = entry["throughput_p95"]
+
+    new_entry["diskIops"] = entry["disk_iops"]
+    new_entry["diskThroughput"] = entry["disk_throughput_mbps"]
+    new_entry["newDiskIops"] = entry["new_disk_iops"]
+    new_entry["newDiskThroughput"] = entry["new_disk_throughput_mbps"]
+
+    new_entry["resourceID"] = entry["resource_id"]
+    new_entry["resourceName"] = entry["resource_name"]
+    new_entry["recommendationDetails"] = entry["recommendation_details"]
+    new_entry["vendor"] = entry["cloud_vendor"]
+    new_entry["lookbackPeriod"] = entry["lookback_period"]
+    new_entry["resourceType"] = entry["resource_type"]
+    new_entry["newResourceType"] = entry["recommendation_resource_type"]
+    new_entry["workspaceId"] = entry["workspace_id"]
+    new_entry["clusterSource"] = entry["cluster_source"]
+
+    new_entry["savingsCurrency"] = entry["currency"]
+    new_entry["savings"] = entry["estimated_monthly_savings"]
+
+    // Additional handling for disk recommendations
+    if (!new_entry["resourceType"] && !new_entry["newResourceType"] && new_entry["newDiskIops"] && new_entry["newDiskThroughput"]) {
+      new_entry["resourceType"] = [ new_entry["diskIops"], " IOPS, ", new_entry["diskThroughput"], " Throughput (mbps)" ].join('')
+      new_entry["newResourceType"] = [ new_entry["newDiskIops"], " IOPS, ", new_entry["newDiskThroughput"], " Throughput (mbps)" ].join('')
+    }
+
+    // Add additional useful values
+    new_entry["service"] = "Databricks"
+
+    return new_entry
+  })
+EOS
+end
+
+# Filter to just the recommendation type this policy template expects
+datasource "ds_databricks_incident" do
+  run_script $js_databricks_incident, $ds_databricks_data_normalized, $param_db_recommendation
+end
+
+script "js_databricks_incident", type:"javascript" do
+  parameters "ds_databricks_data_normalized", "param_db_recommendation"
+  result "result"
+  code <<-'EOS'
+  result = _.filter(ds_databricks_data_normalized, function(entry) {
+    return entry["recommendation_type"] == param_db_recommendation
+  })
+EOS
+end
+
+###############################################################################
+# Policy
+###############################################################################
+
+policy "pol_incident" do
+  validate_each $ds_databricks_incident do
+    summary_template "Databricks {{ with index data 0 }}{{ .recommendation_type }}{{ end }}: {{ len data }} Recommendations Found"
+    check eq(0, 1)
+    export do
+      resource_level true
+      field "vendor" do
+        label "Cloud Vendor"
+      end
+      field "accountID" do
+        label "Account ID"
+      end
+      field "accountName" do
+        label "Account Name"
+      end
+      field "resourceID" do
+        label "Resource ID"
+      end
+      field "resourceName" do
+        label "Resource Name"
+      end
+      field "recommendationDetails" do
+        label "Recommendation"
+      end
+      field "resourceType" do
+        label "Resource Type"
+      end
+      field "newResourceType" do
+        label "Recommended Resource Type"
+      end
+      field "region" do
+        label "Region"
+      end
+      field "platform" do
+        label "Platform"
+      end
+      field "workspaceId" do
+        label "Workspace ID"
+      end
+      field "clusterSource" do
+        label "Cluster Source"
+      end
+      field "savings" do
+        label "Estimated Monthly Savings"
+      end
+      field "savingsCurrency" do
+        label "Savings Currency"
+      end
+      field "cpuMaximum" do
+        label "CPU Maximum %"
+      end
+      field "cpuAverage" do
+        label "CPU Average %"
+      end
+      field "cpuP95" do
+        label "CPU p95"
+      end
+      field "memMaximum" do
+        label "Memory Maximum %"
+      end
+      field "memAverage" do
+        label "Memory Average %"
+      end
+      field "memP95" do
+        label "Memory p95"
+      end
+      # field "iopsAverage" do
+      #   label "IOPS Average"
+      # end
+      # field "iopsP95" do
+      #   label "IOPS p95"
+      # end
+      # field "throughputAverage" do
+      #   label "Throughput Average"
+      # end
+      # field "throughputP95" do
+      #   label "Throughput p95"
+      # end
+      field "lookbackPeriod" do
+        label "Look Back Period (Days)"
+      end
+      field "service" do
+        label "Service"
+      end
+      field "id" do
+        label "ID"
+      end
+    end
+  end
+end
