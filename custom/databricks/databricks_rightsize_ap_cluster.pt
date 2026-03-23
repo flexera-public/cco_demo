@@ -74,7 +74,7 @@ script "js_databricks_data_normalized", type:"javascript" do
     }
 
     // Copy some values to new keys to match with what the scraper is going to expect
-    new_entry["resourceID"] = entry["resource_name"]
+    new_entry["resourceID"] = entry["resource_id"] ? entry["resource_id"] : entry["resource_name"]
     new_entry["resourceName"] = entry["resource_name"]
     new_entry["recommendationDetails"] = entry["recommendation_details"]
     new_entry["vendor"] = entry["cloud_vendor"]
