@@ -1,9 +1,9 @@
 # DEMO POLICY TEMPLATE. DOES NOT PRODUCE REAL RESULTS.
 # More info available here: https://github.com/flexera-public/cco_demo
-name "Databricks Rightsize Worker Node [Demo]"
+name "Databricks Rightsize All Purpose Cluster [Demo]"
 rs_pt_ver 20180301
 type "policy"
-short_description "Databricks Rightsize Worker Node [Demo]"
+short_description "Databricks Rightsize All Purpose Cluster [Demo]"
 long_description ""
 # This is to make it easy to identify this template as a demo template via API
 doc_link "https://github.com/flexera-public/cco_demo"
@@ -40,8 +40,8 @@ parameter "param_db_recommendation" do
   category "Policy Settings"
   label "Databricks Recommendation"
   description "Indicates the Databricks recommendation to provide. Should generally be left at its default value."
-  allowed_values "Worker Node Rightsizing"
-  default "Worker Node Rightsizing"
+  allowed_values "All-Purpose Cluster: Rightsize"
+  default "All-Purpose Cluster: Rightsize"
 end
 
 ###############################################################################
@@ -74,40 +74,21 @@ script "js_databricks_data_normalized", type:"javascript" do
     }
 
     // Copy some values to new keys to match with what the scraper is going to expect
-    new_entry["cpuAverage"] = entry["cpu_utilization_avg"]
-    new_entry["cpuMaximum"] = entry["cpu_utilization_max"]
-    new_entry["cpuP95"] = entry["cpu_utilization_p95"]
-    new_entry["memAverage"] = entry["memory_utilization_avg"]
-    new_entry["memMaximum"] = entry["memory_utilization_max"]
-    new_entry["memP95"] = entry["memory_utilization_p95"]
-    new_entry["iopsAverage"] = entry["iops_utilization_avg"]
-    new_entry["iopsP95"] = entry["iops_p95"]
-    new_entry["throughputAverage"] = entry["throughput_average_percent"]
-    new_entry["throughputP95"] = entry["throughput_p95"]
-
-    new_entry["diskIops"] = entry["disk_iops"]
-    new_entry["diskThroughput"] = entry["disk_throughput_mbps"]
-    new_entry["newDiskIops"] = entry["new_disk_iops"]
-    new_entry["newDiskThroughput"] = entry["new_disk_throughput_mbps"]
-
-    new_entry["resourceID"] = entry["resource_id"]
+    new_entry["resourceID"] = entry["resource_id"] ? entry["resource_id"] : entry["resource_name"]
     new_entry["resourceName"] = entry["resource_name"]
     new_entry["recommendationDetails"] = entry["recommendation_details"]
     new_entry["vendor"] = entry["cloud_vendor"]
     new_entry["lookbackPeriod"] = entry["lookback_period"]
-    new_entry["resourceType"] = entry["resource_type"]
-    new_entry["newResourceType"] = entry["recommendation_resource_type"]
     new_entry["workspaceId"] = entry["workspace_id"]
     new_entry["clusterSource"] = entry["cluster_source"]
 
     new_entry["savingsCurrency"] = entry["currency"]
-    new_entry["savings"] = entry["estimated_monthly_savings"]
+    new_entry["savings"] = entry["estimated_monthly_savings_amount"]
 
-    // Additional handling for disk recommendations
-    if (!new_entry["resourceType"] && !new_entry["newResourceType"] && new_entry["newDiskIops"] && new_entry["newDiskThroughput"]) {
-      new_entry["resourceType"] = [ new_entry["diskIops"], " IOPS, ", new_entry["diskThroughput"], " Throughput (mbps)" ].join('')
-      new_entry["newResourceType"] = [ new_entry["newDiskIops"], " IOPS, ", new_entry["newDiskThroughput"], " Throughput (mbps)" ].join('')
-    }
+    new_entry["workerMinCount"] = entry["details"]["Worker Min Count"]
+    new_entry["workerMaxCount"] = entry["details"]["Worker Max Count"]
+    new_entry["dbus"] = entry["details"]["DBUs"]
+    new_entry["sku"] = entry["details"]["Sku Name"]
 
     // Add additional useful values
     new_entry["service"] = "Databricks"
@@ -160,11 +141,17 @@ policy "pol_incident" do
       field "recommendationDetails" do
         label "Recommendation"
       end
-      field "resourceType" do
-        label "Resource Type"
+      field "driver_resource_type" do
+        label "Driver Resource Type"
       end
-      field "newResourceType" do
-        label "Recommended Resource Type"
+      field "driver_recommendation_resource_type" do
+        label "Driver Recommended Resource Type"
+      end
+      field "worker_resource_type" do
+        label "Worker Resource Type"
+      end
+      field "worker_recommendation_resource_type" do
+        label "Worker Recommended Resource Type"
       end
       field "region" do
         label "Region"
@@ -172,11 +159,17 @@ policy "pol_incident" do
       field "platform" do
         label "Platform"
       end
+      field "status" do
+        label "Status"
+      end
       field "workspaceId" do
         label "Workspace ID"
       end
       field "clusterSource" do
         label "Cluster Source"
+      end
+      field "cost" do
+        label "Current Cluster Cost"
       end
       field "savings" do
         label "Estimated Monthly Savings"
@@ -184,36 +177,54 @@ policy "pol_incident" do
       field "savingsCurrency" do
         label "Savings Currency"
       end
-      field "cpuMaximum" do
-        label "CPU Maximum %"
+      field "sku" do
+        label "SKU Name"
       end
-      field "cpuAverage" do
-        label "CPU Average %"
+      field "dbus" do
+        label "DBUs"
       end
-      field "cpuP95" do
-        label "CPU p95"
+      field "workerMinCount" do
+        label "Worker Minimum Count"
       end
-      field "memMaximum" do
-        label "Memory Maximum %"
+      field "workerMaxCount" do
+        label "Worker Maximum Count"
       end
-      field "memAverage" do
-        label "Memory Average %"
+      field "driver_cpu_utilization_max" do
+        label "Driver CPU Maximum %"
       end
-      field "memP95" do
-        label "Memory p95"
+      field "driver_cpu_utilization_avg" do
+        label "Driver CPU Average %"
       end
-      # field "iopsAverage" do
-      #   label "IOPS Average"
-      # end
-      # field "iopsP95" do
-      #   label "IOPS p95"
-      # end
-      # field "throughputAverage" do
-      #   label "Throughput Average"
-      # end
-      # field "throughputP95" do
-      #   label "Throughput p95"
-      # end
+      field "driver_cpu_utilization_p95" do
+        label "Driver CPU p95"
+      end
+      field "driver_memory_utilization_max" do
+        label "Driver Memory Maximum %"
+      end
+      field "driver_memory_utilization_avg" do
+        label "Driver Memory Average %"
+      end
+      field "driver_memory_utilization_p95" do
+        label "Driver Memory p95"
+      end
+      field "worker_cpu_utilization_max" do
+        label "Worker CPU Maximum %"
+      end
+      field "worker_cpu_utilization_avg" do
+        label "Worker CPU Average %"
+      end
+      field "worker_cpu_utilization_p95" do
+        label "Worker CPU p95"
+      end
+      field "worker_memory_utilization_max" do
+        label "Worker Memory Maximum %"
+      end
+      field "worker_memory_utilization_avg" do
+        label "Worker Memory Average %"
+      end
+      field "worker_memory_utilization_p95" do
+        label "Worker Memory p95"
+      end
       field "lookbackPeriod" do
         label "Look Back Period (Days)"
       end
