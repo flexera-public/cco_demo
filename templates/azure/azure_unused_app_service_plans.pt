@@ -3,7 +3,7 @@
 name "Azure Unused App Service Plans [Demo]"
 rs_pt_ver 20180301
 type "policy"
-short_description "Checks for snapshots older than a specified number of days and, optionally, deletes them. See the [README](https://github.com/flexera-public/policy_templates/tree/master/cost/aws/old_snapshots) and [docs.flexera.com/flexera/EN/Automation](https://docs.flexera.com/flexera/EN/Automation/AutomationGS.htm) to learn more."
+short_description "Demo policy template that generates sample recommendations. See the [README](https://github.com/flexera-public/cco_demo) for more details."
 long_description ""
 # This is to make it easy to identify this template as a demo template via API
 doc_link "https://github.com/flexera-public/cco_demo"
@@ -36,8 +36,78 @@ parameter "param_demo" do
 end
 
 ###############################################################################
+# Credentials
+###############################################################################
+
+credentials "auth_flexera" do
+  schemes "oauth2"
+  label "Flexera"
+  description "Select Flexera One OAuth2 credentials"
+  tags "provider=flexera"
+end
+
+###############################################################################
 # Datasources & Scripts
 ###############################################################################
+
+datasource "ds_flexera_api_hosts" do
+  run_script $js_flexera_api_hosts, rs_optima_host
+end
+
+script "js_flexera_api_hosts", type: "javascript" do
+  parameters "rs_optima_host"
+  result "result"
+  code <<-'EOS'
+  host_table = {
+    "api.optima.flexeraeng.com": {
+      flexera: "api.flexera.com"
+    },
+    "api.optima-eu.flexeraeng.com": {
+      flexera: "api.flexera.eu"
+    },
+    "api.optima-apac.flexeraeng.com": {
+      flexera: "api.flexera.au"
+    }
+  }
+  result = host_table[rs_optima_host]
+EOS
+end
+
+datasource "ds_billing_centers" do
+  request do
+    auth $auth_flexera
+    host rs_optima_host
+    path join(["/analytics/orgs/", rs_org_id, "/billing_centers"])
+    query "view", "allocation_table"
+    header "Api-Version", "1.0"
+    header "User-Agent", "RS Policies"
+    ignore_status [403]
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "[*]") do
+      field "href", jmes_path(col_item, "href")
+      field "id", jmes_path(col_item, "id")
+      field "name", jmes_path(col_item, "name")
+      field "parent_id", jmes_path(col_item, "parent_id")
+    end
+  end
+end
+
+datasource "ds_top_level_bcs" do
+  run_script $js_top_level_bcs, $ds_billing_centers
+end
+
+script "js_top_level_bcs", type: "javascript" do
+  parameters "ds_billing_centers"
+  result "result"
+  code <<-'EOS'
+  filtered_bcs = _.filter(ds_billing_centers, function(bc) {
+    return bc['parent_id'] == null || bc['parent_id'] == undefined
+  })
+  result = _.compact(_.pluck(filtered_bcs, 'id'))
+EOS
+end
 
 datasource "ds_azure_unused_app_service_plans_1" do
   request do
@@ -47,12 +117,166 @@ datasource "ds_azure_unused_app_service_plans_1" do
   end
 end
 
+datasource "ds_cost_resources" do
+  request do
+    run_script $js_cost_resources_request, $ds_top_level_bcs, rs_org_id, rs_optima_host
+  end
+  result do
+    encoding "json"
+    collect jmes_path(response, "rows[*]") do
+      field "resource_id", jmes_path(col_item, "dimensions.resource_id")
+      field "vendor_account", jmes_path(col_item, "dimensions.vendor_account")
+      field "vendor_account_name", jmes_path(col_item, "dimensions.vendor_account_name")
+      field "cost", jmes_path(col_item, "metrics.cost_amortized_unblended_adj")
+    end
+  end
+end
+
+script "js_cost_resources_request", type: "javascript" do
+  parameters "ds_top_level_bcs", "rs_org_id", "rs_optima_host"
+  result "request"
+  code <<-'EOS'
+  // 3-month window using month granularity
+  var now = new Date()
+  var end_year = now.getFullYear()
+  var end_m = now.getMonth() + 2
+  if (end_m > 12) { end_year += 1; end_m -= 12 }
+  var end_month = end_year + "-" + ("0" + end_m).slice(-2)
+
+  var start = new Date(now.getFullYear(), now.getMonth() - 2, 1)
+  var start_month = start.getFullYear() + "-" + ("0" + (start.getMonth() + 1)).slice(-2)
+
+  var request = {
+    auth: "auth_flexera",
+    host: rs_optima_host,
+    verb: "POST",
+    path: "/bill-analysis/orgs/" + rs_org_id + "/costs/select",
+    body_fields: {
+      "dimensions": ["resource_id", "vendor_account", "vendor_account_name"],
+      "granularity": "month",
+      "start_at": start_month,
+      "end_at": end_month,
+      "metrics": ["cost_amortized_unblended_adj"],
+      "billing_center_ids": ds_top_level_bcs,
+      "limit": 100000,
+      "filter": {
+        "type": "and",
+        "expressions": [
+          {
+            "dimension": "vendor",
+            "type": "equal",
+            "value": "Azure"
+          },
+          {
+            "type": "or",
+            "expressions": [
+              {
+                "dimension": "resource_id",
+                "type": "substring",
+                "substring": "/providers/Microsoft.Web/serverfarms/"
+              },
+              {
+                "dimension": "resource_id",
+                "type": "substring",
+                "substring": "/providers/microsoft.web/serverfarms/"
+              }
+            ]
+          },
+          {
+            "type": "not",
+            "expression": {
+              "dimension": "adjustment_name",
+              "type": "substring",
+              "substring": "Shared"
+            }
+          }
+        ]
+      }
+    },
+    headers: {
+      "User-Agent": "RS Policies",
+      "Api-Version": "1.0"
+    },
+    ignore_status: [400]
+  }
+EOS
+end
+
+datasource "ds_merged_1" do
+  run_script $js_merged_1, $ds_cost_resources, $ds_azure_unused_app_service_plans_1
+end
+
+script "js_merged_1", type: "javascript" do
+  parameters "ds_cost_resources", "ds_seed"
+  result "result"
+  code <<-'EOS'
+  // Group cost rows by resource_id, sum cost across months
+  var cost_by_id = {}
+  _.each(ds_cost_resources, function(row) {
+    if (!row['resource_id'] || row['resource_id'] === '') return
+    if (!cost_by_id[row['resource_id']]) {
+      cost_by_id[row['resource_id']] = {
+        resource_id: row['resource_id'],
+        vendor_account: row['vendor_account'] || '',
+        vendor_account_name: row['vendor_account_name'] || '',
+        cost: 0
+      }
+    }
+    cost_by_id[row['resource_id']].cost += row['cost']
+  })
+
+  // Keep only rows whose resource_id matches the expected format for this template
+  var all_rows = _.filter(_.values(cost_by_id), function(e) {
+    var rid = e['resource_id'].toLowerCase()
+    return rid.indexOf('/serverfarms/') >= 0
+  })
+
+  // Sort by total cost descending and skip offset for multi-incident templates
+  var sorted = _.sortBy(all_rows, function(e) { return -e.cost })
+  sorted = sorted.slice(0)
+
+  // Overlay real resource identifiers onto seed data
+  var result = []
+  for (var i = 0; i < ds_seed.length; i++) {
+    var item = {}
+    _.each(_.keys(ds_seed[i]), function(k) { item[k] = ds_seed[i][k] })
+    if (i < sorted.length) {
+      var c = sorted[i]
+      // Capture old seed identity values before replacing, for substring substitution
+      var old_account_id   = String(item['accountID']  !== undefined ? item['accountID']  : '')
+      var old_account_name = String(item['accountName'] !== undefined ? item['accountName'] : '')
+      var old_resource_id  = String(item['resourceID'] !== undefined ? item['resourceID']  : (item['id'] !== undefined ? item['id'] : ''))
+      var new_account_id   = c['vendor_account']
+      var new_account_name = c['vendor_account_name']
+      var new_resource_id  = c['resource_id']
+      // Replace top-level identity fields
+      if (item.hasOwnProperty('accountID'))   item['accountID']   = new_account_id
+      if (item.hasOwnProperty('accountName')) item['accountName'] = new_account_name
+      if (item.hasOwnProperty('resourceID'))  item['resourceID']  = new_resource_id
+      if (item.hasOwnProperty('id'))          item['id']          = new_resource_id
+      // Replace embedded occurrences of those values in all other string fields
+      // (e.g. recommendationDetails, resourceARN, chartUrlField, resourceGroup)
+      var replacements = []
+      if (old_resource_id  && old_resource_id  !== new_resource_id)  replacements.push([old_resource_id,  new_resource_id])
+      if (old_account_id   && old_account_id   !== new_account_id)   replacements.push([old_account_id,   new_account_id])
+      if (old_account_name && old_account_name !== new_account_name) replacements.push([old_account_name, new_account_name])
+      _.each(_.keys(item), function(k) {
+        if (k === 'accountID' || k === 'accountName' || k === 'resourceID' || k === 'id') return
+        if (typeof item[k] !== 'string') return
+        _.each(replacements, function(pair) { item[k] = item[k].split(pair[0]).join(pair[1]) })
+      })
+    }
+    result.push(item)
+  }
+EOS
+end
+
 ###############################################################################
 # Policy
 ###############################################################################
 
 policy "pol_incident" do
-  validate_each $ds_azure_unused_app_service_plans_1 do
+  validate_each $ds_merged_1 do
     summary_template "Azure Unused App Service Plans: {{ len data }} Azure Unused App Service Plans Found"
     check eq(0, 1)
     export do
