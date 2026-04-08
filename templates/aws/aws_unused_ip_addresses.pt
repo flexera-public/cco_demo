@@ -113,7 +113,7 @@ datasource "ds_aws_unused_ip_addresses_1" do
   request do
     verb "GET"
     host "raw.githubusercontent.com"
-    path "/flexera-public/cco_demo/refs/heads/main/generated_data/fake_incident_tables/aws_unused_ip_addresses_1.json"
+    path "/flexera-public/cco_demo/refs/heads/FOAA-935_feat_demo_pts_resourceids_from_cost_data/generated_data/fake_incident_tables/aws_unused_ip_addresses_1.json"
   end
 end
 
@@ -168,6 +168,16 @@ script "js_cost_resources_request", type: "javascript" do
             "value": "AWS"
           },
           {
+            "dimension": "service",
+            "type": "equal",
+            "value": "AmazonVPC"
+          },
+          {
+            "dimension": "usage_type",
+            "type": "substring",
+            "substring": "PublicIP"
+          },
+          {
             "type": "not",
             "expression": {
               "dimension": "adjustment_name",
@@ -213,7 +223,7 @@ script "js_merged_1", type: "javascript" do
   // Keep only rows whose resource_id matches the expected format for this template
   var all_rows = _.filter(_.values(cost_by_id), function(e) {
     var rid = e['resource_id'].toLowerCase()
-    return rid.indexOf('eipalloc-') === 0
+    return rid.indexOf('elastic-ip/eipalloc-') === 0 || rid.indexOf('eipalloc-') === 0
   })
 
   // Sort by total cost descending and skip offset for multi-incident templates
