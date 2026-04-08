@@ -68,8 +68,8 @@ RESOURCE_ID_FILTERS = {
     "aws_unused_albs": "rid.indexOf('loadbalancer/app/') === 0",
     "aws_unused_nlbs": "rid.indexOf('loadbalancer/net/') === 0",
     "aws_unused_clbs": "rid.indexOf('loadbalancer/') === 0 && rid.indexOf('/app/') < 0 && rid.indexOf('/net/') < 0",
-    # Elastic IP allocation IDs start with "eipalloc-"
-    "aws_unused_ip_addresses":               "rid.indexOf('eipalloc-') === 0",
+    # Elastic IP allocation IDs come from cost API as "elastic-ip/eipalloc-..."
+    "aws_unused_ip_addresses":               "rid.indexOf('elastic-ip/eipalloc-') === 0 || rid.indexOf('eipalloc-') === 0",
     # ── Azure ────────────────────────────────────────────────────────────────
     # Azure ARM paths are lowercased before matching
     # Virtual machines
@@ -180,6 +180,10 @@ COST_API_FILTERS = {
     "aws_unused_clbs": [
         {"dimension": "service", "type": "equal", "value": "AWSELB"},
         {"dimension": "resource_type", "type": "equal", "value": "Load Balancer"},
+    ],
+    "aws_unused_ip_addresses": [
+        {"dimension": "service", "type": "equal", "value": "AmazonVPC"},
+        {"dimension": "usage_type", "type": "substring", "substring": "PublicIP"},
     ],
     # ── Azure VMs ────────────────────────────────────────────────────────────
     "azure_compute_rightsizing": [
@@ -534,7 +538,7 @@ def gen_seed_datasources(incidents):
         result += '  request do\n'
         result += '    verb "GET"\n'
         result += '    host "raw.githubusercontent.com"\n'
-        result += '    path "/flexera-public/cco_demo/refs/heads/main/%s"\n' % incident_path
+        result += '    path "/flexera-public/cco_demo/refs/heads/FOAA-935_feat_demo_pts_resourceids_from_cost_data/%s"\n' % incident_path
         result += '  end\n'
         result += 'end\n\n'
     return result
