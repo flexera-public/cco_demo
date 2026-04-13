@@ -538,7 +538,7 @@ def gen_seed_datasources(incidents):
         result += '  request do\n'
         result += '    verb "GET"\n'
         result += '    host "raw.githubusercontent.com"\n'
-        result += '    path "/flexera-public/cco_demo/refs/heads/FOAA-935_feat_demo_pts_resourceids_from_cost_data/%s"\n' % incident_path
+        result += '    path "/flexera-public/cco_demo/refs/heads/main/%s"\n' % incident_path
         result += '  end\n'
         result += 'end\n\n'
     return result
@@ -653,6 +653,17 @@ def _merge_js_code(offset, filter_expr, strip_prefix=""):
         '        _.each(replacements, function(pair) { item[k] = item[k].split(pair[0]).join(pair[1]) })\n'
         '      })\n'
         '    }\n'
+        '    // Recommendation ingestion expects tags as an array of "key=value" strings.\n'
+        '    if (typeof item[\'tags\'] === \'string\') {\n'
+        '      var tag_entries = []\n'
+        '      _.each(item[\'tags\'].split(\',\'), function(tag) {\n'
+        '        var cleaned = String(tag).replace(/^\\s+|\\s+$/g, \'\')\n'
+        '        if (cleaned !== \'\' && cleaned.indexOf(\'=\') > 0) tag_entries.push(cleaned)\n'
+        '      })\n'
+        '      item[\'tags\'] = tag_entries\n'
+        '    }\n'
+        '    // Use ISO-like currency code for better downstream compatibility.\n'
+        '    if (item[\'savingsCurrency\'] === \'US$\') item[\'savingsCurrency\'] = \'USD\'\n'
         '    result.push(item)\n'
         '  }\n'
     ) % offset
