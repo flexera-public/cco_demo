@@ -261,6 +261,17 @@ script "js_merged_1", type: "javascript" do
         _.each(replacements, function(pair) { item[k] = item[k].split(pair[0]).join(pair[1]) })
       })
     }
+    // Recommendation ingestion expects tags as an array of "key=value" strings.
+    if (typeof item['tags'] === 'string') {
+      var tag_entries = []
+      _.each(item['tags'].split(','), function(tag) {
+        var cleaned = String(tag).replace(/^\s+|\s+$/g, '')
+        if (cleaned !== '' && cleaned.indexOf('=') > 0) tag_entries.push(cleaned)
+      })
+      item['tags'] = tag_entries
+    }
+    // Use ISO-like currency code for better downstream compatibility.
+    if (item['savingsCurrency'] === 'US$') item['savingsCurrency'] = 'USD'
     result.push(item)
   }
 EOS

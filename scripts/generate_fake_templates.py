@@ -538,7 +538,7 @@ def gen_seed_datasources(incidents):
         result += '  request do\n'
         result += '    verb "GET"\n'
         result += '    host "raw.githubusercontent.com"\n'
-        result += '    path "/flexera-public/cco_demo/refs/heads/main/%s"\n' % incident_path
+        result += '    path "/flexera-public/cco_demo/refs/heads/FOAA-935_feat_demo_pts_resourceids_from_cost_data/%s"\n' % incident_path
         result += '  end\n'
         result += 'end\n\n'
     return result
