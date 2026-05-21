@@ -8,6 +8,7 @@ cost data and merging them with static seed data.
 """
 from __future__ import annotations
 import json
+import subprocess
 from pathlib import Path
 
 IN_DIR = Path("generated_data/template_schema")
@@ -299,6 +300,86 @@ COST_API_FILTERS = {
     ],
 }
 
+# Mapping from Flexera cost API region display names to provider region codes.
+# The cost API "region" dimension returns human-readable names; we need the
+# provider-native codes for fields like region and ARN.
+REGION_DISPLAY_TO_CODE = {
+    "AWS": {
+        "US East (N. Virginia)": "us-east-1",
+        "US East (Ohio)": "us-east-2",
+        "US West (N. California)": "us-west-1",
+        "US West (Oregon)": "us-west-2",
+        "Africa (Cape Town)": "af-south-1",
+        "Asia Pacific (Hong Kong)": "ap-east-1",
+        "Asia Pacific (Hyderabad)": "ap-south-2",
+        "Asia Pacific (Jakarta)": "ap-southeast-3",
+        "Asia Pacific (Melbourne)": "ap-southeast-4",
+        "Asia Pacific (Mumbai)": "ap-south-1",
+        "Asia Pacific (Osaka)": "ap-northeast-3",
+        "Asia Pacific (Seoul)": "ap-northeast-2",
+        "Asia Pacific (Singapore)": "ap-southeast-1",
+        "Asia Pacific (Sydney)": "ap-southeast-2",
+        "Asia Pacific (Tokyo)": "ap-northeast-1",
+        "Canada (Central)": "ca-central-1",
+        "Canada West (Calgary)": "ca-west-1",
+        "Europe (Frankfurt)": "eu-central-1",
+        "Europe (Ireland)": "eu-west-1",
+        "Europe (London)": "eu-west-2",
+        "Europe (Milan)": "eu-south-1",
+        "Europe (Paris)": "eu-west-3",
+        "Europe (Spain)": "eu-south-2",
+        "Europe (Stockholm)": "eu-north-1",
+        "Europe (Zurich)": "eu-central-2",
+        "Israel (Tel Aviv)": "il-central-1",
+        "Middle East (Bahrain)": "me-south-1",
+        "Middle East (UAE)": "me-central-1",
+        "South America (Sao Paulo)": "sa-east-1",
+    },
+    "Azure": {
+        "East US": "eastus",
+        "East US 2": "eastus2",
+        "West US": "westus",
+        "West US 2": "westus2",
+        "West US 3": "westus3",
+        "Central US": "centralus",
+        "North Central US": "northcentralus",
+        "South Central US": "southcentralus",
+        "West Central US": "westcentralus",
+        "Canada Central": "canadacentral",
+        "Canada East": "canadaeast",
+        "North Europe": "northeurope",
+        "West Europe": "westeurope",
+        "UK South": "uksouth",
+        "UK West": "ukwest",
+        "France Central": "francecentral",
+        "France South": "francesouth",
+        "Germany West Central": "germanywestcentral",
+        "Germany North": "germanynorth",
+        "Sweden Central": "swedencentral",
+        "Switzerland North": "switzerlandnorth",
+        "Switzerland West": "switzerlandwest",
+        "Norway East": "norwayeast",
+        "Norway West": "norwaywest",
+        "Australia East": "australiaeast",
+        "Australia Southeast": "australiasoutheast",
+        "Australia Central": "australiacentral",
+        "East Asia": "eastasia",
+        "Southeast Asia": "southeastasia",
+        "Japan East": "japaneast",
+        "Japan West": "japanwest",
+        "Korea Central": "koreacentral",
+        "Korea South": "koreasouth",
+        "Central India": "centralindia",
+        "South India": "southindia",
+        "West India": "westindia",
+        "Brazil South": "brazilsouth",
+        "South Africa North": "southafricanorth",
+        "South Africa West": "southafricawest",
+        "UAE North": "uaenorth",
+        "UAE Central": "uaecentral",
+    },
+}
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Boilerplate PT blocks (constant across all enriched templates)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -386,6 +467,7 @@ datasource "ds_cost_resources" do
       field "resource_id", jmes_path(col_item, "dimensions.resource_id")
       field "vendor_account", jmes_path(col_item, "dimensions.vendor_account")
       field "vendor_account_name", jmes_path(col_item, "dimensions.vendor_account_name")
+      field "region", jmes_path(col_item, "dimensions.region")
       field "cost", jmes_path(col_item, "metrics.cost_amortized_unblended_adj")
     end
   end
@@ -411,7 +493,7 @@ script "js_cost_resources_request", type: "javascript" do
     verb: "POST",
     path: "/bill-analysis/orgs/" + rs_org_id + "/costs/select",
     body_fields: {
-      "dimensions": ["resource_id", "vendor_account", "vendor_account_name"],
+      "dimensions": ["resource_id", "vendor_account", "vendor_account_name", "region"],
       "granularity": "month",
       "start_at": start_month,
       "end_at": end_month,
@@ -528,7 +610,7 @@ def gen_header(name, version, cloud, service, policy_set, recommendation_type, e
     return result
 
 
-def gen_seed_datasources(incidents):
+def gen_seed_datasources(incidents, git_sha):
     """Generate datasources that fetch static seed data from GitHub."""
     result = ""
     for incident in incidents:
@@ -538,7 +620,7 @@ def gen_seed_datasources(incidents):
         result += '  request do\n'
         result += '    verb "GET"\n'
         result += '    host "raw.githubusercontent.com"\n'
-        result += '    path "/flexera-public/cco_demo/refs/heads/FOAA-935_feat_demo_pts_resourceids_from_cost_data/%s"\n' % incident_path
+        result += '    path "/flexera-public/cco_demo/%s/%s"\n' % (git_sha, incident_path)
         result += '  end\n'
         result += 'end\n\n'
     return result
@@ -550,7 +632,7 @@ def gen_cost_query(vendor, extra_exprs=None):
     return COST_QUERY_TEMPLATE % (vendor, extra_block)
 
 
-def gen_merge_datasource(idx, seed_ds_name, offset, filter_expr, strip_prefix=""):
+def gen_merge_datasource(idx, seed_ds_name, offset, filter_expr, strip_prefix="", cloud=""):
     """Generate a datasource + script that merges cost data onto seed data.
 
     idx:          1-based incident index (for unique naming)
@@ -560,6 +642,7 @@ def gen_merge_datasource(idx, seed_ds_name, offset, filter_expr, strip_prefix=""
                   restrict which cost rows are eligible, or empty string for no filter
     strip_prefix: optional string prefix to strip from cost API resource_id before
                   assigning to new_resource_id (e.g. "snapshot/" for EC2 snapshots)
+    cloud:        cloud provider name (e.g. "AWS", "Azure") for region mapping
     """
     merge_ds = 'ds_merged_%d' % idx
     merge_js = 'js_merged_%d' % idx
@@ -572,14 +655,14 @@ def gen_merge_datasource(idx, seed_ds_name, offset, filter_expr, strip_prefix=""
     result += '  parameters "ds_cost_resources", "ds_seed"\n'
     result += '  result "result"\n'
     result += "  code <<-'EOS'\n"
-    result += _merge_js_code(offset, filter_expr, strip_prefix)
+    result += _merge_js_code(offset, filter_expr, strip_prefix, cloud)
     result += 'EOS\n'
     result += 'end\n\n'
 
     return result
 
 
-def _merge_js_code(offset, filter_expr, strip_prefix=""):
+def _merge_js_code(offset, filter_expr, strip_prefix="", cloud=""):
     """Return the JavaScript that merges cost rows onto seed data."""
     if filter_expr:
         filter_block = (
@@ -601,7 +684,24 @@ def _merge_js_code(offset, filter_expr, strip_prefix=""):
     else:
         strip_block = ''
 
+    # Build JS region mapping object for this cloud provider
+    region_map = REGION_DISPLAY_TO_CODE.get(cloud, {})
+    if region_map:
+        map_entries = ',\n'.join(
+            '    "%s": "%s"' % (display, code)
+            for display, code in region_map.items()
+        )
+        region_map_block = (
+            '  // Map cost API region display names to provider region codes\n'
+            '  var region_map = {\n'
+            + map_entries + '\n'
+            '  }\n\n'
+        )
+    else:
+        region_map_block = ''
+
     return (
+        region_map_block +
         '  // Group cost rows by resource_id, sum cost across months\n'
         '  var cost_by_id = {}\n'
         '  _.each(ds_cost_resources, function(row) {\n'
@@ -611,6 +711,7 @@ def _merge_js_code(offset, filter_expr, strip_prefix=""):
         '        resource_id: row[\'resource_id\'],\n'
         '        vendor_account: row[\'vendor_account\'] || \'\',\n'
         '        vendor_account_name: row[\'vendor_account_name\'] || \'\',\n'
+        '        region: row[\'region\'] || \'\',\n'
         '        cost: 0\n'
         '      }\n'
         '    }\n'
@@ -632,23 +733,28 @@ def _merge_js_code(offset, filter_expr, strip_prefix=""):
         '      var old_account_id   = String(item[\'accountID\']  !== undefined ? item[\'accountID\']  : \'\')\n'
         '      var old_account_name = String(item[\'accountName\'] !== undefined ? item[\'accountName\'] : \'\')\n'
         '      var old_resource_id  = String(item[\'resourceID\'] !== undefined ? item[\'resourceID\']  : (item[\'id\'] !== undefined ? item[\'id\'] : \'\'))\n'
+        '      var old_region       = String(item[\'region\'] !== undefined ? item[\'region\'] : \'\')\n'
         '      var new_account_id   = c[\'vendor_account\']\n'
         '      var new_account_name = c[\'vendor_account_name\']\n'
         '      var new_resource_id  = c[\'resource_id\']\n'
+        '      var new_region       = c[\'region\'] || \'\'\n'
+        '      if (region_map && region_map[new_region]) new_region = region_map[new_region]\n'
         + strip_block +
         '      // Replace top-level identity fields\n'
         '      if (item.hasOwnProperty(\'accountID\'))   item[\'accountID\']   = new_account_id\n'
         '      if (item.hasOwnProperty(\'accountName\')) item[\'accountName\'] = new_account_name\n'
         '      if (item.hasOwnProperty(\'resourceID\'))  item[\'resourceID\']  = new_resource_id\n'
         '      if (item.hasOwnProperty(\'id\'))          item[\'id\']          = new_resource_id\n'
+        '      if (item.hasOwnProperty(\'region\') && new_region !== \'\') item[\'region\'] = new_region\n'
         '      // Replace embedded occurrences of those values in all other string fields\n'
         '      // (e.g. recommendationDetails, resourceARN, chartUrlField, resourceGroup)\n'
         '      var replacements = []\n'
         '      if (old_resource_id  && old_resource_id  !== new_resource_id)  replacements.push([old_resource_id,  new_resource_id])\n'
         '      if (old_account_id   && old_account_id   !== new_account_id)   replacements.push([old_account_id,   new_account_id])\n'
         '      if (old_account_name && old_account_name !== new_account_name) replacements.push([old_account_name, new_account_name])\n'
+        '      if (old_region && new_region && old_region !== new_region) replacements.push([old_region, new_region])\n'
         '      _.each(_.keys(item), function(k) {\n'
-        '        if (k === \'accountID\' || k === \'accountName\' || k === \'resourceID\' || k === \'id\') return\n'
+        '        if (k === \'accountID\' || k === \'accountName\' || k === \'resourceID\' || k === \'id\' || k === \'region\') return\n'
         '        if (typeof item[k] !== \'string\') return\n'
         '        _.each(replacements, function(pair) { item[k] = item[k].split(pair[0]).join(pair[1]) })\n'
         '      })\n'
@@ -709,6 +815,8 @@ def gen_policy_block(incidents, enrich):
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+    git_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+
     for schema_path in sorted(IN_DIR.glob("*.json")):
         with open(schema_path, "r", encoding="utf-8") as f:
             schema = json.load(f)
@@ -731,7 +839,7 @@ def main() -> None:
 
         if enrich:
             file_contents += BOILERPLATE_DATASOURCES
-            file_contents += gen_seed_datasources(incidents)
+            file_contents += gen_seed_datasources(incidents, git_sha)
             cost_api_filter = COST_API_FILTERS.get(filename, [])
             file_contents += gen_cost_query(CLOUD_TO_VENDOR[cloud], cost_api_filter)
 
@@ -744,7 +852,7 @@ def main() -> None:
                 incident_path = incident.get("path", "")
                 seed_ds_name = "ds_" + Path(incident_path).stem
 
-                file_contents += gen_merge_datasource(idx, seed_ds_name, offset, filter_expr, strip_prefix)
+                file_contents += gen_merge_datasource(idx, seed_ds_name, offset, filter_expr, strip_prefix, cloud)
 
                 # Count seed entries to advance offset for next incident
                 seed_file = Path(incident_path)
@@ -752,7 +860,7 @@ def main() -> None:
                     with open(seed_file, "r", encoding="utf-8") as sf:
                         offset += len(json.load(sf))
         else:
-            file_contents += gen_seed_datasources(incidents)
+            file_contents += gen_seed_datasources(incidents, git_sha)
 
         file_contents += gen_policy_block(incidents, enrich)
 
