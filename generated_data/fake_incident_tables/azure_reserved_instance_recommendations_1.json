@@ -1,6 +1,6 @@
 [
   {
-    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
+    "accountID": "91fb8e66-dc35-419f-a275-c15b2efffa68",
     "accountName": "sales-crm",
     "costWithNoRI": 184.93,
     "estimatedBreakEvenInMonths": 9,
@@ -24,7 +24,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
+    "accountID": "20f6cb39-669a-40ef-a7cd-e2a4d725dee3",
     "accountName": "security-ops",
     "costWithNoRI": 936.67,
     "estimatedBreakEvenInMonths": 9,
@@ -48,7 +48,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
+    "accountID": "8d751df2-3c55-491c-b2f5-ea6bb9931963",
     "accountName": "customer-facing",
     "costWithNoRI": 67.81,
     "estimatedBreakEvenInMonths": 9,
@@ -72,7 +72,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
+    "accountID": "09163689-cc0f-473c-9bd8-e00525b5132a",
     "accountName": "content-management",
     "costWithNoRI": 149.86,
     "estimatedBreakEvenInMonths": 9,
@@ -96,7 +96,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
+    "accountID": "2a38a012-a2b6-4c97-b027-d850c96fb180",
     "accountName": "logging-infrastructure",
     "costWithNoRI": 149.87,
     "estimatedBreakEvenInMonths": 9,
@@ -120,7 +120,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
+    "accountID": "18d8c800-b472-40c8-8f0e-389d40e559a3",
     "accountName": "ml-experiments",
     "costWithNoRI": 149.85,
     "estimatedBreakEvenInMonths": 9,
@@ -144,7 +144,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "8752afcb-f9b4-453b-b34c-cb9f3a9a0247",
+    "accountID": "1d0b13b7-57f3-4b55-9525-e047592acf34",
     "accountName": "mobile-backend",
     "costWithNoRI": 67.82,
     "estimatedBreakEvenInMonths": 9,
@@ -168,7 +168,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
+    "accountID": "695ef8ea-bcb5-4a5e-b0ef-7b20d09c2ad0",
     "accountName": "monitoring-observability",
     "costWithNoRI": 149.88,
     "estimatedBreakEvenInMonths": 9,
@@ -192,7 +192,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
+    "accountID": "3bb7422a-2110-4bad-9dbc-becd61713a2d",
     "accountName": "demo-environment",
     "costWithNoRI": 936.69,
     "estimatedBreakEvenInMonths": 9,
@@ -216,7 +216,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "57e25d4f-1ba6-4ac3-8ae9-455e3f0236ec",
+    "accountID": "e0ee3af4-ffb7-474a-914a-75c14ba9e154",
     "accountName": "data-science",
     "costWithNoRI": 149.89,
     "estimatedBreakEvenInMonths": 10,
@@ -240,7 +240,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
+    "accountID": "d577a8b8-1258-4a02-b85f-90e349bb2a69",
     "accountName": "content-management",
     "costWithNoRI": 936.7,
     "estimatedBreakEvenInMonths": 9,
@@ -264,7 +264,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
+    "accountID": "65900941-9457-424f-865c-9ffd696dc94e",
     "accountName": "artifact-storage",
     "costWithNoRI": 149.9,
     "estimatedBreakEvenInMonths": 9,
@@ -288,7 +288,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
+    "accountID": "a41ba16a-700d-4dd1-93e8-566a7219f6ca",
     "accountName": "edge-computing",
     "costWithNoRI": 67.83,
     "estimatedBreakEvenInMonths": 10,
@@ -312,7 +312,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
+    "accountID": "ed5aa5d3-9774-41e4-82e7-463bffb738c5",
     "accountName": "content-management",
     "costWithNoRI": 149.91,
     "estimatedBreakEvenInMonths": 10,
@@ -336,7 +336,7 @@
     "term": "1 Year"
   },
   {
-    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
+    "accountID": "4d627ada-3c64-4254-a8ed-22a1b2098178",
     "accountName": "data-science",
     "costWithNoRI": 936.71,
     "estimatedBreakEvenInMonths": 9,
