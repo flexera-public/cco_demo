@@ -1,6 +1,6 @@
 [
   {
-    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
+    "accountID": "353a536b-7e88-4b5b-bdc4-fb3af5b3566b",
     "accountName": "ci-cd-pipeline",
     "capacity": 3,
     "cpuAverage": 1.17,
@@ -15,7 +15,7 @@
     "newCapacity": 1,
     "newResourceType": "Standard_D2s_v3",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine cdn-origin in Azure Subscription ci-cd-pipeline (353a536b-7e88-4b5b-bdc4-fb3af5b3566b) from Standard_D4s_v3 to Standard_D2s_v3",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server cdn-origin in Azure Subscription ci-cd-pipeline (353a536b-7e88-4b5b-bdc4-fb3af5b3566b) from Standard_D4s_v3 to Standard_D2s_v3",
     "region": "southeastasia",
     "resourceGroup": "prod",
     "resourceID": "/subscriptions/353a536b-7e88-4b5b-bdc4-fb3af5b3566b/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/cdn-origin",
@@ -33,7 +33,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "ceee86e2-a6cf-4a62-8004-1313cc581679",
+    "accountID": "333c7121-fbf4-4595-a3ab-aa5714626905",
     "accountName": "artifact-storage",
     "capacity": 5,
     "cpuAverage": 3.51,
@@ -48,7 +48,7 @@
     "newCapacity": 2,
     "newResourceType": "Standard_B1ms",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine load-balancer in Azure Subscription artifact-storage (333c7121-fbf4-4595-a3ab-aa5714626905) from Standard_B2s to Standard_B1ms",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server load-balancer in Azure Subscription artifact-storage (333c7121-fbf4-4595-a3ab-aa5714626905) from Standard_B2s to Standard_B1ms",
     "region": "southeastasia",
     "resourceGroup": "dev",
     "resourceID": "/subscriptions/333c7121-fbf4-4595-a3ab-aa5714626905/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/load-balancer",
@@ -66,7 +66,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "1aec08f2-c15d-4c32-919c-4bab940f69f3",
+    "accountID": "87f6fe68-8b5b-4896-84fc-c9ef47d98e5e",
     "accountName": "performance-testing",
     "capacity": 4,
     "cpuAverage": 2.93,
@@ -81,7 +81,7 @@
     "newCapacity": 2,
     "newResourceType": "Standard_D32s_v3",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine stream-processor in Azure Subscription performance-testing (87f6fe68-8b5b-4896-84fc-c9ef47d98e5e) from Standard_D8s_v4 to Standard_D32s_v3",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server stream-processor in Azure Subscription performance-testing (87f6fe68-8b5b-4896-84fc-c9ef47d98e5e) from Standard_D8s_v4 to Standard_D32s_v3",
     "region": "switzerlandnorth",
     "resourceGroup": "prod",
     "resourceID": "/subscriptions/87f6fe68-8b5b-4896-84fc-c9ef47d98e5e/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/stream-processor",
@@ -99,7 +99,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "13e8d4fc-8226-45a0-88cf-2979d3e9eba9",
+    "accountID": "bdc29014-d626-4f0e-a7a3-9f6067b51421",
     "accountName": "customer-facing",
     "capacity": 6,
     "cpuAverage": 4.23,
@@ -114,7 +114,7 @@
     "newCapacity": 3,
     "newResourceType": "Standard_B2s",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine api-gateway in Azure Subscription customer-facing (bdc29014-d626-4f0e-a7a3-9f6067b51421) from Standard_B4ms to Standard_B2s",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server api-gateway in Azure Subscription customer-facing (bdc29014-d626-4f0e-a7a3-9f6067b51421) from Standard_B4ms to Standard_B2s",
     "region": "uksouth",
     "resourceGroup": "dev",
     "resourceID": "/subscriptions/bdc29014-d626-4f0e-a7a3-9f6067b51421/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/api-gateway",
@@ -132,7 +132,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "1af450b2-ce7a-4af5-9ebc-a13461fe1e32",
+    "accountID": "fe2b8510-aebe-4384-b7bd-2b5d9a1afe3a",
     "accountName": "customer-facing",
     "capacity": 1,
     "cpuAverage": 0.94,
@@ -147,7 +147,7 @@
     "newCapacity": 1,
     "newResourceType": "Standard_D2s_v4",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine video-streaming in Azure Subscription customer-facing (fe2b8510-aebe-4384-b7bd-2b5d9a1afe3a) from Standard_D4s_v4 to Standard_D2s_v4",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server video-streaming in Azure Subscription customer-facing (fe2b8510-aebe-4384-b7bd-2b5d9a1afe3a) from Standard_D4s_v4 to Standard_D2s_v4",
     "region": "eastus2",
     "resourceGroup": "prod",
     "resourceID": "/subscriptions/fe2b8510-aebe-4384-b7bd-2b5d9a1afe3a/resourceGroups/rg-dev/providers/Microsoft.Compute/virtualMachines/video-streaming",
@@ -165,7 +165,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "6383b3a2-a8c4-4c07-8acf-f38e08fc7622",
+    "accountID": "8d77cd95-4cfd-4338-8f58-dd03658968e1",
     "accountName": "integration-testing",
     "capacity": 3,
     "cpuAverage": 1.62,
@@ -180,7 +180,7 @@
     "newCapacity": 1,
     "newResourceType": "Standard_B4ms",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine stream-processor in Azure Subscription integration-testing (8d77cd95-4cfd-4338-8f58-dd03658968e1) from Standard_B8ms to Standard_B4ms",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server stream-processor in Azure Subscription integration-testing (8d77cd95-4cfd-4338-8f58-dd03658968e1) from Standard_B8ms to Standard_B4ms",
     "region": "southeastasia",
     "resourceGroup": "dev",
     "resourceID": "/subscriptions/8d77cd95-4cfd-4338-8f58-dd03658968e1/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/stream-processor",
@@ -198,7 +198,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "8752afcb-f9b4-453b-b34c-cb9f3a9a0247",
+    "accountID": "050bd270-87c2-47de-8c31-02f5f7c418ce",
     "accountName": "performance-testing",
     "capacity": 2,
     "cpuAverage": 1.05,
@@ -213,7 +213,7 @@
     "newCapacity": 1,
     "newResourceType": "Standard_D2s_v4",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine backup-instance in Azure Subscription performance-testing (050bd270-87c2-47de-8c31-02f5f7c418ce) from Standard_D8s_v4 to Standard_D2s_v4",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server backup-instance in Azure Subscription performance-testing (050bd270-87c2-47de-8c31-02f5f7c418ce) from Standard_D8s_v4 to Standard_D2s_v4",
     "region": "westus",
     "resourceGroup": "prod",
     "resourceID": "/subscriptions/050bd270-87c2-47de-8c31-02f5f7c418ce/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/backup-instance",
@@ -231,7 +231,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "9c6588cd-ca5e-429d-adc7-5292d3880914",
+    "accountID": "b3f9c982-c7b3-424a-85d3-dcd952d3edf9",
     "accountName": "e-commerce-platform",
     "capacity": 5,
     "cpuAverage": 2.51,
@@ -246,7 +246,7 @@
     "newCapacity": 2,
     "newResourceType": "Standard_B1s",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine gpu-compute in Azure Subscription e-commerce-platform (b3f9c982-c7b3-424a-85d3-dcd952d3edf9) from Standard_B4ms to Standard_B1s",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server gpu-compute in Azure Subscription e-commerce-platform (b3f9c982-c7b3-424a-85d3-dcd952d3edf9) from Standard_B4ms to Standard_B1s",
     "region": "eastus2",
     "resourceGroup": "dev",
     "resourceID": "/subscriptions/b3f9c982-c7b3-424a-85d3-dcd952d3edf9/resourceGroups/rg-staging/providers/Microsoft.Compute/virtualMachines/gpu-compute",
@@ -264,7 +264,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "912102ae-2e57-4094-bb8a-63a7d1c38207",
+    "accountID": "55056637-9d0a-4268-b454-4d5d525e43d7",
     "accountName": "customer-facing",
     "capacity": 4,
     "cpuAverage": 2.01,
@@ -279,7 +279,7 @@
     "newCapacity": 2,
     "newResourceType": "Standard_D2s_v3",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine staging-env in Azure Subscription customer-facing (55056637-9d0a-4268-b454-4d5d525e43d7) from Standard_D4s_v3 to Standard_D2s_v3",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server staging-env in Azure Subscription customer-facing (55056637-9d0a-4268-b454-4d5d525e43d7) from Standard_D4s_v3 to Standard_D2s_v3",
     "region": "southcentralus",
     "resourceGroup": "prod",
     "resourceID": "/subscriptions/55056637-9d0a-4268-b454-4d5d525e43d7/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/staging-env",
@@ -297,7 +297,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "57e25d4f-1ba6-4ac3-8ae9-455e3f0236ec",
+    "accountID": "c9cd73b4-f165-4ae6-ad87-1bc1eeebd151",
     "accountName": "mobile-backend",
     "capacity": 7,
     "cpuAverage": 3.23,
@@ -312,7 +312,7 @@
     "newCapacity": 3,
     "newResourceType": "Standard_B4ms",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine video-streaming in Azure Subscription mobile-backend (c9cd73b4-f165-4ae6-ad87-1bc1eeebd151) from Standard_B1s to Standard_B4ms",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server video-streaming in Azure Subscription mobile-backend (c9cd73b4-f165-4ae6-ad87-1bc1eeebd151) from Standard_B1s to Standard_B4ms",
     "region": "southindia",
     "resourceGroup": "dev",
     "resourceID": "/subscriptions/c9cd73b4-f165-4ae6-ad87-1bc1eeebd151/resourceGroups/rg-prod/providers/Microsoft.Compute/virtualMachines/video-streaming",
@@ -330,7 +330,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "f048a88c-9bc9-43cf-a30d-f48c94708866",
+    "accountID": "381c91d8-8165-4c46-8ab5-349d12dde94b",
     "accountName": "production-platform",
     "capacity": 3,
     "cpuAverage": 1.49,
@@ -345,7 +345,7 @@
     "newCapacity": 2,
     "newResourceType": "Standard_D16s_v3",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine render-farm in Azure Subscription production-platform (381c91d8-8165-4c46-8ab5-349d12dde94b) from Standard_D32s_v5 to Standard_D16s_v3",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server render-farm in Azure Subscription production-platform (381c91d8-8165-4c46-8ab5-349d12dde94b) from Standard_D32s_v5 to Standard_D16s_v3",
     "region": "centralus",
     "resourceGroup": "prod",
     "resourceID": "/subscriptions/381c91d8-8165-4c46-8ab5-349d12dde94b/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/render-farm",
@@ -363,7 +363,7 @@
     "version": "5.7"
   },
   {
-    "accountID": "ca1eeeca-231f-4a91-a740-04eaeb043516",
+    "accountID": "8cdc70be-98d5-4b6f-8731-01d3e556497b",
     "accountName": "load-testing",
     "capacity": 9,
     "cpuAverage": 4.51,
@@ -378,7 +378,7 @@
     "newCapacity": 4,
     "newResourceType": "Standard_B1s",
     "platform": "Azure MySQL Flexible Server",
-    "recommendationDetails": "Resize Azure virtual machine auth-service in Azure Subscription load-testing (8cdc70be-98d5-4b6f-8731-01d3e556497b) from Standard_B4ms to Standard_B1s",
+    "recommendationDetails": "Downsize Azure MySQL Flexible Server auth-service in Azure Subscription load-testing (8cdc70be-98d5-4b6f-8731-01d3e556497b) from Standard_B4ms to Standard_B1s",
     "region": "eastus",
     "resourceGroup": "dev",
     "resourceID": "/subscriptions/8cdc70be-98d5-4b6f-8731-01d3e556497b/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/auth-service",
