@@ -120,5 +120,5 @@
       "Minimum Saving Threshold": 10.0,
       "Recommendation": "Snowflake Warehouse - AUTO_SUSPEND"
     }
-  },
+  }
 ]
