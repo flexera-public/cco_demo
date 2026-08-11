@@ -970,8 +970,22 @@ script "js_rbds", type: "javascript" do
         "business_capability": "Software License Management",
         "service_tier": "Tier 1 - Mission Critical",
         "environment_type": "Production"
-      }
+      },
       // End production applications - no comma needed, last item
+
+      // Data Cloud Optimization Example
+      "vendor_account=WZB44003" : {
+        "cost_center": "CC-440",
+        "cost_approver": "SWonder@example.com",
+        "service_owner": "SRobinson@example.com",
+        "technical_owner": "RJames@example.com",
+        "operating_company": "BuyerCorp Inc.",
+        "department": "Engineering",
+        "application": "Data Cloud",
+        "business_capability": "Business Intelligence",
+        "service_tier": "Tier 1 - Mission Critical",
+        "environment_type": "Production",
+      }
     }
 
     // Get the existing dimensions in the Org which includes RBDs
