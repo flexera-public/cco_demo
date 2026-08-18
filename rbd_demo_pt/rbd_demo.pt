@@ -1360,6 +1360,36 @@ script "js_rbds", type: "javascript" do
           }
         })
 
+        // If Tag Application has a value, use that value
+        rules.push({
+          "condition": {
+            "type": "and",
+            "expressions": [
+              {
+                "type": "not",
+                "expression": {
+                  "type": "dimension_equals",
+                  "dimension": "tag_applications",
+                  "value": "",
+                  "caseInsensitive": true
+                }
+              },
+              {
+                "type": "not",
+                "expression": {
+                  "type": "dimension_equals",
+                  "dimension": "tag_applications",
+                  "value": "None",
+                  "caseInsensitive": true
+                }
+              }
+            ]
+          },
+          "value": {
+            "dimension": "tag_applications"
+          }
+        })
+
         // Everything below simulates rules generated from Cloud Tenant Tags (i.e. Cloud Account and RGs)
         // This is a typicaly "baseline" strategy, but the rules above show how manual rules can be added to improve coverage or accuracy of allocations
 
